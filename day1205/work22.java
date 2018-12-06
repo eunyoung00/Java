@@ -13,8 +13,7 @@ public class work22 {
 		int flag=0;
 		for(int i=0; i<intset.length; i++) {//0~5까지 
 //			intset[i]=(char)((int)(Math.random()*45));
-			//0~45니까.
-			//아니라 0~44 해서 45개인것
+			//0~45가 아니라 0~44 해서 45개인것
 			//그래서 0~44 +1값을 더해서 1~45
 //			System.out.print(intset[i]+" ");//정상출력..
 			
@@ -48,7 +47,7 @@ public class work22 {
 //	
 //	출력: 이재찬 이재현 공선의 정택성 이재현 최지우 김희철 이재찬 이재찬 정택성 공선의
 	public String[] Token(String names) {
-		StringTokenizer stk = new StringTokenizer(names, ",.~!",false);
+		StringTokenizer stk = new StringTokenizer(names, ",.~!");
 //		System.out.println(stk.countTokens()+"개");
 		String[] tok = new String[stk.countTokens()];
 //		String[] tok = new String[11];
@@ -58,6 +57,7 @@ public class work22 {
 			System.out.print(tok[i]+" ");
 			i++;
 		}
+		
 		
 		return tok;
 	}//Token
