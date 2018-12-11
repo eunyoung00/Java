@@ -14,6 +14,7 @@ import java.awt.event.WindowEvent;
  */
 
 //1.Window Component »ó¼Ó
+@SuppressWarnings("serial")
 public class UseMenuBar extends Frame{
 
 	public UseMenuBar() {

@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Label;
 import java.awt.List;
-import java.awt.TextArea;
 import java.awt.TextField;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
