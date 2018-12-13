@@ -53,12 +53,16 @@ public class Work27Evt extends WindowAdapter implements ActionListener,ItemListe
 //				System.out.println(hw.getTfName().getText());//후
 				if(!hw.getTfName().getText().equals("") && !hw.getTfAge().getText().equals("")
 						&& !hw.getTfAdress().getText().equals("")) {
-					templ.remove(selectedIndex);
-					
-					//해당 아이템 변경.
-					hw.getList().add(hw.getTfName().getText()+"/"+
+					//지우고
+//					templ.remove(selectedIndex);
+					String inputData = hw.getTfName().getText()+"/"+
 							hw.getTfAge().getText()+"/"+
-							hw.getTfAdress().getText(),selectedIndex);
+							hw.getTfAdress().getText();
+//					//해당 아이템 변경.
+//					hw.getList().add(hw.getTfName().getText()+"/"+
+//							hw.getTfAge().getText()+"/"+
+//							hw.getTfAdress().getText(),selectedIndex);
+					hw.getList().replaceItem(inputData,selectedIndex);
 				}//end if
 			}//end if
 

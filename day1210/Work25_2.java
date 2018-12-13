@@ -71,7 +71,7 @@ public class Work25_2 extends Frame{
 		//배치관리자 해지
 		setLayout(null);
 		
-		lblFont.setLocation(20,35);//배치좌표
+		lblFont.setLocation(20,45);//배치좌표
 		lblFont.setSize(80,20);//배치크기
 		add(lblFont);//Frame에 배치
 		tfFont.setLocation(20,70);//배치좌표
@@ -81,7 +81,7 @@ public class Work25_2 extends Frame{
 		listFont.setSize(100,100);//배치크기
 		add(listFont);//Frame에 배치
 		
-		lblStyle.setLocation(140,35);//배치좌표
+		lblStyle.setLocation(140,45);//배치좌표
 		lblStyle.setSize(80,20);//배치크기
 		add(lblStyle);//Frame에 배치
 		tfStyle.setLocation(140,70);//배치좌표
@@ -91,7 +91,7 @@ public class Work25_2 extends Frame{
 		listStyle.setSize(100,100);//배치크기
 		add(listStyle);//Frame에 배치
 
-		lblSize.setLocation(260,35);//배치좌표
+		lblSize.setLocation(260,45);//배치좌표
 		lblSize.setSize(80,20);//배치크기
 		add(lblSize);//Frame에 배치
 		tfSize.setLocation(260,70);//배치좌표
