@@ -1,0 +1,30 @@
+
+day1204/test.java
+src.zip
+day1212/EventC.java
+day1212/Event.java
+day1212/DesignFriend.java
+src.zip
+day1217/DataProcess.java
+day1217/stdVO.java
+day1217/Work29.java
+
+#workspace에서 제외
+.metadata
+.recommenders
+
+#javase_prj1에서 제외
+javase_prj/.settings
+javase_prj/bin
+javase_prj/doc
+javase_prj/.classpath
+javase_prj/.project
+
+#javase_prj2에서 제외
+javase_prj2/.settings
+javase_prj2/bin
+javase_prj2/doc
+javase_prj2/.classpath
+javase_prj2/.project
+
+
