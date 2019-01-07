@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 
+import kr.co.sist.chat.server.evt.MultiChatServerEvt;
+
 /**
  * 채팅방 관리자 화면
  * @author owner
@@ -37,7 +39,14 @@ public class MultiChatServerView extends JFrame{
 		add("Center",jspList);
 		add("South",btnPanel);
 		
-		setBounds(100, 100, 300, 500);
+		//이벤트 등록
+		MultiChatServerEvt mcse=new MultiChatServerEvt(this);
+		jbtOpenServer.addActionListener(mcse);
+		jbtCloseServer.addActionListener(mcse);
+		
+		addWindowListener(mcse);
+		
+		setBounds(100, 100, 400, 700);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -63,6 +72,5 @@ public class MultiChatServerView extends JFrame{
 		return dlmChatList;
 	}
 
-	
 	
 }//class

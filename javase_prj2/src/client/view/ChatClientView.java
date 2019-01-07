@@ -1,4 +1,4 @@
-package kr.co.sist.chat.client.view;
+package client.view;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -9,70 +9,65 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-import kr.co.sist.chat.client.evt.MultiChatClientEvt;
+import client.evt.ChatClientEvt;
 
 @SuppressWarnings("serial")
-public class MultiChatClientView extends JFrame{
+public class ChatClientView extends JFrame{
 	private JTextArea jtaTalkDisplay;
-	private JTextField jtfServerIp,jtfNick,jtfTalk;
-	private JButton jbtConnect,jbtCapture,jbtClose;
+	private JTextField jtfNick,jtfTalk;
+	private JButton jbtConnect,jbtCapture,jbtClose,jbtNickList;
 	private JScrollPane jspTalkDisplay;
-	
-	
-	public MultiChatClientView() {
+	private int port;
+
+	public ChatClientView(int port) {
 		super("채팅 클라이언트");
-		
+		this.port=port;
+	
 		jtaTalkDisplay=new JTextArea();
-		jtfServerIp=new JTextField("211.63.89.",10);
 		jtfNick=new JTextField(10);
-		jtfTalk=new JTextField();
-		jtfTalk.setBorder(new TitledBorder("대화"));
-		
 		
 		jbtConnect=new JButton("접속");
 		jbtCapture=new JButton("저장");
 		jbtClose=new JButton("종료");
+		jbtNickList=new JButton("접속자");
 		
 		jspTalkDisplay=new JScrollPane(jtaTalkDisplay);
 		jspTalkDisplay.setBorder(new TitledBorder("대화 내용"));
 		
+		jtfTalk=new JTextField();
+		jtfTalk.setBorder(new TitledBorder("대화"));
+		
 		jtaTalkDisplay.setEditable(false);
 		
 		JPanel jpNorth=new JPanel();
-		jpNorth.add(new JLabel("서버 주소",JLabel.CENTER));
-		jpNorth.add(jtfServerIp);
-		jpNorth.add(new JLabel("대화명", JLabel.CENTER));
+		jpNorth.add(new JLabel("닉네임",JLabel.CENTER));
 		jpNorth.add(jtfNick);
 		jpNorth.add(jbtConnect);
 		jpNorth.add(jbtCapture);
 		jpNorth.add(jbtClose);
+		jpNorth.add(jbtNickList);
 		
 		add("North",jpNorth);
 		add("Center",jspTalkDisplay);
 		add("South",jtfTalk);
 		
-		MultiChatClientEvt mcce=new MultiChatClientEvt(this);//has a
-		addWindowListener(mcce);
+		ChatClientEvt cse=new ChatClientEvt(this);
+		addWindowListener(cse);
 		
-		jbtConnect.addActionListener(mcce);
-		jbtClose.addActionListener(mcce);
-		jbtCapture.addActionListener(mcce);
-		jtfTalk.addActionListener(mcce);
-		
+		jbtConnect.addActionListener(cse);
+		jbtClose.addActionListener(cse);
+		jbtCapture.addActionListener(cse);
+		jbtNickList.addActionListener(cse);
+		jtfTalk.addActionListener(cse);
 		
 		setBounds(100, 100, 600, 350);
 		setVisible(true);
 //		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-	}//MultiChatClientView
-
+	}//ChatClientView
 
 	public JTextArea getJtaTalkDisplay() {
 		return jtaTalkDisplay;
-	}
-
-	public JTextField getJtfServerIp() {
-		return jtfServerIp;
 	}
 
 	public JTextField getJtfNick() {
@@ -95,8 +90,16 @@ public class MultiChatClientView extends JFrame{
 		return jbtClose;
 	}
 
+	public JButton getJbtNickList() {
+		return jbtNickList;
+	}
+
 	public JScrollPane getJspTalkDisplay() {
 		return jspTalkDisplay;
 	}
 
+	public int getPort() {
+		return port;
+	}
+	
 }//class

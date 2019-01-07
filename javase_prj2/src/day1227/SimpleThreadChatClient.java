@@ -116,7 +116,8 @@ public class SimpleThreadChatClient extends JFrame implements Runnable,ActionLis
 		/////추가27
 		clientNick=JOptionPane.showInputDialog("대화명 입력");
 		//2.
-		client=new Socket("211.63.89.148", 65535);
+//		client=new Socket("211.63.89.148", 65535);
+		client=new Socket("211.63.89.144", 35000);
 		
 		//4.스트림 연결.
 		readStream=new DataInputStream(client.getInputStream());
