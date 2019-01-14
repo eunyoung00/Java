@@ -38,7 +38,7 @@ public class UsePreparedStatementDAO {
 		//1.드라이버 로딩
 		//2.Connection 얻기
 			con=getConn();
-		//3.쿼리문 생성 객체얻기 : PreparedStatement 객체는 실행되는 쿼리문을 알고있습니다.
+		//3.쿼리문 생성 객체얻기 : PreparedStatement 객체는 실행되는 쿼리문을 알고있다.
 			String insertCpEmp="insert into cp_emp2(empno,ename,hiredate,sal) values(?,?,sysdate,?)";
 			pstmt=con.prepareStatement(insertCpEmp);
 		//4.바인드 변수에 값 설정//위 쿼리문에 ?에 대해 값을 설정해 주는것
@@ -49,13 +49,11 @@ public class UsePreparedStatementDAO {
 		//5.쿼리 수행후 결과 얻기
 			pstmt.executeUpdate();//update를 주로 불러준다.?
 			
-			
 		}finally {
 			//6.연결 끊기
 			if(pstmt!=null) { pstmt.close();}//end if;
 			if(con!=null) { con.close();}//end if;
 		}//end finally
-		
 	}//insertCpEmp2
 	
 //	/**
@@ -79,13 +77,11 @@ public class UsePreparedStatementDAO {
 	public boolean updateCpEmp2(CpEmp2VO cevo) throws SQLException {
 		boolean flag=false;
 		
-		
 		return flag;
 	}//updateCpEmp2
 	
 	public boolean deleteCpEmp2(CpEmp2VO cevo) throws SQLException {
 		boolean flag=false;
-		
 		
 		return flag;
 	}//deleteCpEmp2
@@ -101,6 +97,5 @@ public class UsePreparedStatementDAO {
 		
 		return cevo;
 	}
-	
 	
 }//class

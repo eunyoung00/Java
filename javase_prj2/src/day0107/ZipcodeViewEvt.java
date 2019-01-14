@@ -31,6 +31,8 @@ public class ZipcodeViewEvt extends WindowAdapter implements ActionListener{
 	public String blockInjection(String sql) {
 		return sql.replace("'", "").replaceAll("--", "");
 	}//blockInjection
+	//=>PreparedStatement를 쓰는것 만으로도 인젝션 공격을 막을 수 있다.(공격이 막힘)
+	//=>PreparedStatement 사용하여 추가
 	
 	public List<ZipcodeVO> selectZipcode(String dong) throws SQLException{
 		List<ZipcodeVO> list=new ArrayList<ZipcodeVO>();
