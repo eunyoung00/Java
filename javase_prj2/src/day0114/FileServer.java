@@ -51,7 +51,6 @@ public class FileServer extends JFrame implements Runnable,ActionListener {
 		setBounds(100, 100, 400, 600);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 	}//FileServer
 	
 	@Override
@@ -101,7 +100,6 @@ public class FileServer extends JFrame implements Runnable,ActionListener {
 					dataCnt--;
 				}//end while
 				
-				
 			}//end while
 			}finally {
 				if(fos!=null) {fos.close();}//end if
@@ -111,8 +109,6 @@ public class FileServer extends JFrame implements Runnable,ActionListener {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}//end catch
-	
-		
 	}//run
 
 	@Override
@@ -131,7 +127,6 @@ public class FileServer extends JFrame implements Runnable,ActionListener {
 		}else {
 			JOptionPane.showMessageDialog(this, "서버가 이미 동작 중 입니다.");
 		}//end else
-			
 	}//actionPerformed
 
 	public static void main(String[] args) {

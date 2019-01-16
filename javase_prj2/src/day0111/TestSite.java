@@ -77,7 +77,6 @@ public class TestSite extends JFrame {
 		
 		jtab.setRowHeight(50);//레코드 높이	
 		
-		
 		add(jsp);
 		setBounds(100, 100, 500, 300);
 		setVisible(true);
@@ -87,5 +86,4 @@ public class TestSite extends JFrame {
 	public static void main(String[] args) {
 		new TestSite();
 	}//main
-
 }//class

@@ -95,7 +95,6 @@ public class NamecardView extends JFrame {
 		setBounds(100,100,900,400);
 		setVisible(true);
 		setResizable(false);//크기 고정
-		
 	}//NamecardView
 
 	public JButton getJbtImg() {
@@ -120,5 +119,4 @@ public class NamecardView extends JFrame {
 	public static void main(String[] args) {
 		new NamecardView();
 	}//main
-
 }//class

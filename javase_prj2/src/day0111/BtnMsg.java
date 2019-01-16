@@ -39,7 +39,6 @@ public class BtnMsg extends JFrame implements ActionListener {
 		setBounds(100, 100, 300, 400);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 	}//BtnMsg
 
 	@Override

@@ -49,7 +49,6 @@ public class FileClient extends JFrame implements ActionListener{
 		setBounds(100, 100, 400, 300);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 	}//FileClient
 
 	private void selectFile() {
@@ -146,7 +145,6 @@ public class FileClient extends JFrame implements ActionListener{
 			if(dos!=null) {dos.close();}//end if
 			if(socketClient!=null) {socketClient.close();}//end if
 		}//end finally
-		
 	}//sendFile
 	
 	@Override
@@ -157,6 +155,5 @@ public class FileClient extends JFrame implements ActionListener{
 	public static void main(String[] args) {
 		new FileClient();
 	}//main
-
 }//class
 

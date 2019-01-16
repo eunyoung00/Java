@@ -19,7 +19,6 @@ import oracle.jdbc.internal.OracleTypes;
  * @author owner
  */
 public class UseCallableStatementDAO {
-	
 	//Singleton Pattern
 	//<대신 값을 저장하게 만들면 안된다.String name이런거 안만듦
 	private static UseCallableStatementDAO ucs_dao;
