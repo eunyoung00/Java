@@ -89,8 +89,17 @@ public class LunchAddController extends WindowAdapter implements ActionListener{
 			uploadImg(file);
 			//리스트 갱신
 			lmc.setLunch();
+			//다음 도시락의 입력을 편하게 하기 위해서 입력 폼 초기화시켜준다.
+			jtfName.setText("");
+			jtfPrice.setText("");
+			jtaSpec.setText("");
+			
+			lav.getJlLunchImg().setIcon(new ImageIcon("C:/dev/workspace/lunch_prj/src/kr/co/sist/lunch/admin/img/no_img.jpg"));
 			
 			JOptionPane.showMessageDialog(lav, "도시락이 추가되었습니다.");
+			
+			jtfName.requestFocus();
+			
 		} catch (IOException ie) {
 			JOptionPane.showMessageDialog(lav, "파일 업로드 실패");
 			ie.printStackTrace();

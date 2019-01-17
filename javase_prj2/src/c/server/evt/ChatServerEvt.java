@@ -78,6 +78,7 @@ public class ChatServerEvt extends WindowAdapter implements ActionListener{
 								someClient1=server1.accept();
 								csh1=new ChatServerHelper(someClient1, dlmTemp1, cnt, csv, listClient1, csv.getJspList1());//<인스턴스화
 								listClient1.add(csh1);
+								csh1.setclient();
 								csh1.start();//<상속의 장점 : 코드의 재사용성
 								jsp.getVerticalScrollBar().setValue(jsp.getVerticalScrollBar().getMaximum() );
 							}//end while
@@ -104,6 +105,7 @@ public class ChatServerEvt extends WindowAdapter implements ActionListener{
 								someClient2=server2.accept();
 								csh2=new ChatServerHelper(someClient2, dlmTemp2, cnt, csv, listClient2, csv.getJspList2());//<인스턴스화
 								listClient2.add(csh2);
+								csh2.setclient();
 								csh2.start();//<상속의 장점 : 코드의 재사용성
 								jsp.getVerticalScrollBar().setValue(jsp.getVerticalScrollBar().getMaximum() );
 							}//end while
@@ -129,6 +131,8 @@ public class ChatServerEvt extends WindowAdapter implements ActionListener{
 								someClient3=server3.accept();
 								csh3=new ChatServerHelper(someClient3, dlmTemp3, cnt, csv, listClient3, csv.getJspList3());//<인스턴스화
 								listClient3.add(csh3);
+								csh3.setclient();
+								
 								csh3.start();//<상속의 장점 : 코드의 재사용성
 								jsp.getVerticalScrollBar().setValue(jsp.getVerticalScrollBar().getMaximum() );
 							}//end while
@@ -155,6 +159,8 @@ public class ChatServerEvt extends WindowAdapter implements ActionListener{
 								someClient4=server4.accept();
 								csh4=new ChatServerHelper(someClient4, dlmTemp4, cnt, csv, listClient4, csv.getJspList4());//<인스턴스화
 								listClient4.add(csh4);
+								csh4.setclient();
+								
 								csh4.start();//<상속의 장점 : 코드의 재사용성
 								jsp.getVerticalScrollBar().setValue(jsp.getVerticalScrollBar().getMaximum() );
 							}//end while

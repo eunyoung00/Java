@@ -13,7 +13,10 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -32,11 +35,12 @@ public class ChatClientEvt extends WindowAdapter implements ActionListener,Runna
 	private String nick;
 	private String clients;
 	private List<String> clientList;
+	private Set<String> setClient;
 	
 	public ChatClientEvt(ChatClientView ccv) {
 		this.ccv=ccv;
-		clientList=new ArrayList<String>();
 		
+		setClient=new HashSet<String>();
 	}//ChatClientEvt
 	
 	@Override
@@ -49,9 +53,9 @@ public class ChatClientEvt extends WindowAdapter implements ActionListener,Runna
 				while(true) {//서버에서 보내오는 메세지를 읽어들여
 						revMsg=readStream.readUTF();
 						//채팅방에 뿌린다.
-						if(revMsg.contains("    @")) {
+						if(revMsg.contains("    ,")) {
 							createList(revMsg);
-							revMsg=null;
+//							revMsg="   ";
 						}
 						ccv.getJtaTalkDisplay().append(revMsg.trim()+"\n");
 						//스크롤바를 가장 아래로 이동
@@ -92,7 +96,7 @@ public class ChatClientEvt extends WindowAdapter implements ActionListener,Runna
 				return;
 			}//end if
 
-			client=new Socket("211.63.89.156", ccv.getPort());//입력한 ip address의 컴퓨터에 연결
+			client=new Socket("211.63.89.150"/*"192.168.56.1"*/, ccv.getPort());//입력한 ip address의 컴퓨터에 연결
 			//스트림
 			readStream=new DataInputStream(client.getInputStream());
 			writeStream=new DataOutputStream(client.getOutputStream());
@@ -196,10 +200,10 @@ public class ChatClientEvt extends WindowAdapter implements ActionListener,Runna
 	 * 접속자 리스트를 출력하는 일 
 	 */
 	public void printData() {
-//		if(nick==null) {
-//			JOptionPane.showMessageDialog(null, "먼저 접속하여주세요.");
-//			return;//아래로 흘러가지 않게
-//		}
+		if(nick==null) {
+			JOptionPane.showMessageDialog(null, "먼저 접속하여주세요.");
+			return;//아래로 흘러가지 않게
+		}
 		if(clientList.size()==0) {
 			JOptionPane.showMessageDialog(null, "접속자가 없습니다.");
 			return;//아래로 흘러가지 않게
@@ -207,15 +211,25 @@ public class ChatClientEvt extends WindowAdapter implements ActionListener,Runna
 		
 		StringBuilder viewData=new StringBuilder();
 		viewData
-			.append("----------------\n")
+			.append("-----------------------------------------\n")
 			.append("접속자\n")
-			.append("----------------\n");
+			.append("-----------------------------------------\n");
 		String csh=null;
+		int j=0;
 		for(int i=0;i<clientList.size();i++) {
-			csh=clientList.get(i).toString();
-			viewData.append(csh).append("\n");
+//			csh=clientList.get(i).toString();
+//			System.out.println(clientList.get(i).toString());
+			clientList.get(i).toString();
+			j=i;
+			viewData.append(clientList.get(j).toString()).append("\n");
 		}//end for
-//		viewData.append("-----------------------------------------\n");
+
+		viewData.append("-----------------------------------------\n");
+		Iterator<String> ita = setClient.iterator();
+		while(ita.hasNext()){  
+			csh=ita.next();    
+			viewData.append(csh).append("\n");
+		}
 
 		JTextArea jta=new JTextArea(10,1);
 		jta.setEditable(false);
@@ -226,11 +240,26 @@ public class ChatClientEvt extends WindowAdapter implements ActionListener,Runna
 	}//printData
 	
 	public void createList(String revMsg) {
-		clients=revMsg.replace("@", " ").trim();
-		String[] arr=clients.split(",");
+		//revMsg는 정상적으로 빼지고 들어와짐. ,111,333,555,
+		clientList=new ArrayList<String>();
+		//clientList가 초기화가 안되고 뒤에 계속 쌓이니까 지우려다가 
+		//그냥 생성을 여기서 해봄. 그러니까 잘된다..OTL
+		clients=revMsg.trim();
+		clients.substring(clients.indexOf(",")+1, clients.lastIndexOf(",")-1);
+		String[] arr=clients/*.replace("    ", "")*/.split(",");
+		
 		for(int i=0;i<arr.length;i++) {
-			clientList.add(arr[i]);
+			if(arr[i]!=null && !arr[i].equals("")) {//위에서 replace로 바꾸어주기때문에 잡아야함.
+				clientList.add(arr[i]);
+				setClient.add(arr[i]);
+			}//end if
 		}//end for
 	}//createList
+	
+//	public void removeList() {//clientList에 계속 넣어진다? 아마도 뒤에 계속 쌓이기만 하는듯. 
+//		for(int idx=0;idx<clientList.size();idx++) {//clientList를 비워준다?초기화?
+//			clientList.remove(idx);//해봤는데 마지막사람만 남고 다 나가짐..--
+//		}//end for
+//	}
 
 }//class

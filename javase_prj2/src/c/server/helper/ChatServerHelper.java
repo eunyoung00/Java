@@ -56,7 +56,7 @@ public class ChatServerHelper extends Thread{
 			//서버에 접속한 모든 접속자에게 메세지를 출력(<누가들어왔어~!)
 			broadcast("["+cnt+"] 번째 접속자가 ["+nick+"]으로 채팅방에 접속하였습니다.");
 			jsp.getVerticalScrollBar().setValue(jsp.getVerticalScrollBar().getMaximum());
-			
+			//setclient();
 		} catch (IOException ie) {
 			JOptionPane.showMessageDialog(jf, "접속자 연결 중 문제 발생...");
 			ie.printStackTrace();
@@ -77,13 +77,17 @@ public class ChatServerHelper extends Thread{
 			} catch (IOException ie) {
 				//접속자가 퇴실하면 해당 접속자를 리스트에서 삭제 한다. 후엔 서버창에 남겨주도 삭제된애 빼고 모든접속자에게 보내준다.
 				connectList.remove(this);//<cnt가 안되는 이유는 list에 여러명이 들어오는데, 앞에사람이 나가면 인덱스가 변경됨으로 안됨.(나를 지우라고 하면 됨)
+				setclient();
 				
 				//메세지를 읽어들이지 못하는 상태라면 접속자가 연결을 종료한 상태.라 관리자 창에 뿌려준다.
 				dlm.addElement(cnt+"번째/"+nick+" 접속자 퇴실");
 				broadcast("["+nick+"]님이 퇴실하였습니다.");
-				jsp.getVerticalScrollBar().setValue(jsp.getVerticalScrollBar().getMaximum() );
-				
+				jsp.getVerticalScrollBar().setValue(jsp.getVerticalScrollBar().getMaximum()+1 );
 				ie.printStackTrace();
+//			} catch (EOFException ee) {//파일이 끝났는데?더 읽어들이려 할때?
+//				ee.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
 			}//end catch
 		}//end if
 	}//run
@@ -94,17 +98,14 @@ public class ChatServerHelper extends Thread{
 	 * @param msg
 	 */
 	public synchronized void broadcast(String msg) {
-		ChatServerHelper mcsh=null;
+		ChatServerHelper csh=null;
 		
 		try {
 			for(int i=0; i<connectList.size(); i++) {//<모든접속자가 나올것.
 				
-				mcsh = connectList.get(i);//list에서 Helper객체를 얻고
-				mcsh.writeStream.writeUTF(msg);//출력 스트림에 출력
-				mcsh.writeStream.flush();//목적지로 분출
-				
-				mcsh.writeStream.writeUTF(client);
-				mcsh.writeStream.flush();//목적지로 분출
+				csh = connectList.get(i);//list에서 Helper객체를 얻고
+				csh.writeStream.writeUTF(msg);//출력 스트림에 출력
+				csh.writeStream.flush();//목적지로 분출
 			}//end for
 		} catch (IOException ie) {//<보낼수없는상태에요 라는건 연결이 끊긴것
 			JOptionPane.showMessageDialog(jf, "["+cnt+"] 번째 접속자에게 메세지를 보낼 수 없습니다.");
@@ -112,14 +113,14 @@ public class ChatServerHelper extends Thread{
 		}//end catch
 	}//broadcast
 	
-	public void setclient() {
+	public synchronized void setclient() {
 		ChatServerHelper csh=null;
+		client="    ,";
 		for(int i=0; i<connectList.size();i++){
-			client="    @"+connectList.get(i).toString();
-		}
-//		client =
-//				"    @"+nick+","+client;
-		
+			csh=connectList.get(i);
+			client=client+csh.nick+",";
+		}//end for
+		broadcast(client);
 	}//setclient
 	
 	
