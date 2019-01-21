@@ -287,6 +287,12 @@ public class LunchAdminDAO {
 		return flag;
 	}//updateLunch
 	
+	/**
+	 * 정산! 도시락 이름별로 갯수가 더해져 헷깔렸던것! 이름별로 총갯수가 나와 그에따른 합이 나온다.
+	 * @param date
+	 * @return
+	 * @throws SQLException
+	 */
 	public List<CalcVO> selectCalc(String date) throws SQLException{
 		List<CalcVO> list=new ArrayList<CalcVO>();
 		
@@ -305,6 +311,7 @@ public class LunchAdminDAO {
 			.append("	from lunch l, ordering o	")
 			.append("	where o.lunch_code=l.lunch_code	")
 			.append("	and  to_char(o.order_date,'yyyy-mm-dd')=to_char(to_date(?,'yyyy-mm-dd'),'yyyy-mm-dd')	")
+			.append("	and o.status='Y'	")//제작상태가 완료인것에 대해서만 정산
 			.append("	group by l.lunch_code,l.lunch_name,l.price	")
 			.append("	order by l.lunch_code	");
 			
@@ -354,9 +361,9 @@ public class LunchAdminDAO {
 			.append("	to_char(o.order_date,'yyyy-mm-dd hh:mi:ss') order_date, o.phone, o.ip_address,o.status	")
 			.append("	from  lunch l, ordering o	")
 			.append("	where o.lunch_code=l.lunch_code	")
-//			.append("	and to_char(order_date,'yyyy-mm-dd') = to_char(sysdate,'yyyy-mm-dd')	")
-			.append("	and to_char(order_date,'yyyy-mm-dd') = '2019-01-15'	")
-			.append("	and to_char(order_date,'hh24')<=13	")
+			.append("	and to_char(order_date,'yyyy-mm-dd') = to_char(sysdate,'yyyy-mm-dd')	")
+//			.append("	and to_char(order_date,'yyyy-mm-dd') = '2019-01-15'	")
+//			.append("	and to_char(order_date,'hh24')<=13	")
 			.append("	order by o.order_num	");
 	 		
 			pstmt=con.prepareStatement(selectOrder.toString());
@@ -382,6 +389,71 @@ public class LunchAdminDAO {
 		return list;
 	}//selectOrderList
 	
+	/**
+	 * 도시락 제작 완료 시점에 호출되어 해당 주문 도시락의 완성상태를 변경하는 일.
+	 * @param orderNum
+	 * @return
+	 */
+	public boolean updateStatus(String orderNum) throws SQLException{
+		boolean flag=false;
+		
+		Connection con = null;
+		PreparedStatement pstmt=null;
+		
+		try {
+		//1.
+		//2.
+			con=getConn();
+		//3.
+			String updateOrder="update ordering set status='Y' where order_num=?";
+			pstmt=con.prepareStatement(updateOrder);
+		//4.
+			pstmt.setString(1, orderNum);
+		//5.
+			int cnt=pstmt.executeUpdate();
+			if(cnt==1){
+				flag=true;
+			}//end if
+		}finally {
+			//6.
+			if(pstmt!=null) {pstmt.close();}//end if
+			if(con!=null) {con.close();}//end if
+		}//end finally
+		return flag;
+	}//updateStatus
+	
+	/**
+	 * 주문된 도시락을 삭제하는 일
+	 * @param orderNum
+	 * @return
+	 */
+	public boolean deleteOrder(String orderNum) throws SQLException{
+		boolean flag =false;
+
+		Connection con = null;
+		PreparedStatement pstmt=null;
+		
+		try {
+		//1.
+		//2.
+			con=getConn();
+		//3.
+			String deleteOrder="delete from ordering where order_num=?";
+			pstmt=con.prepareStatement(deleteOrder);
+		//4.
+			pstmt.setString(1, orderNum);
+		//5.
+			int cnt=pstmt.executeUpdate();
+			if(cnt==1){
+				flag=true;
+			}//end if
+		}finally {
+			//6.
+			if(pstmt!=null) {pstmt.close();}//end if
+			if(con!=null) {con.close();}//end if
+		}//end finally
+		return flag;
+	}//deleteOrder
 	
 	public static void main(String[] args) {
 		try {

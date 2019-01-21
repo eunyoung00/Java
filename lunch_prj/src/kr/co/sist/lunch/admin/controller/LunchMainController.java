@@ -1,5 +1,6 @@
 package kr.co.sist.lunch.admin.controller;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -10,11 +11,13 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Vector;
+
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
 import kr.co.sist.lunch.admin.model.LunchAdminDAO;
 import kr.co.sist.lunch.admin.view.LunchAddView;
 import kr.co.sist.lunch.admin.view.LunchDetailView;
@@ -24,7 +27,7 @@ import kr.co.sist.lunch.amdin.vo.LunchDetailVO;
 import kr.co.sist.lunch.amdin.vo.LunchVO;
 import kr.co.sist.lunch.amdin.vo.OrderVO;
 
-public class LunchMainController extends WindowAdapter implements ActionListener,MouseListener{
+public class LunchMainController extends WindowAdapter implements ActionListener,MouseListener, Runnable{
 
 	private LunchMainView lmv;
 	private LunchAdminDAO la_dao;
@@ -34,6 +37,8 @@ public class LunchMainController extends WindowAdapter implements ActionListener
 	private String orderNum;
 	private String lunchName;
 	private int selectedRow;
+	
+	private Thread threadOrdering;//여러번 돌지 않도록 인스턴스변수로
 	
 	public LunchMainController(LunchMainView lmv) {
 		this.lmv=lmv;
@@ -133,10 +138,18 @@ public class LunchMainController extends WindowAdapter implements ActionListener
 	@Override
 	public void mouseClicked(MouseEvent me) {
 		if(me.getSource()==lmv.getJtb()) {
-			if(lmv.getJtb().getSelectedIndex()==1) {//처음탭에서 이벤트 발생
+			if(lmv.getJtb().getSelectedIndex()==1) {//두번째(주문)탭에서 이벤트 발생
 //				System.out.println("이벤트발생발생~~~");
+				
+				///////////////////////////<주문현황을 계속~~~조회하여!!!=Thread 
+				//실시간으로 DB를 조회하여 주문현황을 계속 갱신 ==>Thread
+				if(threadOrdering==null) {//이거 없으면 계속 만들어진다.
+					threadOrdering =new Thread(this);
+					threadOrdering.start();
+				}//end if
+				
 				//현제까지의 주문사항을 조회 (Thread로 돌려야 한다)
-				searchOrder();
+//				searchOrder();
 			}//end if
 		}//end if
 		if(me.getSource()==lmv.getJtOrder() && me.getButton()==MouseEvent.BUTTON3) {//우클릭?
@@ -186,6 +199,10 @@ public class LunchMainController extends WindowAdapter implements ActionListener
 		}//end switch
 	}//mouseClicked
 	
+	private void msgCenter(Component parentComponent,String message) {
+		JOptionPane.showMessageDialog(parentComponent, message);
+	}//msgCenter
+	
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getSource()==lmv.getJbtAddLunch()) {//도시락 추가버튼
@@ -200,19 +217,87 @@ public class LunchMainController extends WindowAdapter implements ActionListener
 			searchCalc();
 		}//end if
 		
-		if(ae.getSource()==lmv.getJmOrderRemove()) {
-//			JOptionPane.showConfirmDialog(lmv, "정말 삭제인 부분");
-		}//end if
-		if(ae.getSource()==lmv.getJmOrderStatus()) {
+//		if(ae.getSource()==lmv.getJmOrderRemove()) {
+////			JOptionPane.showConfirmDialog(lmv, "정말 삭제인 부분");
+//		}//end if
+//		if(ae.getSource()==lmv.getJmOrderStatus()) {
+//			//제작상태가 'N'인 상태에서만 동작!
+//			JTable jt=lmv.getJtOrder();
+//			if(((String)jt.getValueAt(selectedRow, 10)).equals("N")) {
+//				switch(JOptionPane.showConfirmDialog(lmv, orderNum+" "+lunchName+"주문정보를 삭제하시겠습니까?")) {
+//				case JOptionPane.OK_OPTION:
+//					try {
+//					if(la_dao.deleteOrder(orderNum)) {//DB Table에서 해당 레코드 삭제
+//						msgCenter(lmv, orderNum+"주문이 삭제되었습니다.");
+//						//주문 테이블 갱신 (원래는 db에서 가지고 와야하는데
+//						searchOrder();
+//					}else {
+//						msgCenter(lmv, orderNum+"주문이 삭제되지 않습니다.");
+//					}//end else
+//					}catch (SQLException e) {
+//						msgCenter(lmv, "DB에서 문제 발생");
+//						e.printStackTrace();
+//					}//end catch
+//					}//end switch
+//				}//end if
+//			}else {
+//				msgCenter(lmv, "제작된 도시락은 삭제할 수 없습니다.");
+//			}//end else
+//			JPopupMenu jp= lmv.getJpOrderMenu();
+//			jp.setVisible(false);//popup메뉴 숨김
+		  
+			if(ae.getSource() == lmv.getJmOrderRemove()) {
+			//제작상태가 'N'인 상태에서만 동작
+			JTable jt = lmv.getJtOrder();
+			if(((String)jt.getValueAt(selectedRow, 10)).equals("N")) { //제작상태가 'N'인 상태에서만 동작
+				switch(JOptionPane.showConfirmDialog(lmv, "[ "+orderNum+lunchName+" ] 주문정보를 삭제하시겠습니까?")) {
+	            case JOptionPane.OK_OPTION :
+	               try {
+	                  if(la_dao.deleteOrder(orderNum)) { //DB Table의 해당 레코드 삭제
+	                     lmv.getJpOrderMenu().setVisible(false);
+	                     msgCenter(lmv, "주문이 삭제되었습니다.");
+	                     //테이블 갱신
+	                     searchOrder();
+	                  } else {
+	                     JOptionPane.showMessageDialog(lmv, "도시락 주문 삭제에 실패하였습니다.");
+	                  }//end else
+	               } catch (SQLException se) {
+	                  lmv.getJpOrderMenu().setVisible(false);
+	                  JOptionPane.showMessageDialog(lmv, "DB에서 문제가 발생하였습니다.");
+	                  se.printStackTrace();
+	               }//end catch
+	            }//end switch
+			} else {
+				lmv.getJpOrderMenu().setVisible(false);
+	            JOptionPane.showMessageDialog(lmv, "제작된 도시락은 삭제할 수 없습니다.");
+     		}//end else
+			}//end if
+
+			if(ae.getSource()==lmv.getJmOrderStatus()) {
+				//제작상태가 'N'인 상태에서만 동작!
+				JTable jt=lmv.getJtOrder();
+				if(((String)jt.getValueAt(selectedRow, 10)).equals("N")) {
+			
 			switch(JOptionPane.showConfirmDialog(lmv, "["+orderNum+lunchName+"] 주문이 완료었습니까?")) {
 			case JOptionPane.OK_OPTION : 
-				JTable jt=lmv.getJtOrder();
-				jt.setValueAt("Y", selectedRow, 10);//화면만 바꿈!DB는 아님!
-				//테이블의 값만 변경
-////////////////////////////////////////////////////////////////////////////////
-/////////////////////01-17-2019 : 주문변경은 내일 ~!~!~!~~!`
-////////////////////////////////////////////////////////////////////////////////
+				//DB Table의 해당 레코드 변경
+				try {
+					if(la_dao.updateStatus(orderNum)) {//상태변환성공
+						jt.setValueAt("Y", selectedRow, 10);//테이블의 값만 변경//<화면만 바꿈!DB는 아님!
+					}else {//상태 변환 실패
+						JOptionPane.showMessageDialog(lmv, "도시락 제작상태 변환이 실패!");
+					}//end else
+				} catch (SQLException e) {
+					JOptionPane.showMessageDialog(lmv, "DB에서 문제 발생!\n잠시후 다시 시도해 보세요.");
+					e.printStackTrace();
+				}//end catch		
 			}//end switch
+			}else {
+				JOptionPane.showMessageDialog(lmv, "제작이 완료된 도시락입니다.");//static import로 받아 짧게 사용한다.아니면 메소드를 메소드를 하나만들어...
+			}//end else
+			
+			JPopupMenu jp= lmv.getJpOrderMenu();
+			jp.setVisible(false);//popup메뉴 숨김
 		}//end if
 	}//actionPerformed
 
@@ -284,7 +369,7 @@ public class LunchMainController extends WindowAdapter implements ActionListener
 		cal.set(Calendar.MONTH, selMonth-1);
 		
 		int lastDay=cal.getActualMaximum(Calendar.DATE);
-		int nowDay=cal.get(Calendar.DAY_OF_MONTH);
+//		int nowDay=cal.get(Calendar.DAY_OF_MONTH);
 
 		lmv.getCbmDay().removeAllElements();//모델을 초기화 하고
 		for(int day=1; day<lastDay+1; day++) {
@@ -296,7 +381,21 @@ public class LunchMainController extends WindowAdapter implements ActionListener
 		
 	}//setDay
 
-	
+	@Override
+	public void run() {
+		//30초마다 한번씩 조회 수행
+		try {
+			while(true) {  //<문젠 계~~속돌아 DB를 연결했다 끊고 ~반복되어 선택도 되지 않는다.CUP도 많이 잡아먹음
+				searchOrder();//<while이 없으면 조회가 한번만되어 아님.무한루프로 돌려준다.
+				Thread.sleep(1000*30);
+			}//end while
+		} catch (InterruptedException e) {
+			msgCenter(lmv, "주문 조회 중 문제가 발생했습니다.");
+			e.printStackTrace();
+			//소켓을 사용하는 방법또한 방법! 키오스크-서버-주문이 뜸 서버를 돌고 주문이 들어올때마다 들어오는것도 있음 부하가 덜걸린다.
+		}//end catch
+	}//run
+	//////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public void mousePressed(MouseEvent e) {}
 	@Override

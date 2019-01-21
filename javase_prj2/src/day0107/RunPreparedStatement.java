@@ -108,5 +108,4 @@ public class RunPreparedStatement {
 		}while(!exitFlag);
 		JOptionPane.showMessageDialog(null, "사용해 주셔서 감사합니다.");
 	}//main
-
 }//class

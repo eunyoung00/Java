@@ -1,9 +1,7 @@
 package kr.co.sist.lunch.admin.view;
 
 import java.awt.BorderLayout;
-import java.awt.MenuItem;
 import java.util.Calendar;
-
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -40,9 +38,9 @@ public class LunchMainView extends JFrame {
 		super("도시락 관리 [로그인 계정 : "+adminName+" ]");
 		
 		cal=Calendar.getInstance();
-		
 		jtb=new JTabbedPane();
-		//도시락
+		
+		//////////////////도시락
 		String[] lunchColumns= {"번호","도시락 코드","이미지","도시락 명","가격"};
 		dtmLunch=new DefaultTableModel(lunchColumns,4) {
 			@Override
@@ -70,7 +68,7 @@ public class LunchMainView extends JFrame {
 		//테이블의 높이
 		jtLunch.setRowHeight(110);
 		
-		//정산
+		//////////////////정산
 		String[] clacColumns= {"번호","도시락명(도시락코드)","수량","가격"};
 		dtmCalc=new DefaultTableModel(clacColumns, 4);
 		jtCalc=new JTable(dtmCalc) {
@@ -88,7 +86,7 @@ public class LunchMainView extends JFrame {
 		//정산테이블의 높이 설정
 		jtCalc.setRowHeight(25);
 		
-		//주문
+		///////////////주문
 		String[] orderColumns = {"번호","주문 번호","도시락 코드","도시락명","주문자명","수량","가격","주문일","연락처","주문자 ip","제작 상태"};
 		dtmOrder=new DefaultTableModel(orderColumns, 4){
 			@Override

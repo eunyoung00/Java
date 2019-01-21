@@ -8,10 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.jws.soap.SOAPBinding.Use;
-
-import oracle.jdbc.driver.DMSFactory;
-
 /**
  * Statement객체를 사용하여 CRUD를 구현하는 클래스
  * CRUD는 Create Read Update Delete 의 약자.
