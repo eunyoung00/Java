@@ -138,8 +138,8 @@ public class LunchClientDAO {
 			con=getConn();
 		//3.
 			//orderName,phone,ipAddress,lunchCode;			private int quan;
-			String insertOrder="insert into ordering(ORDER_NUM,QUAN,ORDER_NAME,PHONE,IP_ADDRESS,LUNCH_CODE) "
-					+ "values(order_code,?,?,?,?,?)";
+			String insertOrder="insert into ordering(ORDER_NUM,QUAN,ORDER_NAME,PHONE,IP_ADDRESS,LUNCH_CODE,REQUEST) "
+					+ "values(order_code,?,?,?,?,?,?)";
 			pstmt=con.prepareStatement(insertOrder);
 		//4.
 			pstmt.setInt(1, oavo.getQuan());
@@ -147,6 +147,7 @@ public class LunchClientDAO {
 			pstmt.setString(3, oavo.getPhone());
 			pstmt.setString(4, oavo.getIpAddress());
 			pstmt.setString(5, oavo.getLunchCode());
+			pstmt.setString(6, oavo.getRequest());//잘 추가함!!
 		//5.
 			pstmt.executeUpdate();
 		}finally {
@@ -156,6 +157,12 @@ public class LunchClientDAO {
 		}//end finally
 	}//insertOrder
 	
+	/**
+	 * 주문자 조회
+	 * @param oivo
+	 * @return
+	 * @throws SQLException
+	 */
 	public List<OrderListVO> selectOrderList(OrderInfoVO oivo) throws SQLException{
 		List<OrderListVO> list=new ArrayList<OrderListVO>();
 		

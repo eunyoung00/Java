@@ -9,7 +9,6 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import javax.swing.JOptionPane;
 
 import kr.co.sist.lunch.admin.run.LunchAdminMain;
@@ -18,7 +17,7 @@ public class FileServer extends Thread {
 
 	@Override
 	public void run() {
-//		System.out.println("0000000000000000000");
+//		System.out.println("thread?0000000000000000000");
 		ServerSocket server=null;
 		try {
 			try {
@@ -121,7 +120,7 @@ public class FileServer extends Thread {
 			dos.flush();
 			
 			dos.writeUTF(fName);//writeUTF
-			
+			//<토막낸 갯수를 보내고(파일수와 토막난 수) 그수만큼 파일(실질적 내용물)을 반복해 받는다
 			fis=new FileInputStream("C:/dev/workspace/lunch_prj/src/kr/co/sist/lunch/admin/img/"+fName);
 			while( (fileLen=fis.read(readData))!=-1) {
 				dos.write(readData,0,fileLen);

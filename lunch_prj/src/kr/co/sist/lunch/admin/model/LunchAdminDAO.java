@@ -143,7 +143,7 @@ public class LunchAdminDAO {
 			con=getConn();
 		//3.
 			String selectLunch=
-				"SELECT LUNCH_NAME,IMG,SPEC,TO_CHAR(INPUT_DATE,'YYYY-MM-DD') INPUT_DATE,PRICE FROM LUNCH WHERE LUNCH_CODE=?";
+				"SELECT LUNCH_NAME,IMG,SPEC,TO_CHAR(INPUT_DATE,'YYYY-MM-DD') INPUT_DATE,PRICE,REQUEST FROM LUNCH WHERE LUNCH_CODE=?";
 			pstmt=con.prepareStatement(selectLunch);
 		//4.
 			pstmt.setString(1, code);
@@ -152,7 +152,7 @@ public class LunchAdminDAO {
 			//입력된 코드로 조회된 레코드가 존재할 때 VO를 생성하고 값 추가
 			if(rs.next()) {
 				ldvo=new LunchDetailVO(code, rs.getString("lunch_name"), rs.getString("img"),
-						rs.getString("spec"), rs.getString("input_date"), rs.getInt("price"));
+						rs.getString("spec"), rs.getString("input_date"), rs.getInt("price"),rs.getString("request"));
 				
 			}//end if
 		}finally {
@@ -358,7 +358,7 @@ public class LunchAdminDAO {
 			StringBuilder selectOrder=new StringBuilder();
 			selectOrder
 			.append("	select o.order_num, l.lunch_code, l.lunch_name, o.order_name, o.quan,l.price*o.quan price,	")
-			.append("	to_char(o.order_date,'yyyy-mm-dd hh:mi:ss') order_date, o.phone, o.ip_address,o.status	")
+			.append("	to_char(o.order_date,'yyyy-mm-dd hh:mi:ss') order_date, o.phone, o.ip_address,o.status,o.request	")
 			.append("	from  lunch l, ordering o	")
 			.append("	where o.lunch_code=l.lunch_code	")
 			.append("	and to_char(order_date,'yyyy-mm-dd') = to_char(sysdate,'yyyy-mm-dd')	")
@@ -376,7 +376,7 @@ public class LunchAdminDAO {
 				ovo=new OrderVO(rs.getString("order_Num"), rs.getString("lunch_Code"),
 						rs.getString("lunch_Name"), rs.getString("order_Name"), rs.getString("order_Date"),
 						rs.getString("phone"), rs.getString("ip_Address"), rs.getString("status"),
-						rs.getInt("quan"), rs.getInt("price"));
+						rs.getInt("quan"), rs.getInt("price"),rs.getString("request"));
 				list.add(ovo);
 			}//end while
 			
@@ -454,6 +454,113 @@ public class LunchAdminDAO {
 		}//end finally
 		return flag;
 	}//deleteOrder
+	
+	/**
+	 * 요청사항 반환
+	 * @return
+	 * @throws SQLException
+	 */
+	public String selectRequest(String orderNum) throws SQLException{
+		String request=null;
+		
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		try {
+		//1.
+		//2.
+			con=getConn();
+		//3.
+			String selectRequest="SELECT REQUEST FROM ORDERING WHERE ORDER_NUM=?";
+			pstmt=con.prepareStatement(selectRequest.toString());
+		//4.
+			pstmt.setString(1,orderNum);
+		//5.
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				request=rs.getString("request");
+			}//end while
+		}finally {
+			//6.
+			if(rs!=null) {rs.close();}//end if
+			if(pstmt!=null) {pstmt.close();}//end if
+			if(con!=null) {con.close();}//end if
+		}//end finally
+		
+		if(request!=null) {
+			return request;
+		}else {
+			request="";
+			return request;
+		}
+	}//selectRequest
+	
+	public String selectRequestStatus(String orderNum) throws SQLException{
+		String requests=null;
+		
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		try {
+		//1.
+		//2.
+			con=getConn();
+		//3.
+			String selectRequests="SELECT REQUEST_STATUS FROM ORDERING WHERE ORDER_NUM=?";
+			pstmt=con.prepareStatement(selectRequests.toString());
+		//4.
+			pstmt.setString(1,orderNum);
+		//5.
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				requests=rs.getString("request_status");
+			}//end while
+		}finally {
+			//6.
+			if(rs!=null) {rs.close();}//end if
+			if(pstmt!=null) {pstmt.close();}//end if
+			if(con!=null) {con.close();}//end if
+		}//end finally
+		
+		if(requests!=null) {
+			return requests;
+		}else {
+			requests="";
+			return requests;
+		}
+	}//selectRequest
+	
+	public boolean updateRequestStatus(String orderNum) throws SQLException{
+		boolean flag=false;
+		
+		Connection con = null;
+		PreparedStatement pstmt=null;
+		
+		try {
+		//1.
+		//2.
+			con=getConn();
+		//3.
+			String updateOrder="update ordering set request_status='Y' where order_num=?";
+			pstmt=con.prepareStatement(updateOrder);
+		//4.
+			pstmt.setString(1, orderNum);
+		//5.
+			int cnt=pstmt.executeUpdate();
+			if(cnt==1){
+				flag=true;
+			}//end if
+		}finally {
+			//6.
+			if(pstmt!=null) {pstmt.close();}//end if
+			if(con!=null) {con.close();}//end if
+		}//end finally
+		return flag;
+	}//updateStatus
 	
 	public static void main(String[] args) {
 		try {

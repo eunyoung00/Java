@@ -102,6 +102,9 @@ public class LunchMainController extends WindowAdapter implements ActionListener
 		System.exit(0);//JVM의 모든 인스턴스 종료
 	}//windowClosed
 	
+	/**
+	 * 주문 사항 조회
+	 */
 	private void searchOrder() {//이메소드가 thread로 돌아야 한다. 원랜
 		try {
 			List<OrderVO> list=la_dao.selectOrderList();
@@ -127,13 +130,33 @@ public class LunchMainController extends WindowAdapter implements ActionListener
 				
 				//추가
 				dtm.addRow(vec);
-				
 			}//end for
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}//end catch
 	}//searchOrder
+	
+	/**
+	 * 요청사항의 값이 존재하고 읽지 않았다면 true
+	 * 존재하지 않거나 읽었다면 false 반환한다.
+	 * @return
+	 */
+	public boolean requestExist() {
+		boolean flag=false;
+//		JTable jt=lmv.getJtOrder();
+		String request=null;
+//		String requestStatus=null;
+		try {
+			request = la_dao.selectRequest(orderNum);
+//			requestStatus = la_dao.selectRequest(orderNum);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}//end catch
+		if(!request.equals(""));{//mt가 아니고
+			flag=true;
+		}//end if
+		return flag;
+	}//requestExist
 	
 	@Override
 	public void mouseClicked(MouseEvent me) {
@@ -152,11 +175,53 @@ public class LunchMainController extends WindowAdapter implements ActionListener
 //				searchOrder();
 			}//end if
 		}//end if
+		if(me.getSource()==lmv.getJtOrder()&&me.getClickCount()==DBL_CLICK) {//더블클릭시 쨔란
+			JTable jt=lmv.getJtOrder();
+			orderNum=(String)jt.getValueAt(jt.getSelectedRow(), 1);
+			try {
+				if(!la_dao.selectRequest(orderNum).equals("")) {//값이 있으면
+//					String request=la_dao.selectRequest(orderNum);
+					if(la_dao.updateRequestStatus(orderNum)) {//상태변환성공
+						msgCenter(lmv, "요청사항"+la_dao.selectRequest(orderNum));
+					}else {//상태 변환 실패
+						JOptionPane.showMessageDialog(lmv, "도시락 제작상태 변환이 실패!");
+					}//end else
+				
+					int r = jt.rowAtPoint(me.getPoint());//위치뽑아 행가져와
+			        if (r >= 0 && r < jt.getRowCount()) {
+			        	
+			        	jt.setRowSelectionInterval(r, r);//시작행과 끝행 사이의 행을 선택하는 일(시작과 끝이 같은게선택되어 그행이 선택되는)
+			        } else {
+			        	jt.clearSelection();
+			        }//end else
+			        //선택한 행을 넣는다.
+			        selectedRow=r;
+				JPopupMenu jp=lmv.getJpOrderMenu();
+				jp.setLocation(me.getXOnScreen(),me.getYOnScreen());
+				jp.setVisible(true);
+				
+				orderNum=(String)jt.getValueAt(jt.getSelectedRow(), 1);//우클릭이 판정이 안돼서...
+				lunchName=(String)jt.getValueAt(jt.getSelectedRow(), 3)+" "+
+							(String)jt.getValueAt(jt.getSelectedRow(), 4);
+				}//end if
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog(lmv, "DB에서 문제 발생!\n잠시후 다시 시도해 보세요.");
+				e.printStackTrace();
+			}//end catch
+			
+			
+		}else {
+			JPopupMenu jp= lmv.getJpOrderMenu();
+			jp.setVisible(false);
+			
+		}//end else
+		
 		if(me.getSource()==lmv.getJtOrder() && me.getButton()==MouseEvent.BUTTON3) {//우클릭?
 			JTable jt=lmv.getJtOrder();
 			//마우스 포인터가 클릭되면 테이블에서 클릭한 행을 가져오는 일
 			int r = jt.rowAtPoint(me.getPoint());//위치뽑아 행가져와
 		        if (r >= 0 && r < jt.getRowCount()) {
+		        	
 		        	jt.setRowSelectionInterval(r, r);//시작행과 끝행 사이의 행을 선택하는 일(시작과 끝이 같은게선택되어 그행이 선택되는)
 		        } else {
 		        	jt.clearSelection();
@@ -174,6 +239,8 @@ public class LunchMainController extends WindowAdapter implements ActionListener
 //			System.out.println(jt.getSelectedRow());
 			lunchName=(String)jt.getValueAt(jt.getSelectedRow(), 3)+" "+
 						(String)jt.getValueAt(jt.getSelectedRow(), 4);
+			
+			
 		}else {
 			JPopupMenu jp= lmv.getJpOrderMenu();
 			jp.setVisible(false);
@@ -273,8 +340,52 @@ public class LunchMainController extends WindowAdapter implements ActionListener
      		}//end else
 			}//end if
 
-			if(ae.getSource()==lmv.getJmOrderStatus()) {
+//			try {//주문 완료를 하려면 요청사항이 있으면 읽어야 하고 없으면 그냥 주문 완료를 띄워주면 된다.
+//			if(ae.getSource()==lmv.getJmOrderStatus()&&requestExist()) {
+//					//la_dao.selectRequest(orderNum).equals("N")) {
+//				//주문완료+읽지 않은 상태라면
+//				JTable jt=lmv.getJtOrder();
+//				orderNum=(String)jt.getValueAt(jt.getSelectedRow(), 1);
+//					String request=la_dao.selectRequest(orderNum);
+//					if(!request.equals("")) {
+//						msgCenter(lmv, la_dao.selectRequest(orderNum));
+//					}//end if
+//			}//end if
+//			} catch (SQLException e1) {
+//				e1.printStackTrace();
+//			}//end catch
+			
+			
+			if(ae.getSource()==lmv.getJmOrderStatus()) {//주문완료
 				//제작상태가 'N'인 상태에서만 동작!
+/////////////////////////////////////////////////
+			try {
+				if (la_dao.selectRequestStatus(orderNum).equals("N")) {// 읽지않았을때
+//String request=la_dao.selectRequest(orderNum);
+					if (la_dao.updateRequestStatus(orderNum)) {// 상태변환성공
+						msgCenter(lmv, "요청사항" + la_dao.selectRequest(orderNum));
+					} else {// 상태 변환 실패
+						JOptionPane.showMessageDialog(lmv, "도시락 제작상태 변환이 실패!");
+					} // end else
+				} // end if
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			} // end if
+			/*
+			 * int r = jt.rowAtPoint(me.getPoint());//위치뽑아 행가져와 if (r >= 0 && r <
+			 * jt.getRowCount()) {
+			 * 
+			 * jt.setRowSelectionInterval(r, r);//시작행과 끝행 사이의 행을 선택하는 일(시작과 끝이 같은게선택되어 그행이
+			 * 선택되는) } else { jt.clearSelection(); }//end else //선택한 행을 넣는다. selectedRow=r;
+			 * JPopupMenu jp=lmv.getJpOrderMenu();
+			 * jp.setLocation(me.getXOnScreen(),me.getYOnScreen()); jp.setVisible(true);
+			 * 
+			 * orderNum=(String)jt.getValueAt(jt.getSelectedRow(), 1);//우클릭이 판정이 안돼서...
+			 * lunchName=(String)jt.getValueAt(jt.getSelectedRow(), 3)+" "+
+			 * (String)jt.getValueAt(jt.getSelectedRow(), 4);
+			 * 
+			 */
+////////////////////////////////////////////////////////////////////////////////////////		
 				JTable jt=lmv.getJtOrder();
 				if(((String)jt.getValueAt(selectedRow, 10)).equals("N")) {
 			
