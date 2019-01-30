@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>alignment 정렬</title>
+<style type="text/css">
+	/* text-align: left,center,right로 수평정렬 */
+	#div_text{width:600px; height:100px; border:1px solid #333; text-align: right;
+			vertical-align: bottom;}/* text행의높이가 아니기 때문에 vertical을 주나 마나, td안에서는 티가난다. */
+	#left{text-align: letf}
+	#center{text-align: center}
+	#right{text-align: right}
+	
+	/* vertical-align: 행의높이가 존재하는 tag에서 사용한다. */
+	#top{vertical-align: top}
+	#middle{vertical-align: middle}
+	#bottom{vertical-align: bottom}
+	
+	/* 혼자test */
+	#a{vertical-align: top; text-align: left;}
+	#b{vertical-align: middle; text-align: right;}
+	#c{vertical-align: bottom; text-align: center;}
+	
+	/* 문자열이 아닌 tag를 가운데 정렬할 때에는 margin으로 한다. */
+/* 	table{text-align: center} */
+	table,div{margin:0px auto;}
+</style>
+</head>
+<body>
+	<div id="div_text">
+		<strong>문자열 수평 정렬</strong><br/>
+		fsfs<br/>
+		fsf<br/>
+	</div>
+	
+	<hr/>
+	<table border="1" cellspacing="0">
+	<tr height="100px">
+		<td id="left"; width="80px">왼쪽</td><!-- 기본이 왼쪽 주나마나 -->
+		<td id="center"; width="80px">가운데</td>
+		<td id="right"; width="80px">오른쪽</td>
+	</tr>
+	<tr height="100px">
+		<td id="top"; width="80px">위</td>
+		<td id="middle"; width="80px">가운데</td>
+		<td id="bottom"; width="80px">아래</td>
+	</tr>
+	<tr height="100px">
+		<td id="a"; width="80px">위왼</td>
+		<td id="b"; width="80px">가운데오</td>
+		<td id="c"; width="80px">아래센</td>
+	</tr>
+	</table>
+
+</body>
+</html>
