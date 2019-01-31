@@ -10,14 +10,16 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
+
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
 import kr.co.sist.lunch.admin.model.LunchAdminDAO;
 import kr.co.sist.lunch.admin.run.LunchAdminMain;
 import kr.co.sist.lunch.admin.view.LunchAddView;
-import kr.co.sist.lunch.amdin.vo.LunchAddVO;
+import kr.co.sist.lunch.admin.vo.LunchAddVO;
 
 public class LunchAddController extends WindowAdapter implements ActionListener{
 

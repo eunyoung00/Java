@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kr.co.sist.lunch.admin.view.LunchMainView;
-import kr.co.sist.lunch.amdin.vo.AdminLoginVO;
-import kr.co.sist.lunch.amdin.vo.CalcVO;
-import kr.co.sist.lunch.amdin.vo.LunchAddVO;
-import kr.co.sist.lunch.amdin.vo.LunchDetailVO;
-import kr.co.sist.lunch.amdin.vo.LunchUpdateVO;
-import kr.co.sist.lunch.amdin.vo.LunchVO;
-import kr.co.sist.lunch.amdin.vo.OrderVO;
+import kr.co.sist.lunch.admin.vo.AdminLoginVO;
+import kr.co.sist.lunch.admin.vo.CalcVO;
+import kr.co.sist.lunch.admin.vo.LunchAddVO;
+import kr.co.sist.lunch.admin.vo.LunchDetailVO;
+import kr.co.sist.lunch.admin.vo.LunchUpdateVO;
+import kr.co.sist.lunch.admin.vo.LunchVO;
+import kr.co.sist.lunch.admin.vo.OrderVO;
 
 public class LunchAdminDAO {
 

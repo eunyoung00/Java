@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>shadow</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/main_v190130.css"/>
+<style type="text/css">
+#wrap{margin:0px auto;width:800px; height:860px;}
+#header{width:800px; height:140px; background:#FFFFFF url(http://localhost:8080/html_prj/common/images/header_bg.png) repeat-x;
+		position: relative; }
+#headerTitle{font-family: HY견고딕,고딕; font-size:35px; font-weight:bold; text-align:center; 
+			/* padding-top: 35px */ position:absolute; top:40px; left:290px; }
+#container{width:800px; height:600px; }
+#footer{width:800px; height:120px; }
+#footerTitle{float: right; font-size:15px; padding-top:20px; padding-right:20px; }
+
+.shadow{text-shadow: 7px -3px 8px #FF0000}
+/* overflow: auto; 약관 만들때 자동으로 스크롤 바가 만들어지도록 하는 속성 */
+.boxshadow{ border: 1px solid #333; width:200px; height:150px; box-shadow: 5px 10px 10px #333; 
+			background-color:#FFEE55; border-radius: 0px 15px 0px 0px;}
+			
+	/* border-radius: 모든방향에 적용
+		특정 위치만 호를 적용할 수 있다.
+		border-radius:좌상px 우상px 우하px 좌하px;
+	*/
+.radius{border:1px solid #333; width: 300px; height: 100px; margin-top: 20px; border-radius: 10px 10px 0px 0px;	}
+.radius1{border:1px solid #578BBB; width: 200px; height: 200px; margin-top: 20px; border-radius: 100px 100px 100px 100px;
+		background-color: #7BA4CE; box-shadow: 10px 10px 10px #578BBB; }
+</style>
+</head>
+<body>
+<div id="wrap">
+	<div id="header">
+		<div id="headerTitle">SIST Class4</div>
+	</div>
+	
+	<div id="container">
+	오늘은 <span class="shadow">1월 31일</span> 입니다.<br/>
+	<div class="boxshadow">
+		공지사항<br/>
+		내일은 금요일 2월1일 입니다<br/>
+		즐거운 설 명절 되시고,<br/>
+		2월 7일 목요일에 뵙겠습니다.
+	</div>
+	
+	<!-- radius -->
+	<div class="radius">
+		이번주는 SKY캐슬 막방입니다.<br/>
+		김주영 선생님은 과연 교도소에서 재소자들을 SKY를 보낼 수 있을 것인가....
+	</div>
+	<div class="radius1">
+		
+	</div>	
+	
+	</div>
+	
+	<div id="footer">
+		<div id="footerTitle">copyright&copy; all right reserved. class 4.</div>
+	</div>
+</div>
+
+</body>
+</html>

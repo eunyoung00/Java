@@ -22,10 +22,10 @@ import kr.co.sist.lunch.admin.model.LunchAdminDAO;
 import kr.co.sist.lunch.admin.view.LunchAddView;
 import kr.co.sist.lunch.admin.view.LunchDetailView;
 import kr.co.sist.lunch.admin.view.LunchMainView;
-import kr.co.sist.lunch.amdin.vo.CalcVO;
-import kr.co.sist.lunch.amdin.vo.LunchDetailVO;
-import kr.co.sist.lunch.amdin.vo.LunchVO;
-import kr.co.sist.lunch.amdin.vo.OrderVO;
+import kr.co.sist.lunch.admin.vo.CalcVO;
+import kr.co.sist.lunch.admin.vo.LunchDetailVO;
+import kr.co.sist.lunch.admin.vo.LunchVO;
+import kr.co.sist.lunch.admin.vo.OrderVO;
 
 public class LunchMainController extends WindowAdapter implements ActionListener,MouseListener, Runnable{
 

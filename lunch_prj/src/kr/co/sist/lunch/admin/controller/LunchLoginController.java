@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 import kr.co.sist.lunch.admin.model.LunchAdminDAO;
 import kr.co.sist.lunch.admin.view.LunchLoginView;
 import kr.co.sist.lunch.admin.view.LunchMainView;
-import kr.co.sist.lunch.amdin.vo.AdminLoginVO;
+import kr.co.sist.lunch.admin.vo.AdminLoginVO;
 
 public class LunchLoginController extends WindowAdapter implements ActionListener{
 

@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: html_prj
+Bundle-SymbolicName: html_prj
+Bundle-Version: 1.0.0.qualifier

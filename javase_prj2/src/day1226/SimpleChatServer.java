@@ -73,6 +73,7 @@ public class SimpleChatServer extends JFrame implements ActionListener {
 		setBounds(100, 100, 300, 400);
 		setVisible(true);
 		jtf.requestFocus();//커서를 jtf에 위치시킨다.
+		jtf.addActionListener(this);//메세지가 보내지는 위치! 자동 스레드화되서 읽어지는것?
 
 		try {
 			openServer();
@@ -84,8 +85,8 @@ public class SimpleChatServer extends JFrame implements ActionListener {
 									"서버가동 실패!!! 메세지를 읽어들일 수 없습니다.");
 			e.printStackTrace();
 		}//end catch
+//		jtf.addActionListener(this);//여기있을땐 메세지가 보내지지 않는다.
 		
-		jtf.addActionListener(this);
 	}//SimpleChatServer
 	
 	 public void close() throws IOException{

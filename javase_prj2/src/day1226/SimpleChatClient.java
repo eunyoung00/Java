@@ -51,6 +51,7 @@ public class SimpleChatClient extends JFrame implements ActionListener {
 			}//windowClosing
 		});
 		
+		jtf.addActionListener(this);//여기있을때 자동으로 스레드화?
 		setBounds(100, 100, 300, 400);
 		setVisible(true);
 		jtf.requestFocus();//커서를 jtf에 위치시킨다.
@@ -62,7 +63,7 @@ public class SimpleChatClient extends JFrame implements ActionListener {
 			e.printStackTrace();
 		}//end catch
 		
-		jtf.addActionListener(this);
+//		jtf.addActionListener(this);//여기있으면 메세지가 보내지지않는다
 	}//SimpleChatServer
 	
 

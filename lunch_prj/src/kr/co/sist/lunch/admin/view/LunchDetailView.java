@@ -2,6 +2,7 @@ package kr.co.sist.lunch.admin.view;
 
 import java.awt.Color;
 import java.awt.Font;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -10,9 +11,10 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
 import kr.co.sist.lunch.admin.controller.LunchDetailController;
 import kr.co.sist.lunch.admin.controller.LunchMainController;
-import kr.co.sist.lunch.amdin.vo.LunchDetailVO;
+import kr.co.sist.lunch.admin.vo.LunchDetailVO;
 
 /**
  * 도시락테이블에서 선택된 도시락의 상세 정보를 출력하고, 수정 또는 삭제를 할 수 있는 창

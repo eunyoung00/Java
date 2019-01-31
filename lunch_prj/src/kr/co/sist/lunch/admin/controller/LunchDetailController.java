@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 
 import kr.co.sist.lunch.admin.model.LunchAdminDAO;
 import kr.co.sist.lunch.admin.view.LunchDetailView;
-import kr.co.sist.lunch.amdin.vo.LunchUpdateVO;
+import kr.co.sist.lunch.admin.vo.LunchUpdateVO;
 
 public class LunchDetailController extends WindowAdapter implements ActionListener{
 
