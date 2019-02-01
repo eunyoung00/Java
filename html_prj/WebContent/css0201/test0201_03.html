@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>test3</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/main_v190130.css"/>
+<style type="text/css">
+#wrap{margin:0px auto;width:800px; height:860px;}
+#header{width:800px; height:140px; background-color:#FFFFFF; position: relative; }
+#headerTitle{font-family: HY견고딕,고딕; font-size:35px; font-weight:bold; text-align:center; 
+			font-color:#081C58; position:absolute; top:40px; left:310px; }
+#container{width:800px; height:600px; position: relative;}
+#footer{width:800px; height:120px; }
+#footerTitle{float: right; font-size:15px; padding-top:20px; padding-right:20px; }
+.top1{float: left;}
+.top2{float: right;}
+.group{float: left; font-size: 12px;}
+.gray{float: left; color:#ECECEC;}
+.select{float: right;}
+.null{float: right;}
+.center{background-color:#FBFBFB; border-bottom:1px solid #EAEAEA; 
+		border-top:2px solid #000000; width:800px; height:25px; position:absolute; top:25px;
+		padding-top:5px; padding-left:5px;}
+.table{float: left;position:absolute; top:55px;}
+td{text-align: center; }
+.col4{width:80px; heignt:10px}
+</style>
+</head>
+<body>
+<div id="wrap">
+	<div id="header">
+		<div id="headerTitle">교보 문고</div>
+	</div>
+	
+	<div id="container">
+	<div>
+		<div class="top1">전체 <span>'자바'</span> 검색결과 (1 ~20 / 총5,883건)</div>
+		<div class="top2"><input type="Button" value="결과내재검색/상세검색"/> <input type="Button" value="장바구니 담기"/></div>
+	</div>
+	
+	<div class="center">
+		<div class="group">정확도</div>
+		<div class="gray">&nbsp;|&nbsp;</div>
+		<div class="group">판매량</div>
+		<div class="gray">&nbsp;|&nbsp;</div>
+		<div class="group">신상품</div>
+		<div class="gray">&nbsp;|&nbsp;</div>
+		<div class="group">낮은가격</div>
+		<div class="gray">&nbsp;|&nbsp;</div>
+		<div class="group">높은가격</div>
+		<div class="gray">&nbsp;|&nbsp;</div>
+		<div class="group">할인율</div>
+		<div class="gray">&nbsp;|&nbsp;</div>
+		<div class="group">리뷰수</div>
+		<div class="null">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+		<select class="select" size="1" name="select">
+			<option value="옵션선택" selected="selected">옵션선택</option>
+			<option value="옵션선택" selected="selected">옵션선택</option>
+			<option value="옵션선택" selected="selected">옵션선택</option>
+			
+		</select>
+	</div>
+	<div class="table">
+		<table>
+		<tr><!-- 이미지 크기 80*110 -->
+			<td>
+				국내도서<br/>
+				<img src="../common/images/wh3_1.png" style="border:2px solid #E2E2E2"/>
+				<div>새창보기</div><div class="gray">&nbsp;|&nbsp;</div><div>미리보기</div></td>
+			<td>
+				<div>MD의선택</div><div>무료배송</div><div>소득공제</div>
+				<div>[컴퓨터/IT]이팩티브 자바 3/E : 프로그래밍인사이트</div>
+				<br/>
+				<div>조슈아 블로크 지음</div><div class="gray">&nbsp;|&nbsp;</div><div>게임맵시(이복연) 옮김</div><div class="gray">&nbsp;|&nbsp;</div>인사이트<div class="gray">&nbsp;|&nbsp;</div>2018년 11월
+			</td>
+			<td>36,000원<br/>32,400원&nbsp;[10%↓]<br/>1,800원P</td>
+			<td>
+				<input class="col4" type="button" value="바로드림"/><br/>
+				<input class="col4" type="button" value="장바구니 담기"/><br/>
+				<input class="col4" type="button" value="바로구매"/><br/>
+				<input class="col4" type="button" value="보관함 담기"/><br/>
+				<input class="col4" type="button" value="스펙비교"/><br/>
+			</td>
+		</tr>
+		</table>
+	</div>
+	</div>
+	
+	<div id="footer">
+		<div id="footerTitle">copyright&copy; all right reserved. class 4.</div>
+	</div>
+</div>
+
+</body>
+</html>

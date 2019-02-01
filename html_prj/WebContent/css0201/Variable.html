@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>변수 사용</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/main_v190130.css"/>
+<style type="text/css">
+#wrap{margin:0px auto;width:800px; height:860px;}
+#header{width:800px; height:140px; background:#FFFFFF url(http://localhost:8080/html_prj/common/images/header_bg.png) repeat-x;
+		position: relative; }
+#headerTitle{font-family: HY견고딕,고딕; font-size:35px; font-weight:bold; text-align:center; 
+			/* padding-top: 35px */ position:absolute; top:40px; left:290px; }
+#container{width:800px; height:600px; }
+#footer{width:800px; height:120px; }
+#footerTitle{float: right; font-size:15px; padding-top:20px; padding-right:20px; }
+
+</style>
+<script type="text/javascript">
+//지역변수
+//1.변수의 선언
+var name;
+//2.값 할당 : 데이터형 결정
+name="김정윤";
+//3.값 사용
+console.log("이름 "+name+"님 새해 복 많이 받으세요.");
+//2.값 할당 : 데이터형 결정
+name=31.2;
+//3.값 사용
+console.log("나이 "+name+"세.");
+//2.값 할당 : 데이터형 결정
+name=false
+//3.값 사용
+console.log(name);//혼란을 야기해 이렇게 쓰지는 않는다.
+
+//전역변수
+//1.선언과 함께 값 할당을 한다.
+age=31;//어디가 선언이고 값할당인지 헷깔려 지역을 선호한다
+//2.값 할당
+age=31.2;
+//3.값 사용
+alert("전역 변수 : "+age);
+
+//무슨차일까? 함수안에 들어가 지면 반드시 차이남.
+function test(){
+	//지역
+	var addr="경상북도 대프리카";
+	//전역
+	addr1="서울시 강남구 역삼동";
+	
+}
+test();
+//alert("지역 : "+addr);//지역변수는 함수 외부에서 사용할 수 없다.
+alert("전역 : "+addr1);//전역변수는 함수 외부에서 사용할 수 있다. 
+
+</script>
+
+</head>
+<body>
+<div id="wrap">
+	<div id="header">
+		<div id="headerTitle">SIST Class4</div>
+	</div>
+	
+	<div id="container">
+	
+	</div>
+	
+	<div id="footer">
+		<div id="footerTitle">copyright&copy; all right reserved. class 4.</div>
+	</div>
+</div>
+
+</body>
+</html>
