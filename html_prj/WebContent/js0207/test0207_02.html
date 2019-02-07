@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/main_v190130.css"/>
+<style type="text/css">
+table{border: 1px solid #333; box-shadow:10px 10px 0px #333;}
+/*x좌표^ y좌표^ 번짐값^ 그림자색(RGB);*/
+</style>
+<script type="text/javascript">
+	var len=prompt("언어를 입력하세요.(java,HTML,javaScript,CSS)","java");
+	
+	var img="NoImage.png";
+	var name="noname";
+	var birth="1900";
+	var age="100";
+	document.write("<table border='1'cellspacing='0'><tr><td rowspan='3'>");
+	
+	if(len=="java"){
+		img="JamesGosling.JPG"
+		name="JamesGosling"
+		birth="	1955년"
+		age="63세";
+	}else if(len=="javaScript"){
+		img="BrendanEich.JPG"
+		name="BrendanEich"
+		birth="1961년"
+		age="59살";
+	}else if(len=="HTML"){
+		img="TimBernersLee.JPG"
+		name="TimBernersLee"
+		birth="	1955년"
+		age="63세";
+	}else if(len=="CSS"){
+		img="HakonWiumLie.JPG"
+		name="HakonWiumLie"
+		birth="1965년"
+		age="53살";
+	}else{
+		alert("java,HTML,javaScript,CSS중에서 입력해 주세요.")
+	}//else
+	document.write("<img src='../common/images/"+img+"'/></td>");
+	document.write("<td>이름</td><td>"+name+"</td></tr>");
+	document.write("<tr><td>태어난해</td><td>"+birth+"</td></tr>");
+	document.write("<tr><td>나이</td><td>"+age+"</td></tr>");
+	
+	document.write("</table>");
+	
+
+</script>
+</head>
+<body>
+
+
+</body>
+</html>
