@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/main_v190130.css"/>
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+ 	window.onload=function(){
+		//이벤트 등록
+		document.getElementById("frm").addEventListener("click",getValue);
+	}//function 
+
+	function getValue(){
+		/* alert("dddd"); 잘 나오나 확인*/
+		//폼태그의 이름속성을 사용하여 값 설정
+		
+		//1.form태그 얻기
+		var obj=document.frm;
+		//2.form태그의 하위컨트롤 값 얻기.
+		var name=obj.name.value;
+		var addr=obj.addr.value;
+		var age=obj.age.value;
+		//값을얻어 서버로 보내기도 하고 동적으로 바꾸어주기도 한다.
+		
+		//alert("이름 : "+name+"\n주소 : "+addr+"\n나이 : "+age);
+		//1.div얻기(출력 대상)
+		var divNode=document.getElementById("output");
+		//2.출력 내용 생성
+		var output="이름 :<strong>"+name+"</strong><br/>나이 : "+age+"<br/>주소 : " +addr;
+		//3.출력
+		divNode.innerHTML=output
+	}//getValue
+	
+	function idGetValue(){
+		//form태그를 거치지 않고 id속성으로 태그를 찾아서 값 얻기
+		var name=document.getElementById("name").value;
+		var addr=document.getElementById("addr").value;
+		var age=document.getElementById("age").value;
+		
+		alert("id속성으로 값 얻기 : "+name+"/"+addr+"/"+age);
+	}//idGetValue
+</script>
+</head>
+<body>
+	<form name="frm">
+		<label>이름</label>
+		<input type="text" name="name" id="name" class="inputBox"><br/>
+		<label>주소</label>
+		<input type="text" name="addr" id="addr" class="inputBox"><br/>
+		<label>나이</label>
+		<input type="password" name="age" id="age" class="inputBox"><br/>
+		
+		<input type="button" value="form 값 얻기" class="btn" id="frm"><br/>
+		<input type="button" value="id 값 얻기" class="btn" id="id" onclick="idGetValue()"><br/>
+		<input type="button" value="onclick 값 얻기" class="btn" onclick="getValue()"><br/>
+		<!-- onclick은 이벤트 등록이 안되어 있어도 누르면 뜬다? -->
+		
+	</form>
+	
+	<div id="output"></div>
+</body>
+</html>

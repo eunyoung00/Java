@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>test01</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/main_v190130.css"/>
+<style type="text/css">
+</style>
+<script type="text/javascript">
+function getValue(){
+	var name=document.getElementById("name").value;//id속성으로 값을 가져오고
+	var divNode=document.getElementById("output");
+	var output="";
+	/* var output="<h"+i+">"+name+"</h"+i+"><br/>"; */
+	
+	for(i=1;i<7;i++){
+		output+="<h"+i+">"+name+"</h"+i+">";
+	}//end for
+	divNode.innerHTML=output;
+		
+}//getValue
+</script>
+</head>
+<body>
+	<div>
+		<label>이름</label> 
+		<input type="text" id="name"/> 
+		<input type="button" value="확인" onclick="getValue()"/><br/>
+	</div>
+	<div id="output"></div>
+
+</body>
+</html>

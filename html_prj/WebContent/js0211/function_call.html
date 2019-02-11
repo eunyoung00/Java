@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/main_v190130.css"/>
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+	//사용자 동작에 의한 함수 호출
+	function test(){
+		//onload로 호출되면 <body>내의 정보가 loading 된 후 실행되기 때문에 tag의 정보를 script영역에서 얻을 수 있다.
+		
+		//script영역에서 직접 호출하면 <body>가 로딩되기 전에 호출되므로 tag의 정보를 script영역에서 얻을 수 없다.
+		//var val=document.getElementById("temp");
+		alert("test!!!!"/* + val.value */);
+	}//test
+	
+	//test();//<<차이가 없어 보이나..alert가 먼저 출력되면서 코드출력을 멈춰 이미지가 나중에 출력->실행 순서에 대한 차이가 있다.
+</script>
+</head>
+<!-- <body onload="test()"> -->
+<body>
+<!-- <input type="text" id="temp" value="월요일"/> -->
+<label>클릭</label>
+<input type="button"value="클릭" class="btn" onclick="test()"/><br/>
+<label>키가 눌릴 때</label>
+<input type="text" class="inputBox"onkeydown="test()"/><br/>
+<label>키가 올라올 때</label><!-- 키의 연속입력이 가능..계속누름? -->
+<input type="text" class="inputBox"onkeyup="test()"/><br/>
+<label>마우스 포인터가 들어갈 때</label>
+<img src="../common/images/img.png"style="border:2px solid #333" onmouseover="test()"/><br/>
+<label>마우스 포인터가 빠져나갈 때</label>
+<img src="../common/images/img.png"style="border:2px solid #333" onmouseout="test()"/><br/>
+
+<label>값이 변경 될 때</label>
+<!-- select의 onchange는 다른 옵션이 선택되면 변경되는것으로 간주한다. -->
+<select onchange="test()">
+	<option>어머님!</option>
+	<option>예서</option>
+	<option>멘탈이</option>
+	<option>약한 아이입니다.</option>
+</select>
+<!-- input이나 textarea의  onchange는 커서가 들어갔을때의 값과 빠져나갔을 때의 값이 다를때 변경된 것으로 간주한다. -->
+<input type="text" onchange="test()"/><br/>
+<textarea style="width:400px;height:100px;" onchange="test()"></textarea><br/>
+
+<label>커서가 빠져 나갔을 때</label>
+<input type="text" onblur="test()"/><br/>
+
+<label>더블클릭 했을 떄</label>
+<input type="button" value="더블 클릭" ondblclick="test()"/><br/>
+
+</body>
+</html>
