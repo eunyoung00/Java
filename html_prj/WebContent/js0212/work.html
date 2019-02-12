@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/main_v190130.css"/>
+<style type="text/css">
+	#diceWrap{border:1px solid #333; width: 500px; height: 400px; box-shadow: 10px 10px 10px #333;
+				margin-left: 100px; margin-top: 10px;}
+	#inputHeader{height: 150px; }
+	#score{height: 30px; text-align: center; }
+	#diceView{width: 500px; text-align: center; margin-top: 50px; }
+	h2{text-align: center;}
+</style>
+<script type="text/javascript">
+	window.onload=function(){
+		setDice();
+	}//function
+
+	function setDice(){
+		var obj=document.frm;
+		
+		var num1=parseInt(Math.random()*6)+1//1~6
+		var num2=parseInt(Math.random()*6)+1//1~6
+		
+		obj.dice1.src="images/dice_"+num1+".png";
+		obj.dice2.src="images/dice_"+num2+".png";
+		
+	    var arr=[num1,num2];
+		return arr;
+	}//setDice
+	
+	var cnt=0;
+	var p1count=0;
+	var p2count=0;
+	function throwDice(){
+		var obj=document.frm;
+
+		if(obj.player1.value=="" || obj.player2.value==""){//주사위를 던지기 전에 사용자 먼저.
+			alert("사용자를 먼저 입력하여 주세요");
+			return;
+		}//end if
+		
+		if(!(obj.trun1[0].checked || obj.trun1[1].checked)){//아무 체크도 안되어 있다면 사용자1부터라고 알려줌
+				alert("처음은 사용자1 부터 시작합니다.");
+				obj.trun1[0].checked=true;
+				return;
+		}//end if
+		
+		if(cnt==0){//처음돌릴때
+			if(obj.trun1[1].checked==true){
+				alert("처음은 사용자1 부터 시작합니다.");
+				obj.trun1[0].checked=true;
+				return;
+			}
+			var arr=setDice();
+			p1count+=arr[0]+arr[1];
+			obj.trun1[1].checked=true;
+			cnt++;
+		}else if(cnt==1||cnt==3||cnt==5){
+			if(obj.trun1[1].checked){
+				var arr=setDice();
+				p2count+=arr[0]+arr[1];
+				obj.trun1[0].checked=true;
+				cnt++;
+			}else{
+				alert("사용자2의 차례입니다.");
+			}
+		}else if(cnt==2||cnt==4){
+			if(obj.trun1[0].checked){//1이 돌리면 
+				var arr=setDice();
+				p1count+=arr[0]+arr[1];
+				obj.trun1[1].checked=true;
+				cnt++;
+			}else{
+				alert("사용자1의 차례입니다.");
+			}
+		}else {
+			var win="";
+			if(p1count>p2count){
+				win="사용자1";
+			}else{
+				win="사용자2";
+			}
+			var msg="사용자 1님이 "+p1count+"점, 사용자 2님이 "+p2count+"으로 " +win+ "님이 승리하셨습니다~!!"
+			alert("판정 :"+msg);
+			document.getElementById("result").innerHTML+=msg;
+		}//end else
+	}//throwDice
+	
+	function setName(){
+		var obj=document.frm;
+		
+		var player1Name=document.getElementById("p1Name")
+		var player2Name=document.getElementById("p2Name")
+		
+		if(obj.player1.value=="" || obj.player2.value==""){
+			alert("사용자를 입력하여 주세요");
+			return;
+		}//end if
+		
+		player1Name.innerHTML=obj.player1.value;
+		player2Name.innerHTML=obj.player2.value;
+		//obj.p2Name.value
+	}//setName
+	
+	function resetGame(){
+		var obj=document.frm;
+		
+		var player1Name=document.getElementById("p1Name")
+		var player2Name=document.getElementById("p2Name")
+		
+		player1Name.innerHTML="";
+		player2Name.innerHTML="";
+		document.getElementById("result").innerHTML="";
+	}//reset
+
+</script>
+</head>
+<body>
+<div id="diceWrap">
+	<form name="frm">
+		<div id="inputHeader">
+		<h2>주사위 게임</h2>
+			<div>
+				<label>사용자1</label>
+				<input type="text" name="player1" class="inputBox">
+				<label>사용자2</label>
+				<input type="text" name="player2" class="inputBox">
+				<input type="button" value="참여 설정" class="btn" onclick="setName()"/>
+			</div>
+			<div style="text-align: center;margin-top:10px;">
+				<input type="radio" name="trun1" id="p1"><span id="p1Name"></span>
+				<input type="radio" name="trun1" id="p2"><span id="p2Name"></span>
+				<input type="button" value="던지기" class="btn" onclick="throwDice()"/>
+			</div>
+		</div>
+		<div id="score">
+			판정 : <span id="result"></span><br/>
+		<input type="reset" value="초기화" class="btn" onclick="resetGame()"/>
+		</div>
+		<div id="diceView">
+			<img src="images/dice_1.png" name="dice1"/>
+			<img src="images/dice_1.png" name="dice2"/>
+		</div>
+	</form>
+</div>
+
+</body>
+</html>

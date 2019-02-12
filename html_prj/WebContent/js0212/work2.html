@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/main_v190130.css"/>
+<style type="text/css">
+	#header{border:1px solid #333; width: 300px; height: 300px;}
+</style>
+<script type="text/javascript">
+	function change(){
+		var obj=document.frm;
+		
+		var size=obj.setSize.value;
+		var img=obj.imgResize;
+		
+		img.width=size;
+		//obj.img.style="width:"+number+"px; height:"+number+"px;";
+	}//change
+</script>
+</head>
+<body>
+<div id="workWrap">
+	<form name="frm">
+		<div id="header">
+			<img src="images/dice_1.png" name="imgResize" /><!-- style="width:30px;height:30px;" -->
+		</div>
+		<div>
+			30<input type="range" name="setSize" min="30" max="300" onmousemove="change()"/>300<br/>
+		</div>
+	</form>
+</div>
+</body>
+</html>
