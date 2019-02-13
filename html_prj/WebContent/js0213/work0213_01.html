@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/main_v190130.css"/>
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+	function lower(){
+		var obj=document.textboxFrm;
+		var textVal=obj.textbox.value;
+		var arr=["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+		var output="";
+		for(var i=0; i<arr.length; i++){
+			//인덱스 얻기 : 변수명.indexOf('문자열')
+			//자식문자열 얻기 : 변수명.subString(시작인덱스, 끝 인덱스+1);
+			//문자하나 얻기 : 변수명.charAt(인덱스);
+			for(var j=0; j<textVal.length; j++){
+				//output+=textVal.substring(textVal.indexOf(arr[i]),textVal.indexOf(arr[i])+1);
+				if(textVal.charAt(j)!=-1){
+					output+=textVal.charAt(j);
+				}//end if
+			}
+		}//end for
+		alert(output);
+	}//lower
+	function upper(){
+		var obj=document.textboxFrm;
+		var textVal=obj.textbox.value;
+ 		var arr=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+		var output="";
+		for(var i=0; i<arr.length; i++){
+			//인덱스 얻기 : 변수명.indexOf('문자열')
+			//자식문자열 얻기 : 변수명.subString(시작인덱스, 끝 인덱스+1);
+			
+			if(textVal.indexOf(arr[i])!=-1){
+				output+=textVal.substring(textVal.indexOf(arr[i]),textVal.indexOf(arr[i])+1);
+			}//end if 
+		}//end for
+		alert(output);
+	}//upper
+	
+	function viewCase(flag){
+		var divNode=document.getElementById("output");
+		var output="";
+		var data=document.textboxFrm.textbox.value;
+		
+		if(flag=="lc"){//소문자
+			output+="소문자 : "+data.replace(/[A-Z0-9]/g,"");
+		}//end if
+		if(flag=="uc"){//대문자
+			output+="대문자 : "+data.replace(/[a-z0-9]/g,"");
+			
+		}//end if
+		if(flag=="nc"){//숫자
+			output+="숫자 : "+data.replace(/[A-Za-z]/g,"");
+			
+		}//end if
+		divNode.innerHTML=output;
+	}//viewCase
+
+</script>
+</head>
+<body>
+	<div id="result">
+	<form name="textboxFrm">
+		<label>문자열 입력</label>
+		<input type="text" value="abcy12Ab3456Z" name="textbox"/>
+		<input type="button" value="소문자" onclick="viewCase('lc')" class="btn"/><!-- viewCase('lc')/lower() -->
+		<input type="button" value="대문자" onclick="viewCase('uc')" class="btn"/><!-- upper() -->
+		<input type="button" value="숫자" onclick="viewCase('nc')" class="btn"/><!-- number() -->
+	</form>
+	</div>
+	<div id="output">
+	
+	</div>
+	
+
+</body>
+</html>

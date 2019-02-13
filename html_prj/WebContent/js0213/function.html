@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/main_v190130.css"/>
+<style type="text/css">
+	#btnDiv{height: 40px; }
+	#output{width: 400px; height: 200px; border: 1px solid #333; overflow:auto}/* 자동으로 스크롤 바가 만들어지도록  하는 속성 */
+</style>
+<script type="text/javascript">
+	//함수사용
+	function useMath(){
+		var divNode=document.getElementById("output");
+		var output="";
+		
+		//절대값
+		var i=-2;
+		output+= i+"의 절대값 :"+Math.abs(i)+"<br/>";
+		//반올림 : 무조건 소숫점 첫째자리에서 
+		i=0.523;
+		output+= i+"의 반올림 :"+Math.round(i)+"<br/>";
+		//올림
+		i=13.5;
+		output+= i+"의 올림 :"+Math.ceil(i)+"<br/>";
+		//내림
+		i=13.5;
+		output+= i+"의 내림 :"+Math.floor(i)+"<br/>";
+		
+		divNode.innerHTML=output;
+	}//useMath
+	function useString(){
+		var divNode=document.getElementById("output");
+		var output="";
+		
+		var msg="오늘은 수요일 입니다.AbcdEf";
+		//글자수 length는 속성이다.괄호 절대 ㄴㄴ
+		output+=msg+"의 글자수 : "+msg.length+"<br/>";
+		output+=msg+"의 모두 대문자로 : "+msg.toUpperCase()+"<br/>";
+		output+=msg+"의 모두 소문자로 : "+msg.toLowerCase()+"<br/>";
+		//indexOf() L->R으로 가면서 찾는다
+		output+=msg+"에서 '수'라고하는 글자의 인덱스 : "+msg.indexOf("수")+"<br/>";
+		output+=msg+"에서 'A'라고하는 글자의 인덱스 : "+msg.indexOf("A")+"<br/>";
+		output+=msg+"에서 'O'라고하는 글자의 인덱스 : "+msg.indexOf("O")+"<br/>";//없는걸 넣으면 -1(자바처럼-1/오라클은 0)
+		//lastIndexOf() R->L으로 가면서 찾는다
+		output+=msg+"에서 '수'라고하는 글자의 인덱스 : "+msg.lastIndexOf("수")+"<br/>";//어라 last있네..
+		//인덱스에 해당하는 문자하나 얻기(하나가 나와도 문자열임)
+		output+=msg+"에서 5번째 인덱스의 문자 : "+msg.charAt(5)+"<br/>";
+		//인덱스 사이에 해당하는 자식문자열 얻기 : substring(시작인덱스, 끝인덱스+1)
+		output+=msg+"에서 4~7번째 인덱스의 자식문자열 : "+msg.substring(4,7)+"<br/>";
+		
+		msg="노진경,김희철.김정윤,박영민,최지우";//CSV
+		var arrData=msg.split(",");
+		
+		var sa=1;
+		for(var i=0; i<arrData.length; i++){
+			output+="<marquee scrollamount='"+sa+"'>"+arrData[i]+"</marquee>";
+			sa+=3;
+		}//end for
+		
+		msg="  A BC  ";
+		//앞뒤 공백 제거
+		output+="["+msg+"]에서 앞뒤 공백 제거 : ["+msg.trim()+"]<br/>";
+		
+		msg="김정윤,박영민,노진경,김희철,오영근";
+		//특정 문자열을 치환 : L->R로 진행하면서 가장 먼저 나오는 문자열 하나만 치환. replaceAll은 없다!
+		output+="["+msg+"]에서 '영'제거 : ["+msg.replace("영","young")+"]<br/>";
+		
+		divNode.innerHTML=output;
+	}//useString
+	function useDate(){
+		var divNode=document.getElementById("output");
+		var output="";
+		
+		//날짜정보는 접속자 컴퓨터의 시간정보(접속자마다 다른 날짜 정보가 얻어질 수 있다.)
+		//1.생성
+		var date=new Date();
+		//2.함수 호출
+		output += date+"<br/>";
+		//getYear()는 1900을 더해야 현재 년도가 출력된다.
+		//output += "년 :"+(date.getYear()+1900)+"<br/>";
+		output += "년: "+date.getFullYear()+"<br/>";
+		output += "월: "+(date.getMonth()+1)+"<br/>";
+		output += "일: "+date.getDate()+"<br/>";
+		output += "시: "+date.getHours()+"<br/>";
+		output += "분: "+date.getMinutes()+"<br/>";
+		output += "초: "+date.getSeconds()+"<br/>";
+		
+		divNode.innerHTML=output;
+		
+		if(date.getSeconds()==50){
+			useRecursive();
+		}//end if
+		
+		//재귀호출 함수 :지정한 시간에 함수를 호출해주는 함수 :
+		//setTimeout(함수명, milliseconds); //setTimeout함수를 가지고 있는 함수만 호출할 수 있다.
+		setTimeout(useDate, 1000);
+	}//useDate
+	function useRecursive(){
+		var divNode=document.getElementById("output");
+		var output="<img src='../common/images/img2.jpg'/>";
+		
+		divNode.innerHTML=output;
+	}//useRecursive
+		
+</script>
+</head>
+<body>
+	<div id="btnDiv">
+		<input type="button" value="수학 함수" class="btn" onclick="useMath()"/><!-- 아이디와 이벤트 등록으로도 가능 -->
+		<input type="button" value="문자열 함수" class="btn" onclick="useString()"/>
+		<input type="button" value="날짜 함수" class="btn" onclick="useDate()"/>
+		<input type="button" value="재귀호출 함수" class="btn" onclick="useRecursive()"/>
+	</div>
+	<div id="output"></div>
+
+</body>
+</html>
