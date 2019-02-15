@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/main_v190130.css"/>
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+	function historyCnt(){
+		alert(history.length);
+	}//historyCnt
+	function historyBack(){
+		history.back();
+		//history.go(-1);//뒤로 한칸, 잘안쓰는 추세 
+	}//historyBack
+	function historyGo(){
+		history.go(1);//그냥쓰면 Error 매개변수가 꼭 쓰여야 한다.  내가원하는 수만큼 이동가능
+	}//historyGo
+
+</script>
+</head>
+<body>
+	<input type="button" value="히스토리의 수 " onclick="historyCnt()"/>
+	<input type="button" value="뒤로" onclick="historyBack()"/>
+	<input type="button" value="앞으로" onclick="historyGo()"/>
+
+</body>
+</html>
