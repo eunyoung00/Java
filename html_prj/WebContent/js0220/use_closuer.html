@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/main_v190130.css"/>
+<style type="text/css">
+	#output{width:500px; height: 300px; border: 1px solid #dfdfdf;}
+</style>
+<script type="text/javascript">
+	window.onload=function(){
+		document.getElementById("btn1").addEventListener("click",useNonParam);
+		document.getElementById("btn2").addEventListener("click",useParam);
+	}//function
+	
+	//매개변수 없는 무기명 함수
+	function useNonParam(){
+		var val=function(){
+			//alert("aaaaa");//잘나온다
+			var name="김정윤";
+			
+			function getAddr(){
+				return "서울시 강남구 역삼동";
+			}//getAddr
+			
+			//closuer : 함수내의 변수나, 함수를 외부에서 사용할 수 있도록 접근권한을 변경해 준다.
+			//{외부명:내부명}
+			//return{na:name}
+			return{na:name, addr:getAddr}
+		}();//아래의 두줄이 합쳐진것 => 함수가 만들면서 호출된다!
+		/* };
+		val(); */
+		
+		//자바의 문법으로 안에있는 name을 부르려면
+		//alert(val.name+"/"+val.addr());//Error private변수인 것으로 밖에서 사용하지 못한다.
+		//무기명 함수 안에 있는 변수는 외부에서 사용할 수 없다. (자바로 치면 private)
+		//이때 밖에서 사용하고 싶으면 return{};
+		//getAddr()=>안에서 쓰인 함수도 밖에선 부를수 없다.
+		//alert(val.na+"/"+val.addr());
+		
+		var divNode=document.getElementById("output");
+		divNode.innerHTML="이름: "+val.na+", 주소: "+val.addr();
+	}//useNonParam
+	
+	//매개변수 있는 무기명 함수
+	function useParam(){
+		var name=document.getElementById("name").value;
+		var addr=document.getElementById("addr").value;
+		var age=document.getElementById("age").value;
+		
+		var personData=function(i_name,i_addr,i_age){//변수와 같게 주어도 상관없음!
+			function getName(){
+				return i_name+"님";
+			}//getName
+			function getAddr(){
+				return "거주지 : "+i_addr;
+			}//getName
+			
+			function birth(){
+				var date=new Date();
+				return date.getFullYear()-i_age+1;
+			}//birth
+			//closure
+			return{name:getName,addr: getAddr, bir:birth}
+		}(name,addr,age);
+		
+		//alert(personData.name());
+		document.getElementById("output").innerHTML="이름 : "+personData.name()+", 주소 : "+personData.addr()+", 태어난 해 : "+personData.bir();
+	}//useParam
+
+</script>
+</head>
+<body>
+<div id="output"></div>
+<div>
+	이름 : <input type="text"name="name"id="name"></br>
+	주소 : <input type="text"name="addr"id="addr"></br>
+	나이 : <input type="text"name="age"id="age"></br>
+</div>
+	<input type="button" value="매개변수 없는 무기명 함수" id="btn1" class="btn"/>
+	<input type="button" value="매개변수 있는 무기명 함수" id="btn2" class="btn"/>
+</body>
+</html>
