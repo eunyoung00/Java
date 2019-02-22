@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/main_v190130.css"/>
+<style type="text/css">
+	#wrap{width: 1000px; heigth:600px; margin:0px auto; }
+	#getValue{width:498px; height:598px; border:1px solid #333; float:left;}
+	#setValue{width:498px; height:598px; border:1px solid #333; float:right;}
+</style>
+<!-- CDN을 사용하여 jQuery를 다운로드 받아 사용. -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		//이름이 유일한 HTML Form Control 얻기
+		$("#btn").click(function(){
+			var output="<ul>";
+			//text 값 얻기
+			output+="<li>text :"+$("#text").val()+"</li>";
+			//password	
+			output+="<li>password :"+$("#pass").val()+"</li>";
+			//hidden	
+			output+="<li>hidden :"+$("#hid").val()+"</li>";
+			//checkbox : value가 설정되어있지 않으면 on이 나온다.
+			output+="<li>checkbox :"+$("#flag").val()+"</li>";
+			//date	
+			output+="<li>date(HTML5 Control) :"+$("#date").val()+"</li>";
+			//select	
+			output+="<li>select :"+$("#loc").val()+"</li>";
+			//file : 경로는 가상의 경로명이 나온다.(보안문제->크롬만?)
+			output+="<li>file :"+$("#file").val()+"</li>";
+			//textarea	
+			output+="<li>textarea :"+$("#ta").val()+"</li>";
+			
+			$("#value").html(output);
+			
+			if(confirm("전송하시겠습니까?")){//404
+				//document.frm.submit();//도 되긴 되는데...
+				$("#frm").submit();//jquery에서 제공하는 함수
+			}//end if
+		});//click
+		
+		//값 설정
+		$("#btnSet").click(function(){
+			//text 값 설정
+			$("#text1").val("김정윤");
+			//password 값 설정 :*(방향?양?문자?)로 보여준다
+			$("#pass1").val("123456");
+			//hidden 값 설정
+			$("#hid1").val("히든태그의 값");
+			//date 값 설정 : yyyy-mm-dd의 형식을 가진 값
+			$("#date1").val("2019-05-15");
+			//file 값 설정 : file은 값 설정이 되지 않는다.(보안의 이슈)
+			//$("#file1").val("c:/div/env.bat");
+			//textarea 값 설정
+			var msg="널 향한 설레임은 \n오늘 부터 우리는\n꿈꾸며 기도하는 오늘부터 우리는"
+			$("#ta1").val(msg);
+		});//click
+		
+	});//ready
+</script>
+</head>
+<body>
+<div id="wrap">
+	<div id="getValue">
+	<strong>값 얻기</strong>
+	<form name="frm" action="test.jsp" id="frm"><!-- 백엔드로 값을 넘길때에는 name이 꼬오오오오옥 필요 / jQuery에서 중요한건 id  -->
+		<label>text</label>
+			<input type="text" name="text" class="inputBox" value="오늘부터 우리는" id="text"/><br/>	
+		<label>password</label>
+			<input type="password" name="pass" class="inputBox" value="여자친구" id="pass"/><br/>	
+		<label>hidden</label>
+			<input type="hidden" name="hid" value="2019-02-22" id="hid"/><br/>	
+		<label>checkbox</label><!-- value가 없는 checkbox는 on이 넘어간다. -->
+			<input type="checkbox" name="flag" id="flag"/>로그인 유지<br/>	
+		<label>날짜선택</label><!-- HTML5에서 지원되는 Control 그전엔 없다! -->
+			<input type="date" name="date" id="date"/><br/>	
+		<label>지역선택</label>
+			<select name="loc" id="loc">
+				<option value="서울">서울</option>			
+				<option value="경기">경기</option>			
+				<option value="강원">강원</option>			
+				<option value="충청">충청</option>			
+			</select><br/>
+		<label>파일선택</label><!-- 값을 얻을 수는 있는데 설정은 되지 않는다. -->
+			<input type="file"name="file"id="file"class="inputBox"/><br/>
+		<label>ta</label><!-- 값을 넣을때는  value로 넣긴 하는데 태그사이에 넣어쓴다../textarea사이에선 엔터를 치지 않는다+공백도 -->
+			<textarea class="inputBox"name="ta"id="ta"style="width:300px;height:100px">소원,은하,엄지,유쥬,신비,예린</textarea>
+			<br/>
+		<input type="button" value="값얻기" class="btn" id="btn"/>
+		<input type="reset" value="초기화" class="btn" id="rst"/>
+	</form>
+	<div id="value"></div>
+	</div>
+	<div id="setValue">
+	<strong>값 설정</strong>
+	<form name="frm1"id="frm1">
+		<label>text</label>
+			<input type="text" name="text" class="inputBox" id="text1"/><br/>	
+		<label>password</label>
+			<input type="password" name="pass" class="inputBox" id="pass1"/><br/>	
+		<label>hidden</label>
+			<input type="hidden" name="hid" id="hid1"/><br/>	
+		<label>날짜선택</label>
+			<input type="date" name="date" id="date1"/><br/>	
+		<label>파일선택</label>
+			<input type="file"name="file"id="file1"class="inputBox"/><br/>
+		<label>ta</label>
+			<textarea class="inputBox"name="ta"id="ta1"style="width:300px;height:100px"></textarea>
+			<br/>
+		<input type="button" value="값설정" class="btn" id="btnSet"/>
+		<input type="reset" value="초기화" class="btn"/><!-- jQuery에서 하는게 아니라 id뺌~ -->
+	</form>
+	</div>
+</div>
+</body>
+</html>
