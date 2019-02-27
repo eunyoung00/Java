@@ -21,16 +21,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>LifeCycle</display-name>
-    <servlet-name>LifeCycle</servlet-name>
-    <servlet-class>day0226.LifeCycle</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>LifeCycle</servlet-name>
-    <url-pattern>/LifeCycle</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>life_cycle</display-name>
     <servlet-name>life_cycle</servlet-name>
     <servlet-class>day0226.LifeCycle</servlet-class>
@@ -48,5 +38,25 @@
   <servlet-mapping>
     <servlet-name>test_call</servlet-name>
     <url-pattern>/test_call</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>use_request</display-name>
+    <servlet-name>use_request</servlet-name>
+    <servlet-class>day0227.UseHttpServletRequest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>use_request</servlet-name>
+    <url-pattern>/test/use_request</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>param_value</display-name>
+    <servlet-name>param_value</servlet-name>
+    <servlet-class>day0227.UseWebParameter</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>param_value</servlet-name>
+    <url-pattern>/param_value</url-pattern>
   </servlet-mapping>
 </web-app>

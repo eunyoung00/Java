@@ -15,7 +15,5 @@ public class UseGarbageCollector {
 		
 		System.gc();//가비지 컬렉터 호출
 		System.out.println("남은 사원 :"+p.getName());
-		
 	}//main
-
 }//class
