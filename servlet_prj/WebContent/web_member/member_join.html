@@ -245,36 +245,7 @@
 	}//chkPass
 	
 	function popupCenter(){
-		var width=0;
-		var height=0;
-		var html="";
-		var id=""
-		
-		if(this.id=="idDup"){
-//			alert("아이디 중복확인");
-			id="idDup";
-			html="id_dup.html";
-			width=502;
-			height=303;
-		}//end if
-		if(this.id=="searchZip"){
-//			alert("우편번호확인");
-			id="searchZip";
-			html="search_zip.html";
-			width=408;
-			height=419;
-
-		}//end if	
-		/* if(this.id=="daumZip"){
-//			alert("다음");
-//postcode.map.daum.net/guide
-			id="daumZip";
-			html="daum_zip.html";
-			width=502;
-			height=303;
-
-		}//end if */
-		window.open(html,id,"width="+width+",height="+height);		
+		window.open("../id_dup","idDup","width=502,height=303");		
 	}//popupCenter
 
 </script>
@@ -346,7 +317,7 @@
 <div id="wrap">
 <div id="joinHeader"></div>
 <div id="joinContent">
-	<form action="member.jsp" name="joinFrm">
+	<form action="../web_member_join" name="joinFrm" method="post">
 		<table>
 			<tr>
 				<td class="tdalign" colspan="2"><span id="joinTitle">회원가입</span></td>
