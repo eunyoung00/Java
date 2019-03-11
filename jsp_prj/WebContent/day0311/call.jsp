@@ -19,6 +19,7 @@
 <% if("GET".equals(request.getMethod())){ %>
 #method{ font-weight: bold; font-size: 14px; color: #FF0000;}
 <% }else{ %>
+#method{ font-weight: bold; font-size: 16px; color: #0000FF;}
 <%}//end else %>
 %>
 </style>
