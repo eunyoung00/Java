@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    info="include연습"
-    %>
+    info="반복문 forEach 사용"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +17,6 @@
 #container{width:800px; height:600px; }
 #footer{width:800px; height:120px; }
 #footerTitle{float: right; font-size:15px; padding-top:20px; padding-right:20px; }
-
 </style>
 </head>
 <body>
@@ -26,20 +25,25 @@
 		<div id="headerTitle">SIST Class4</div>
 	</div>
 	<div id="container">
+	<select>
+	<!-- 증가하는 값을 반복시킬 때 -->
+		<c:forEach var="i" begin="1" end="100" step="1">
+		<option value="${i}"><c:out value="${i}"/></option>
+		</c:forEach>
+	</select>
 	<div>
-		외부 JSP
-		<%
-			String name ="김정윤";
-		%>
-		<div>
-			 <%@include file="include_b.jsp" %>
-		</div>
-		외부 JSP
-		<br/>
-		<!-- 외부 JSP에서 끼워지는 JSP의 변수는 에러 없이 사용할 수 있다. -->
-		나이 : <%=age %>,주소: <%=addr %>
-		<!-- 변수는공유된다. -->
-		<%=toDay() %>
+	<%
+		String[] movie={"시네마 천국","주토피아","코어","7인의 사무라이","트루먼쇼","인셉션"};
+		pageContext.setAttribute("movie", movie);
+	%>
+	<ul>
+	<%-- <c:forEach var="i" begin="1" end="6" step="1"> --%>
+	<c:forEach var="movie" items="${movie }">
+	<c:set var="i" value="${i+1}"/>
+		<li>${i})${movie}</li>
+	</c:forEach>
+	</ul>	
+	
 	</div>
 	</div>
 	<div id="footer">

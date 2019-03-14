@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    info="include연습"
-    %>
+    info="업무처리 페이지에서 처리한 결과를 받아 화면을 구성하는 일만 하는 페이지"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,25 +25,36 @@
 		<div id="headerTitle">SIST Class4</div>
 	</div>
 	<div id="container">
-	<div>
-		외부 JSP
-		<%
-			String name ="김정윤";
-		%>
-		<div>
-			 <%@include file="include_b.jsp" %>
-		</div>
-		외부 JSP
-		<br/>
-		<!-- 외부 JSP에서 끼워지는 JSP의 변수는 에러 없이 사용할 수 있다. -->
-		나이 : <%=age %>,주소: <%=addr %>
-		<!-- 변수는공유된다. -->
-		<%=toDay() %>
-	</div>
+	<%
+		//이전페이지에서 처리된 결과 받기
+		String[] member=(String[])request.getAttribute("gruop2");
+		if(member==null){
+			response.sendRedirect("forward_a.jsp");
+			return;
+		}//end if 아랫줄의 코드를 실행하기 때문에 return;
+	%>
+	<table border="1">
+	<tr>
+		<th width="100">이름</th>
+	</tr>	
+	<% for(int i=0; i<member.length; i++){ %>
+	<tr>
+		<td><%= member[i] %></td>
+	</tr>
+	<%}//end for %>
+	</table>
+
+	<a href="forward_a.jsp?name=jungyun&age=30">parameter 요청</a>
+	<br/>
+	<!-- forward로 이동한 페이지에서 이전페이지의 Parameter를 사용할 수 있게된다.값이 넘어오기 때문에 -->
+	파라메터 이름 : <%=request.getParameter("name") %><br/>
+	파라메커 나이 : <%=request.getParameter("age") %><br/>
+
 	</div>
 	<div id="footer">
 		<div id="footerTitle">copyright&copy; all right reserved. class 4.</div>
 	</div>
 </div>
+
 </body>
 </html>

@@ -1,6 +1,7 @@
+<%@page import="java.util.Random"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    info="include연습"
+    info="redirect의 사용"
     %>
 <!DOCTYPE html>
 <html>
@@ -25,26 +26,24 @@
 	<div id="header">
 		<div id="headerTitle">SIST Class4</div>
 	</div>
+	
 	<div id="container">
-	<div>
-		외부 JSP
-		<%
-			String name ="김정윤";
-		%>
-		<div>
-			 <%@include file="include_b.jsp" %>
-		</div>
-		외부 JSP
-		<br/>
-		<!-- 외부 JSP에서 끼워지는 JSP의 변수는 에러 없이 사용할 수 있다. -->
-		나이 : <%=age %>,주소: <%=addr %>
-		<!-- 변수는공유된다. -->
-		<%=toDay() %>
-	</div>
+	<%
+	//정상적인 요청으로 이 페이지를 방문하면 정상적인 응답을 해 주지만
+	//비정상적인 요청이 있다면 다른페이지로 이동할 때 사용한다.(가릴수 없어서 난수발생으로 보여줄 예정)
+	if(new Random().nextBoolean()){//비정상적인 요청
+		//response 내장객체를 사용하여 이동
+		response.sendRedirect("redirect_b.jsp");//URL을 받으므로 외부 site로 이동도 가능하다.
+		return;
+	}//end if
+	%>
+	<img src="../common/images/img.png" title="내 목뼈는 정상임...아마도"/>
+		
 	</div>
 	<div id="footer">
 		<div id="footerTitle">copyright&copy; all right reserved. class 4.</div>
 	</div>
 </div>
+
 </body>
 </html>

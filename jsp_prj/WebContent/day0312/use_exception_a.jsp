@@ -1,6 +1,8 @@
+<%@page import="java.io.IOException"%>
+<%@page import="java.util.Random"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    info="include연습"
+    errorPage="use_exception_b.jsp"
     %>
 <!DOCTYPE html>
 <html>
@@ -17,7 +19,6 @@
 #container{width:800px; height:600px; }
 #footer{width:800px; height:120px; }
 #footerTitle{float: right; font-size:15px; padding-top:20px; padding-right:20px; }
-
 </style>
 </head>
 <body>
@@ -26,21 +27,17 @@
 		<div id="headerTitle">SIST Class4</div>
 	</div>
 	<div id="container">
-	<div>
-		외부 JSP
-		<%
-			String name ="김정윤";
-		%>
-		<div>
-			 <%@include file="include_b.jsp" %>
-		</div>
-		외부 JSP
-		<br/>
-		<!-- 외부 JSP에서 끼워지는 JSP의 변수는 에러 없이 사용할 수 있다. -->
-		나이 : <%=age %>,주소: <%=addr %>
-		<!-- 변수는공유된다. -->
-		<%=toDay() %>
-	</div>
+	<%
+	int num=new Random().nextInt(3);
+	if(num==0){
+		throw new Exception("최상위 예외");
+	}else if(num==1){
+		throw new IOException("IO예외");
+	}else if(num==2){
+		throw new NullPointerException("객체를 생성하시요.");
+	}//end else
+	
+	%>
 	</div>
 	<div id="footer">
 		<div id="footerTitle">copyright&copy; all right reserved. class 4.</div>

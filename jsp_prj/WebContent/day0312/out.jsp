@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    info="include연습"
+    info="브라우저로 출력하는 내장객체"
     %>
 <!DOCTYPE html>
 <html>
@@ -26,25 +26,47 @@
 		<div id="headerTitle">SIST Class4</div>
 	</div>
 	<div id="container">
-	<div>
-		외부 JSP
-		<%
-			String name ="김정윤";
-		%>
-		<div>
-			 <%@include file="include_b.jsp" %>
-		</div>
-		외부 JSP
-		<br/>
-		<!-- 외부 JSP에서 끼워지는 JSP의 변수는 에러 없이 사용할 수 있다. -->
-		나이 : <%=age %>,주소: <%=addr %>
-		<!-- 변수는공유된다. -->
-		<%=toDay() %>
-	</div>
+	<%
+		//out 내장객체의 사용.(장점은 scriptlet안에서 끊지 않고 브라우저로 출력할 수 있다.)
+		String subject="JSP(Java Server Page)-SSS(Server Side Script)중 하나";
+		out.println(subject);
+	
+		String[] link={"http://daum.net","http://youtube.com","http://naver.com"};
+		String[] link_name={"공선의","이재찬","김건하"};
+	%>
+	<table border="1">
+	<tr>
+		<th width="100">out사용</th>
+	</tr>
+<%
+		for(int i=0; i<link.length; i++){ 
+			out.println("\t\t<tr>");
+			out.print("\t\t\t<td><a href='");
+			out.print(link[i]);
+			out.print("'>");
+			out.print(link_name[i]);
+			out.println("</a></td>");
+			out.println("\t\t</tr>");		
+		}//end for 
+%>
+	</table>
+	
+	<table border="1">
+	<tr>
+		<th width="150">Expression사용</th>
+	</tr>
+<%	for(int i=0; i<link.length; i++){%> 
+		<tr>
+			<td><a href="<%=link[i] %>"><%=link_name[i] %></a></td>
+		</tr>
+<%	}//end for %>
+	</table>
+	
 	</div>
 	<div id="footer">
 		<div id="footerTitle">copyright&copy; all right reserved. class 4.</div>
 	</div>
 </div>
+
 </body>
 </html>

@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"
-    info="include연습"
-    %>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +15,6 @@
 #container{width:800px; height:600px; }
 #footer{width:800px; height:120px; }
 #footerTitle{float: right; font-size:15px; padding-top:20px; padding-right:20px; }
-
 </style>
 </head>
 <body>
@@ -26,21 +23,14 @@
 		<div id="headerTitle">SIST Class4</div>
 	</div>
 	<div id="container">
-	<div>
-		외부 JSP
-		<%
-			String name ="김정윤";
-		%>
-		<div>
-			 <%@include file="include_b.jsp" %>
-		</div>
-		외부 JSP
-		<br/>
-		<!-- 외부 JSP에서 끼워지는 JSP의 변수는 에러 없이 사용할 수 있다. -->
-		나이 : <%=age %>,주소: <%=addr %>
-		<!-- 변수는공유된다. -->
-		<%=toDay() %>
-	</div>
+	<%@ include file="use_session_b.jsp" %>
+	<a href="use_session_c.jsp">로그아웃</a><br/>
+	<marquee scrollamount="10"><%= ses_name %>(<%= ses_id 
+	%>)	님의 꿈의 작업페이지2</marquee>
+	<!-- 태그 안에서 줄을 바꾸면 한줄로 잘나와  -->
+	<br/>
+	<img src="../common/images/img2.jpg"/>
+
 	</div>
 	<div id="footer">
 		<div id="footerTitle">copyright&copy; all right reserved. class 4.</div>

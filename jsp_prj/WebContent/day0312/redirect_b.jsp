@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    info="include연습"
+    info="redirect의 연습"
     %>
 <!DOCTYPE html>
 <html>
@@ -26,21 +26,16 @@
 		<div id="headerTitle">SIST Class4</div>
 	</div>
 	<div id="container">
+	비정상적인 요청이 있을 때 보여질 페이지<br/>
+	<a href="redirect_a.jsp?name=jungyun&age=20">요청</a>
 	<div>
-		외부 JSP
-		<%
-			String name ="김정윤";
-		%>
-		<div>
-			 <%@include file="include_b.jsp" %>
-		</div>
-		외부 JSP
-		<br/>
-		<!-- 외부 JSP에서 끼워지는 JSP의 변수는 에러 없이 사용할 수 있다. -->
-		나이 : <%=age %>,주소: <%=addr %>
-		<!-- 변수는공유된다. -->
-		<%=toDay() %>
+	<!-- forward와는 다르게 이동한 페이지에서 파라메터의 값을 사용할 수 없다.
+		비정상적인 요청이 있을 때 제공될 페이지이므로 이전페이지의 값들을 사용할 필요가 없다.
+		forward와는 완전히 동작이 달라 명확히 알고 사용해야 한다. -->
+		파라메터 이름 : <%=request.getParameter("name") %><br/>
+		파라메터 나이 : <%=request.getParameter("age") %><br/>
 	</div>
+
 	</div>
 	<div id="footer">
 		<div id="footerTitle">copyright&copy; all right reserved. class 4.</div>

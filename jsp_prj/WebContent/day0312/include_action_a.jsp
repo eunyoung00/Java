@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"
-    info="include연습"
-    %>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +15,6 @@
 #container{width:800px; height:600px; }
 #footer{width:800px; height:120px; }
 #footerTitle{float: right; font-size:15px; padding-top:20px; padding-right:20px; }
-
 </style>
 </head>
 <body>
@@ -26,21 +23,11 @@
 		<div id="headerTitle">SIST Class4</div>
 	</div>
 	<div id="container">
-	<div>
-		외부 JSP
-		<%
-			String name ="김정윤";
-		%>
 		<div>
-			 <%@include file="include_b.jsp" %>
+		<strong>외부 JSP</strong>
+		<jsp:include page="include_action_b.jsp"/><!-- 이질감이 덜든다.. -->
+		<strong>외부 JSP</strong>
 		</div>
-		외부 JSP
-		<br/>
-		<!-- 외부 JSP에서 끼워지는 JSP의 변수는 에러 없이 사용할 수 있다. -->
-		나이 : <%=age %>,주소: <%=addr %>
-		<!-- 변수는공유된다. -->
-		<%=toDay() %>
-	</div>
 	</div>
 	<div id="footer">
 		<div id="footerTitle">copyright&copy; all right reserved. class 4.</div>
