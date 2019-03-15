@@ -1,3 +1,6 @@
+<%@page import="day0313.TestVO"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     info="반복문 forEach 사용"%>
@@ -33,6 +36,7 @@
 	</select>
 	<div>
 	<%
+	//배열의 값 출력
 		String[] movie={"시네마 천국","주토피아","코어","7인의 사무라이","트루먼쇼","인셉션"};
 		pageContext.setAttribute("movie", movie);
 	%>
@@ -43,7 +47,52 @@
 		<li>${i})${movie}</li>
 	</c:forEach>
 	</ul>	
+	<%
+	//List의 값 출력
+		List<String> list=new ArrayList<String>();
+		list.add("Java SE");
+		list.add("Java EE");
+		list.add("DBMS");
+		list.add("HTML");
+		pageContext.setAttribute("list", list);
+	%>
+	<ul>
+	<c:forEach var="subject" items="${list}">
+	<li><c:out value="${subject}"/></li>
+	</c:forEach>
+	</ul>
 	
+	<%
+	//List가 Generic으로 VO를 가진 경우의 사용
+	//forEach안에서 "변수명.getter명"
+		List<TestVO> voList=new ArrayList<TestVO>();
+	    voList.add(new TestVO("정윤",30));
+	    voList.add(new TestVO("희철",27));
+	    voList.add(new TestVO("재찬",26));
+	    voList.add(new TestVO("택성",28));
+	    
+	    pageContext.setAttribute("vl", voList);
+	 %>
+	 <table>
+	 <thead>
+	 <tr>
+	    <th width="50">번호</th>
+	    <th width="100">이름</th>
+	    <th width="50">나이</th>
+	 </tr>
+	 </thead>
+	 <tbody>
+	 <c:forEach var="data" items="${vl}">
+	 <c:set var="cnt" value="${cnt+1}"/> <!--자동 초기화되어 0부터 들어감 -->
+	 <tr>
+	    <td><c:out value="${cnt}"/></td>
+	    <td><c:out value="${data.firstName}"/></td>
+	    <td><c:out value="${data.age}"/></td>
+	 </tr>
+	 </c:forEach>
+	 </tbody>
+	 </table>
+
 	</div>
 	</div>
 	<div id="footer">

@@ -87,7 +87,7 @@ public class MultiChatClientEvt extends WindowAdapter implements ActionListener,
 			
 			//<서버의 주소가 필요 (갖고 접속하기 떄문에)
 			String serverIp=mccv.getJtfServerIp().getText().trim();
-			client=new Socket(serverIp, 36004);//입력한 ip address의 컴퓨터에 연결
+			client=new Socket(serverIp, 35000);//입력한 ip address의 컴퓨터에 연결
 			//스트림
 			readStream=new DataInputStream(client.getInputStream());
 			writeStream=new DataOutputStream(client.getOutputStream());
