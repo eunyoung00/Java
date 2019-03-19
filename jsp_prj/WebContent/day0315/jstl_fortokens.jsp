@@ -36,9 +36,6 @@
 	
 	</c:forTokens>
 	</ul>
-
-
-
 	</div>
 	<div id="footer">
 		<div id="footerTitle">copyright&copy; all right reserved. class 4.</div>

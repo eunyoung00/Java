@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@page import="com.sun.xml.internal.ws.api.Cancelable"%>
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -29,6 +30,8 @@
 #diaryToday{width:100px; font-family:고딕체; font-size:28px; font-weight:bold;vartical-align:bottom;}
 .diaryTd{width:100px; height: 60px; border: 1px solid #CECECE; text-align: right; 
 			vertical-align: top; font-size: 14px;font-weight: bold;}
+.todayTd{width:100px; height: 60px; border: 1px solid #d7e2e9; text-align: right; 
+			vertical-align: top; font-size: 14px;font-weight: bold; background-color: #e9f4fb; }
 .blankTd{width:100px; height: 60px; border: 1px solid #CECECE; color:#CCCCCC; text-align: right; 
 			vertical-align: top; font-size: 14px;font-weight: bold;}
 .sunColor{font-size: 15px; color:#DE4F44; }
@@ -132,6 +135,11 @@
 	%>
 	<%
 		Calendar cal=Calendar.getInstance();
+	
+		//오늘을 저장
+		StringBuilder todate=new StringBuilder();
+		todate.append(cal.get(Calendar.YEAR)).append(cal.get(Calendar.MONTH)+1).append(cal.get(Calendar.DAY_OF_MONTH));
+		
 		int nowYear=0;
 		int nowMonth=0;
 		int nowDay=cal.get(Calendar.DAY_OF_MONTH);
@@ -143,22 +151,32 @@
 		}//end if
 		
 		nowMonth=cal.get(Calendar.MONTH)+1;
-		
 		String param_year=request.getParameter("param_year");
 		if(param_year !=null && !"".equals(param_year)){//파라메터 년이 존재하면 현재 캘린더 객체의 년을 변경
 			cal.set(Calendar.YEAR, Integer.parseInt(param_year));
 		}//end if
-		
 		nowYear=cal.get(Calendar.YEAR);
+		
+		//오늘 플래그
+		boolean toDayFlag=false;
+		StringBuilder nowDate=new StringBuilder();
+		nowDate.append(nowYear).append(nowMonth).append(nowDay);
+		
+		if(todate.toString().equals(nowDate.toString())){
+			toDayFlag=true;
+		}//end if
+		log(todate+"/"+nowDate+"/"+toDayFlag);
 		
 		pageContext.setAttribute("nowYear", nowYear);
 		pageContext.setAttribute("nowMonth", nowMonth);
 		pageContext.setAttribute("nowDay", nowDay);
 	%>
+		
 	<form action="diary.jsp" name="diaryFrm" method="post">
 		<input type="hidden" name="param_month"/>
 		<input type="hidden" name="param_year"/>
 	</form>
+	
 	
 	<div id="diaryTitle">
 <%-- 		<a href="diary.jsp?param_month=${nowMonth-1==0?12:nowMonth-1}&param_year=${nowMonth-1==0?nowYear-1:nowYear}"><img src="images/btn_prev.png" title="이전 월"/></a> --%>
@@ -166,7 +184,6 @@
 		<span id="diaryToday" title="${nowYear}년 ${nowMonth}월"><c:out value="${nowYear}"/>.<c:out value="${nowMonth}"/></span>
 		<a href="#void" onclick="moveMonth(${nowMonth+1==13?1:nowMonth+1},${nowMonth+1==13?nowYear+1:nowYear})"><img src="images/btn_next.png" title="다음 월"/></a>
 		<a href="diary.jsp" onclick="moveMonth('','')"><img src="images/btn_today.png" title="오늘"/></a>
-	
 	</div>
 	<div id="diaryContent">
 		<table id="diaryTab">
@@ -182,30 +199,48 @@
 		<tr>
 			<!-- <td class="diaryTd">1</td> -->
 			<%
-			String dayClass="";
+			String dayClass="";//요일별 색
+			String todayCss="";//오늘이거나 평일의 TD색
+			
 			//매월마다 끝나는 날짜가 다르기 때문에 무한 루프(마지막날 까지)를 사용한다.
 			for(int tempDay=1; tempDay<33 ; tempDay++){
 				cal.set(Calendar.DAY_OF_MONTH, tempDay);//임시일자를 설정한다.
 				if(cal.get(Calendar.DAY_OF_MONTH) != tempDay){
-					for(int blankTd=cal.get(Calendar.DAY_OF_WEEK); blankTd<8; blankTd++){
-						
-						//만약 마지막날이 토요일이라면 + 설정된 날짜가 현재 일자가 아니고
-						if(cal.get(Calendar.DAY_OF_MONTH) != tempDay&& cal.get(Calendar.DAY_OF_MONTH) == cal.get(Calendar.SATURDAY)){
-							break;
-						}//end if
-					%>
-						<td class="blankTd"></td>
-					<%
-					}//end for
-					//설정된 날짜가 현재 일자가 아니라면 마지막 일자 다음달 1일이므로 반복문을 빠져나간다.
+					//설정된 날짜가 현재 일자가 아니라면 마지막 일자 다음달 1일이므로 공백을 출력한 후 반복문을 빠져나간다.
+					int week=cal.get(Calendar.DAY_OF_WEEK);
+					if(week!=Calendar.SUNDAY){//마지막일이 일요일이 아니면 출력
+						int nextDay=1;
+						int nextMonth=cal.get(Calendar.MONTH)+1;
+						for(int blankTd=week; blankTd<8; blankTd++){
+							
+							/* //만약 마지막날이 토요일이라면 + 설정된 날짜가 현재 일자가 아니고
+							if(cal.get(Calendar.DAY_OF_MONTH) != tempDay&& cal.get(Calendar.DAY_OF_MONTH) == cal.get(Calendar.SATURDAY)){
+								break;
+							}//end if */
+						%>
+							<td class="blankTd"><div><%=nextMonth%>/<%=nextDay %></div></td>
+						<%
+						nextDay++;
+						}//end for
+					}//end if
+					//설정된 날짜가 현재 일자가 아니라면 마지막 일자 다음달 1일이므로 공백을 출력한 후 반복문을 빠져나간다.
 					break;/* 나갔을때의 날짜는 다음달 1일  */
 				}//end if
 				//1일을 출력하기 전에 공백 출력. 딱떨어지는 숫자라면 Switch case추쳔
+				
 				switch(tempDay){
 				case START_DAY:
+					//전달의 마지막날 구하기
+					cal.set(Calendar.MONTH,nowMonth-2);
+					int prevMonth=cal.get(Calendar.MONTH)+1;//이전 월
+					int prevLastDay=cal.getActualMaximum(Calendar.DATE);//이전월의 마지막일
+					
+					cal.set(Calendar.MONTH,nowMonth-1);//다시 현재월로 변경하여 현재월 1일에 맞는 공백 출력
+					int week=cal.get(Calendar.DAY_OF_WEEK);
+					System.out.println(week);
 					for(int blankTd=1; blankTd<cal.get(Calendar.DAY_OF_WEEK); blankTd++){
 					%>
-						<td class="blankTd"></td>		
+						<td class="blankTd"><%=prevMonth%>/<%=prevLastDay-week+blankTd+1 %></td>		
 					<%
 					}//end for
 				}//end switch
@@ -217,16 +252,24 @@
 				default:				dayClass="weekColor";
 				}//end switch
 				
-				//오늘
-				if(Calendar.DAY_OF_MONTH+13==cal.get(Calendar.DAY_OF_MONTH) && Calendar.MONTH+1==cal.get(Calendar.MONTH)+1){
-					 dayClass="toDay";
-				}//end switch
+				todayCss="diaryTd";//평일의 CSS설정
+				if(toDayFlag){//요청한 년월일과 오늘의 년월일이 같다면
+					if(nowDay==tempDay){//오늘의 일자에만 다른 CSS를 적용한다.
+						todayCss="todayTd";
+					}//end if
+				}//end if
 				
+/* 				//오늘
+				Date date=new Date();
+				if(date.getDate()==tempDay && Calendar.MONTH+1==cal.get(Calendar.MONTH)+1){
+					 dayClass="toDay";
+				}//end switch */
 				%>
-				<td class="diaryTd">
+				<td class="<%=todayCss%>">
 					<div><span class="<%=dayClass%>"><%= tempDay %></span></div>
 				</td>
 				<%
+				
 				//토요일이라면 줄 변경
 				switch(cal.get(Calendar.DAY_OF_WEEK)){
 				case Calendar.SATURDAY:

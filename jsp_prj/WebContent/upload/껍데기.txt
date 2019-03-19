@@ -1,0 +1,86 @@
+package day1221;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+/**
+ * UserData를 객체로 생성하여 출력 스트림을 통해 피일로 내보내고 읽어 들이는일
+ * @author owner
+ */
+public class UseObjectStream {
+
+	
+	public void UseObjectOutputStream() throws IOException {
+		ObjectOutputStream oos=null;
+		
+		try {
+			File file=new File("c:/dev/temp/obj_data.dat");
+			oos=new ObjectOutputStream(new FileOutputStream(file));
+			UserData ud=new UserData(26,70.1,"이재현");//객체는  직렬화가 되지 않으면 스트림으로  내보낼수 없다.
+			oos.writeObject(ud);// 객체를 직렬화 하여 스트림에 쓴다.
+			oos.flush();
+			System.out.println("객체를 파일로 기록 !!");//마샬링
+		}
+		finally {
+			if(oos != null) {
+				oos.close();
+			}
+		}
+		
+		
+	}
+	//////////////////////////////////////////////////////////////////////////////output end
+	public void useObjectInputStream()throws IOException,ClassNotFoundException{
+		// 객체를 읽기위한 스트림을 열기
+		ObjectInputStream ois=null;
+		try {
+			File file = new File("c:/dev/temp/obj_data.dat");
+			//파일에 저장된 객체를 읽기 위한 스트림열기
+			ois=new ObjectInputStream(new FileInputStream(file));
+			//스트림을 통해서 직렬화된 객체를 얻어 재조립 언마샬링
+			UserData ud =(UserData)ois.readObject();
+			System.out.println("일거드린 객체의 값  이름이 뭐에요? "+ud.getName()+" 나이응요? "+ud.getAge()+
+															" 몸무게는요? "+ud.getWeigth());
+			
+		}
+		finally {
+			if(ois!=null) {
+				ois.close();
+			}
+		}
+		
+		
+		
+		
+		
+		
+	}
+	/////////////////////////////////////////////////////////////////////////////input end
+	
+	public static void main(String[] args) {
+		UseObjectStream uos=new UseObjectStream();
+		
+		try {
+			uos.UseObjectOutputStream();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
+		System.out.println("=============================");
+		try {
+			uos.useObjectInputStream();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+}
