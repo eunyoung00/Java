@@ -25,6 +25,7 @@
 	OutputStream os=null;
 	
 	if(file.exists()){//파일이 존재 하는지
+		try{
 		fis=new FileInputStream(file);
 		byte[] readFileArr=new byte[(int)file.length()];//파일의 내용을 저장하기 위한 배열
 		
@@ -43,7 +44,10 @@
 		os=response.getOutputStream();
 		os.write(readFileArr);
 		os.flush();
-			
+		}finally{
+			if(fis!=null){fis.close();};
+			if(os!=null){os.close();};
+		}//end finally
 	}//end if
 	
 %>
