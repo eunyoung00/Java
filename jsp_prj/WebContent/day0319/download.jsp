@@ -45,8 +45,8 @@
 		os.write(readFileArr);
 		os.flush();
 		}finally{
-			if(fis!=null){fis.close();};
-			if(os!=null){os.close();};
+			if(fis!=null){fis.close();}//end if
+			if(os!=null){os.close();}//end if
 		}//end finally
 	}//end if
 	
