@@ -16,7 +16,7 @@
 	}//end if
 	
 	response.setHeader("Content-Disposition","attachment;fileName="+URLEncoder.encode(data,"UTF-8"));
-	//한글로 출력하기위해 URLEncoder.encode(data,"UTF-8")해줌.
+	//한글로 출력하기위해 URLEncoder.encode(data,"UTF-8")해줌.(왜 Decoder는 안돼지?)
 	
 	//3.파일스트림 연결
 	File file=new File("C:/dev/workspace/jsp_prj/WebContent/upload/"+data);

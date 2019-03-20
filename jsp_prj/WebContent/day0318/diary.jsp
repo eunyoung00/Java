@@ -266,7 +266,7 @@
 				}//end switch */
 				%>
 				<td class="<%=todayCss%>">
-					<div><a href="#void"><span class="<%=dayClass%>"><%= tempDay %></span></a></div>
+					<div><span class="<%=dayClass%>"><%= tempDay %></span></div>
 				</td>
 				<%
 				
