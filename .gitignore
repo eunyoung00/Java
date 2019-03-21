@@ -9,18 +9,18 @@ day1217/DataProcess.java
 day1217/stdVO.java
 day1217/Work29.java
 
-#workspace¿¡¼­ Á¦¿Ü
+#workspaceï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 .metadata
 .recommenders
 
-#javase_prj1¿¡¼­ Á¦¿Ü
+#javase_prj1ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 javase_prj/.settings
 javase_prj/bin
 javase_prj/doc
 javase_prj/.classpath
 javase_prj/.project
 
-#javase_prj2¿¡¼­ Á¦¿Ü
+#javase_prj2ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 javase_prj2/.settings
 javase_prj2/bin
 javase_prj2/doc
@@ -28,3 +28,4 @@ javase_prj2/.classpath
 javase_prj2/.project
 
 
+jsp_prj/WebContent/day0318/diary/diary.jsp

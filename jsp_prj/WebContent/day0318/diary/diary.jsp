@@ -1,3 +1,4 @@
+@@ -1,9 +1,5 @@
 <%@page import="java.util.Date"%>
 <%@page import="com.sun.xml.internal.ws.api.Cancelable"%>
 <%@page import="java.util.Calendar"%>
@@ -7,15 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="http://localhost:8080/jsp_prj/common/main_v190130.css"/>
-<style type="text/css">
-#wrap{margin:0px auto;width:800px; height:860px;}
-#header{width:800px; height:140px; background:#FFFFFF url(http://localhost:8080/jsp_prj/common/images/header_bg.png) repeat-x;
-		position: relative; }
-#headerTitle{font-family: HY견고딕,고딕; font-size:35px; font-weight:bold; text-align:center; 
-			/* padding-top: 35px */ position:absolute; top:40px; left:290px; }
+@ -19,275 +15,23 @@
 #container{width:800px; height:600px; }
 #footer{width:800px; height:120px; }
 #footerTitle{float: right; font-size:15px; padding-top:20px; padding-right:20px; }
@@ -121,6 +114,7 @@
 	}//moveMonth
 
 </script>
+</style>
 </head>
 <body>
 <div id="wrap">
@@ -283,11 +277,14 @@
 
 	</div>
 
+	<div id="container">
 
 	</div>
+	
 	<div id="footer">
 		<div id="footerTitle">copyright&copy; all right reserved. class 4.</div>
 	</div>
 </div>
+
 </body>
 </html>
