@@ -17,4 +17,12 @@ public class MonthVO {
 	public String getSubject() {
 		return subject;
 	}
+	
+	@Override
+	public String toString() {
+		return "MonthVO [num=" + num + ", subject=" + subject + ", getNum()=" + getNum() + ", getSubject()="
+				+ getSubject() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
+				+ super.toString() + "]";
+	}//toString
+	
 }//class
