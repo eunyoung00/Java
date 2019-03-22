@@ -75,6 +75,9 @@ $(function(){
 <div id="wrap">
 	<div id="header">
 		<div id="headerTitle">SIST Class4</div>
+		<div style="padding-top:100px; ">
+		<c:import url="../common/jsp/main_menu.jsp"></c:import>
+		</div>
 	</div>
 	<div id="container">
 	

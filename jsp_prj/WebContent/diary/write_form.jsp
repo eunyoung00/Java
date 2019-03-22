@@ -10,7 +10,7 @@
 <input type="hidden" name="pageFlag" value="write_process"/>
 <input type="hidden" name="param_year" value="${param.param_year}"/>
 <input type="hidden" name="param_month" value="${param.param_month}"/>
-<table id="wruteTab">
+<table id="writeTab">
 <tr>
 	<th colspan="2" style="text-align: center;">
 		<span style="font-size: 20px">이벤트 작성</span>

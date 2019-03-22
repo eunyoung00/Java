@@ -21,4 +21,20 @@ public class DiaryUpdateVO {
 	public String getPass() {
 		return pass;
 	}
+	public void setNum(int num) {
+		this.num = num;
+	}
+	public void setContents(String contents) {
+		this.contents = contents;
+	}
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+	
+	@Override
+	public String toString() {
+		return "DiaryUpdateVO [num=" + num + ", contents=" + contents + ", pass=" + pass + ", getNum()=" + getNum()
+				+ ", getContents()=" + getContents() + ", getPass()=" + getPass() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+	}//toString
 }//class
