@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 부서정보를 저장하는 XML -->
+<depts>
+	<dept>
+		<deptno>10</deptno>
+		<dname>SI 개발부</dname>
+		<loc>서울</loc>
+	</dept>
+	<dept>
+		<deptno>20</deptno>
+		<dname>SM 유지보수</dname>
+		<loc>경기도</loc>
+	</dept>
+	<dept>
+		<deptno>30</deptno>
+		<dname>SE 시스템엔지니어</dname>
+		<loc>서울</loc>
+	</dept>
+	<dept>
+		<deptno>40</deptno>
+		<dname>QA</dname>
+		<loc>부산</loc>
+	</dept>
+</depts>
