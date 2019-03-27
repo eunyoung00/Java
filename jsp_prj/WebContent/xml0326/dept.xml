@@ -1,6 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- 0327추가 -->
+<!DOCTYPE depts SYSTEM "dept.dtd">
+
 <!-- 부서정보를 저장하는 XML -->
 <depts>
+<!-- DTD에 맞는 구조 -->
 	<dept>
 		<deptno>10</deptno>
 		<dname>SI 개발부</dname>
@@ -21,4 +25,44 @@
 		<dname>QA</dname>
 		<loc>부산</loc>
 	</dept>
+	
+	<!-- 0327추가 -->
+	<!-- deptno는 ?이고, loc는 *이기 때문에 pass해도 되는것. -->
+	<dept>
+		<dname>부서미정</dname>
+	</dept>
+	<!-- n개를 가질수 있어 ErrorX -->
+	<dept>
+		<deptno>100</deptno>
+		<dname>고객지원부</dname>
+		<dname>(고지부)</dname>
+		<loc>서울</loc>
+		<loc>경기</loc>
+		<loc>대전</loc>
+	</dept>
+	
+	<!-- DTD에 위배되는 구조:Error -->
+	<!-- 노드의 순서는 deptno,dname,loc의 순서를 가진다. -->
+	<!-- <dept>
+	순차적으로 읽어들이기 때문에 뒤죽박죽이면 파싱이 어려워진다.
+		<dname>1</dname>
+		<deptno>1</deptno>
+		<loc>1</loc>
+	</dept> -->
+	
+	<!-- dname은 반드시 하나이상 나와야 한다. -->
+	<!-- <dept>
+		<deptno>100</deptno>
+		<loc>서울</loc>
+	</dept> -->
+	
+	<!-- deptno는 0~1개 -->
+	<!-- <dept>
+		<deptno></deptno>
+		<deptno></deptno>
+		<dname></dname>
+		<loc></loc>
+	</dept> -->
+	
+	
 </depts>

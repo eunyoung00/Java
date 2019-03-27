@@ -93,7 +93,7 @@ td{padding: 3px;}
 	<tr>
 		<td style="width:50px; text-align: center; border-right: 1px solid #333;">설명</td>
 		<td style="height:50px; text-align: left; width:650px;" colspan="3">
-			<c:out value="${news.description}"/>
+			<c:out value="${news.description}" escapeXml="false"/>
 		</td>
 		
 	

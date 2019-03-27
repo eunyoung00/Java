@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- 0327추가 -->
+<!DOCTYPE root SYSTEM "hello.dtd">
 
 <root><!-- 최상위 부모노드/근노드? --><!-- root Elememt라고 안에 들은 태그들을 모두. -->
 	<msg>안녕XML</msg>
@@ -8,6 +9,9 @@
 	<!-- <hello>대소문자를 가린다.</Hello> -->
 	<msg/><!-- Element사이에 값이 없다면 /로 하나의 태그만 작성할 수 있다. -->
 	<!-- JSTL (Jsp Standard Tag Library) -->
+	
+	<!-- 0327추가 -->
+	<!-- DTD에 선언되지 않은 태그는 사용할 수 없다.<msg1></msg1> -->
 </root>
 <!-- <root> //한번더 나오면 Error단 다른 부모노드로 감싸여 있으면 Error 아님
 //최상위 부모노드는 반드시 하나만 존재해야 한다.

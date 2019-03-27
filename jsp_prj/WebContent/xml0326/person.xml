@@ -1,4 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- 0327추가 -->
+<!DOCTYPE persons SYSTEM "person.dtd">
+
 <persons>
 	<person>
 		<name>
@@ -19,12 +22,15 @@
 	<person>
 		<!-- wellFormed(적격) 문서는 작성규칙만 지켜서 만들면 된다.-위의 태그들과는 상관이 없음.
 			형제 노드와 다른 노드의 순서를 가지거나 더 추가해도 된다! -->
-		<ssn>900101-*******</ssn>
+		<!-- 0327추가 -->
+		<!-- valid 문서는 작셩규칙과 DTD에 정의된 규칙을 모두 지켜서 만들어야 한다. -->
+		<!-- <ssn>900101-*******</ssn> -->
 		<name>
 			<firstName>재찬</firstName>
-			<middleName>코잘잘</middleName>
+			<!-- <middleName>코잘잘</middleName> -->
 			<lastName>이</lastName>
 		</name>
+		<ssn>900101-*******</ssn>
 		<address>인천시 소래포구</address>
 	</person>
 
