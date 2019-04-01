@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- 03.27추가 -->
-<!DOCTYPE cars SYSTEM "jdom_car.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
 <cars>
   <car car_type="승용">
     <model>아반테</model>
@@ -32,13 +30,4 @@
     <owner>노진경</owner>
     <cc>10000</cc>
   </car>
-  <!-- 03.27추가 -->
-  <!-- 속성을 정의하지 않으면 Error -->
-  <!-- <car>
-    <model>MAN트럭</model>
-    <company>MAN</company>
-    <owner>노진경</owner>
-    <cc>10000</cc>
-  </car> -->
-  
 </cars>

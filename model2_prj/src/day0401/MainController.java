@@ -1,0 +1,26 @@
+package day0401;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@SuppressWarnings("serial")
+public class MainController extends HttpServlet {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request,response);
+		//으로 post로 넘겨 진입점을 하나로 만듦
+	}//doGet
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//response.sendRedirect("day0401/hello.jsp");//페이지의 변경을 알아 보안에 걸려서 쓰지 않는다.
+		RequestDispatcher rd=request.getRequestDispatcher("day0401/hello.jsp");
+		rd.forward(request, response);
+		
+	}//doPost
+}//class
