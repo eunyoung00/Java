@@ -40,6 +40,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>MainController</servlet-name>
-    <url-pattern>/MainController</url-pattern>
+<!--     <url-pattern>/MainController</url-pattern> -->
+    <url-pattern>*.do</url-pattern>
   </servlet-mapping>
 </web-app>

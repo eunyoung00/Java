@@ -19,7 +19,8 @@ public class MainController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//response.sendRedirect("day0401/hello.jsp");//페이지의 변경을 알아 보안에 걸려서 쓰지 않는다.
-		RequestDispatcher rd=request.getRequestDispatcher("day0401/hello.jsp");
+		//RequestDispatcher rd=request.getRequestDispatcher("day0401/hello.jsp");
+		RequestDispatcher rd=request.getRequestDispatcher("day0402/view.jsp");
 		rd.forward(request, response);
 		
 	}//doPost
