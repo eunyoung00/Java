@@ -5,21 +5,38 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/main_v190130.css"/>
 <style type="text/css">
-#wrap{margin:0px auto;width:800px; height:860px;}
-#header{width:800px; height:140px; background:#A7C9C9; position: relative; }
+#wrap{margin:0px auto;width:860px; height:860px;}
+#header{width:860px; height:140px; background:#A7C9C9; position: relative; }
 #headerTitle{font-family: HY견고딕,고딕; font-size:35px; font-weight:bold; text-align:center; 
 			/* padding-top: 35px */ position:absolute; top:40px; left:290px; }
-#container{width:800px; height:600px; }
-#footer{width:800px; min-height:120px; }
+#container{width:860px; min-height:600px; }
+#footer{width:860px; height: 140px; }
 #footerTitle{float: right; font-size:15px; padding-top:20px; padding-right:20px; }
 
 /* 컨테이너 */
-#category{height:300px; background-color: #002255;}
-#recomnend{height:300px; background-color: #220055;}
-#review{height:300px; background-color: #2200FF;}
-#cg01{width:250px;height:250px;background-color: #FF0022;}
-#cg02{width:250px;height:250px;background-color: #FF0088;}
-#cg03{width:250px;height:250px;background-color: #FF00FF;}
+#category{height:300px; position: relative;}
+#recomnend{height:300px; position: relative;}
+#review{height:300px; position: relative;}
+#cgTitle{float: left; position:absolute; top:8px; left:8px;font-size: 20px; font-weight: bold;}
+#cg01{float: left; width:240px;height:250px; border:1px solid #FF0088; position:absolute; top:40px; left:50px;}
+#cg02{float: left; width:240px;height:250px; border:1px solid #FF0088; position:absolute; top:40px; left:310px;}
+#cg03{float: left; width:240px;height:250px; border:1px solid #FF0088; position:absolute; top:40px; left:570px;}
+#cglbtn{float: left; position:absolute; top:140px;}
+#cgrbtn{float: left; position:absolute; top:140px; left: 828px;}
+#rcTitle{float: left; position:absolute; top:8px; left:8px; font-size: 20px; font-weight: bold;}
+#rc01{float: left; width:240px;height:250px; border:1px solid #FF0088; position:absolute; top:40px; left:50px;}
+#rc02{float: left; width:240px;height:250px; border:1px solid #FF0088; position:absolute; top:40px; left:310px;}
+#rc03{float: left; width:240px;height:250px; border:1px solid #FF0088; position:absolute; top:40px; left:570px;}
+#rclbtn{float: left; position:absolute; top:140px;}
+#rcrbtn{float: left; position:absolute; top:140px; left: 828px;}
+#rvTitle{float: left; position:absolute; top:8px; left:8px;	font-size: 20px; font-weight: bold;}
+#rv01{float: left; width:240px;height:250px; border:1px solid #FF0088; position:absolute; top:40px; left:50px;}
+#rv02{float: left; width:240px;height:250px; border:1px solid #FF0088; position:absolute; top:40px; left:310px;}
+#rv03{float: left; width:240px;height:250px; border:1px solid #FF0088; position:absolute; top:40px; left:570px;}
+#rvlbtn{float: left; position:absolute; top:140px;}
+#rvrbtn{float: left; position:absolute; top:140px; left: 828px;}
+		
+		
 </style>
 </head>
 <body>
@@ -32,13 +49,30 @@
 	
 	<div id="content">
 		<div id="category">
-		<div id="cg01"></div>
-		<div id="cg02"></div>
-		<div id="cg03"></div>
+		<span id="cgTitle">카테고리</span>
+		<input type="button" value="letf" class="lbtn" id="cglbtn"/>
+		<div id="cgpage1">
+			<a href="#void"><div id="cg01"></div></a>
+			<a href="#void"><div id="cg02"></div></a>
+			<a href="#void"><div id="cg03"></div></a>
+		</div>
+		<input type="button" value="right" class="rbtn" id="cgrbtn"/>
 		</div>
 		<div id="recomnend">
+		<span id="rcTitle">추천 클래스</span>
+		<input type="button" value="letf" class="lbtn" id="rclbtn"/>
+		<div id="rc01"></div>
+		<div id="rc02"></div>
+		<div id="rc03"></div>
+		<input type="button" value="right" class="rbtn" id="rcrbtn"/>
 		</div>
 		<div id="review">
+		<span id="rvTitle">최신 리뷰</span>
+		<input type="button" value="letf" class="lbtn" id="rvlbtn"/>
+		<div id="rv01"></div>
+		<div id="rv02"></div>
+		<div id="rv03"></div>
+		<input type="button" value="right" class="rbtn" id="rvrbtn"/>
 		</div>
 	</div>
 	

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- Query문을 정의 
+  	   namespace=ns: XML내에서 중복된 id를 사용할 수 있도록 구분하는 것. 
+  					  (자바의 패키지와 비슷한 용도)
+  		select 안에 ; 절대 사용하지 않는다!!!
+  -->
+<mapper namespace="kr.co.sist.exam2">
+<!-- 컬럼하나에 레코드 하나 조회 할 때 -->  
+<!-- 컬럼하나에 레코드 여러개 조회 할 때 -->  
+<!-- 컬럼여러개 레코드 하나 조회 할 때 -->  
+<!-- 컬럼여러개 레코드 여러개 조회 할 때 -->  
+<!-- < 의 조회 -->  
+<!-- > 의 조회 -->  
+<!-- 동일 쿼리의 처리 -->  
+<!-- like의 조회 -->  
+<!-- subquery의 조회 -->  
+<!-- union의 조회 -->  
+<!-- join의 조회 -->  
+<!-- join+subquery 의 조회 -->  
+<!-- 컬럼명 또는 테이블명이 동적일 때의 조회 -->  
+<!-- dynamic query : where,if,choose,foreach -->  
+  
+</mapper>

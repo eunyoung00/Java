@@ -11,6 +11,9 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 public class UseMyBatis {
+	public UseMyBatis() {
+		org.apache.ibatis.logging.LogFactory.useLog4JLogging();
+	}//UseMyBatis
 	
 	//2Â÷ ¼ö¾÷
 	public SqlSessionFactory getSessionFactory() throws IOException{

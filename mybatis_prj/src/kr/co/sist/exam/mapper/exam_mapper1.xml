@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- Query문을 정의 
+  	   namespace=ns: XML내에서 중복된 id를 사용할 수 있도록 구분하는 것. 
+  					  (자바의 패키지와 비슷한 용도)
+  		select 안에 ; 절대 사용하지 않는다!!!
+  -->
+<mapper namespace="kr.co.sist.exam1">
+<!-- Emp Domain을 resultMap으로 설정 -->
+<resultMap type="kr.co.sist.exam.domain.Emp" id="empResult">
+	<result column="EMPNO" property="empno"/>
+	<result column="ename" property="ename"/>
+	<result column="job" property="job"/>
+	<result column="sal" property="sal"/>
+	<result column="hiredate" property="hiredate"/>
+	<result column="mgr" property="mgr"/>
+</resultMap>
+<!-- Zipcode Domain을 더 빨리 찾기 위해 컬럼과 매핑 -->
+<resultMap type="kr.co.sist.exam.domain.Zipcode" id="zipcodeResult">
+	<result column="zipcode" property="zipcode"/>
+	<result column="sido" property="sido"/>
+	<result column="gugun" property="gugun"/>
+	<result column="dong" property="dong"/>
+	<result column="bunji" property="bunji"/>
+
+</resultMap>
+
+<!-- 중복쿼리의 정의 : 위치는 상관이 없당 또한 어느 절이 들어가도 사용가능 -->
+<sql id="empDup">
+SELECT EMPNO,ENAME,JOB,SAL,MGR,TO_CHAR(HIREDATE,'YYYY-MM-DD Q') HIREDATE
+FROM EMP
+</sql>
+
+<!-- 컬럼하나에 레코드 하나 조회 할 때 --> 
+<!-- MyBatis에서는 Java의 데이터형(기본형,참조형)을 그대로 사용할 수 있다. 
+	 String data=SqlSession.selectOne("singleColumn"); //을 찾으면 DNAME이 문자열로 나온다.찾기만 하면 return이 된다.
+--> 
+	<select id="singleColumn" resultType="String">
+	   SELECT DNAME
+	   FROM DEPT
+	   WHERE DEPTNO=10
+	</select>
+<!-- 컬럼하나에 레코드 여러개 조회 할 때 
+	 resultType="자바 데이터형(기본형,참조형)"
+	 호출 : List<데이터형> list=SqlSession.selectList("id");
+	 기본형을 사용해도 되고, 기본형에 대응되는 클래스 - (래퍼)Wrapper class를 사용할 수 있다.
+-->
+<!-- 	<select id="multiRow" resultType="int"> -->
+	<select id="multiRow" resultType="Integer">
+	  select deptno
+	  from dept
+	</select>
+	
+<!-- 컬럼여러개 레코드 하나 조회 할 때 -->  
+<!-- 	<typeAlias>: Domain이나 VO를 미리 등록(iBATIS-mapper에 정의->MyBatis-설정파일에 정의)해 두고 짧은 이름으로 사용할 때 사용한다. 
+	자주 쓰면 편하당(여러번 사용되면 유리하고 한번만 사용된다면 안쓰는게 낫겠다)	
+	
+	조회되는 컬럼은 대소문자를 구분하지 않지만 setter method는 대소문자를 구분한다.
+	iBATIS에서는 컬렴명 또는 컬럼명 as setter명 으로 사용가능?했다?
+	
+	resultType="패키지명.Domain명 사용되거나 typeAlias의 id가 사용된다."
+-->  
+	<select id="multiColumn" resultType="kr.co.sist.exam.domain.DeptInfo">
+	<!-- <select id="multiColumn" resultType="di"> -->
+	  SELECT DNAME,LOC
+	  FROM DEPT
+	  WHERE DEPTNO=10
+	</select>
+<!-- 컬럼여러개 레코드 여러개 조회 할 때 
+	  입력되는(parameterType="") 부서번호에 따른 사원정보 조회(resultType)
+	  
+	  입력되는 값이 단일형 이라면 - 자바 데이터형 그냥 사용가능
+	  					 노드안에서 사용할 때에는 #{아무말대잔치}
+	 입력되는 값이 복합 형이라면 - VO사용
+	 					노드안에서 사용할 때에는 #{getter명}(바인드변수가 들어간다"안붙힘!Error남), ${getter명}("값"이 푹박히고)
+	 mapper는 읽어들여 실행하기 때문에 앞에 설정파일에서 찾지못하거나 에러나면 읽어들이지 못한다.
+	 
+	 조회결과를 미리 매핑한 <resultMap>을 선언 했다면 <select>에서 resultMap속성을 사용해야 한다.
+	  WHERE DEPTNO=#{deptno1}이때에는 아무말이 들어가도 int로 들어가는게 들어가 상관없지만 
+-->  
+<!-- 동일 쿼리의 처리 <sql>-->  
+<!-- 	<select id="multiColumnRow" resultType="kr.co.sist.exam.domain.Emp" parameterType="int"> -->
+<!-- 	<select id="multiColumnRow" resultType="empResult"(타입이 일치하지 않아 찾지 못한다) parameterType="int"> -->
+	<select id="multiColumnRow" resultMap="empResult" parameterType="int">
+	  <include refid="empDup"/>
+	  WHERE DEPTNO=#{deptno1}
+	</select>
+<!-- 조회컬럼이 여러개인 경우 
+	 parameterType에 VO를 설정하고 #{getter명}, ${getter}를 사용한다.
+	 입력되는(parameterType="") 부서번호와 에 따른 사원정보 조회(resultType)
+	  WHERE DEPTNO=#{deptno} and job=#{job}여기에 deptno에는 반드시 getter이어야 한다.1붙으면 Error
+-->
+<select id="multiParam" parameterType="kr.co.sist.exam.vo.EmpVO" resultMap="empResult">
+	  <include refid="empDup"/>
+	  <!-- SELECT EMPNO,ENAME,JOB,SAL,MGR,TO_CHAR(HIREDATE,'YYYY-MM-DD Q') HIREDATE -->
+	  <!-- FROM EMP -->
+	  WHERE DEPTNO=#{deptno} and job=#{job}
+</select>
+  
+<!-- < 의 조회 
+	사원테이블에서 입력된 연봉보다 적게 받는 사원의 사원번호, 사원명,직무,매니저번호,입사일을 조회하세요
+	
+	'<'는 직접 사용할 수 없다. &lt;로 사용.
+	'<'를 직접 사용하고 싶다면 CDATA Section을 사용한다.
+	CDATA Section 사이는 노드가 아닌 단순 문자열임을 알려주는 것.이라 Error안남.
+	<![CDATA[
+	   CDATA Section
+	]]>
+	으로 사용한다.
+-->  
+<select id="lessThan" resultMap="empResult" parameterType="Integer">
+	<include refid="empDup"/>
+	<!-- where sal <![CDATA[<]]> #{sal} -->
+	<![CDATA[
+	   where sal < #{sal}
+	]]>
+</select>
+
+<!-- > 의 조회 
+사원테이블에서 입력된 연봉보다 많이 받는 사원의 사원번호, 사원명,직무,매니저번호,입사일을 조회하세요
+바로 사용해도 에러는 나지 않지만 권장하는 방법은 아니다.
+>는 에러가 발생하지 않는다. &gt; <![CDATA[>]]> 다 가능!
+직관성이  떨어지는게 단점
+-->  
+<select id="greaterThan" resultMap="empResult" parameterType="Integer">
+	<include refid="empDup"/>
+	   where sal &gt; #{sal}
+	   order by sal desc
+</select>
+
+<!-- like의 조회 
+	동을 입력받아(parameterType="") 우편번호,시도,구군,동,번지를 조회(resultType="domainclasspullpath"|resultMap="resultMapID")
+	
+	%#{dong}%면 바인드 변수로 인식하지 못해 Error 난다. 문자열로 바꾸어 해주면 가능!
+-->  
+<select id="like" resultMap="zipcodeResult" parameterType="String">
+	select zipcode,sido,gugun,dong,nvl(bunji,' ') bunji 
+	from zipcode
+	where dong like #{dong}||'%'
+</select>
+
+<!-- subquery의 조회 -->  
+<!-- union의 조회 -->  
+<!-- join의 조회 -->  
+<!-- join+subquery 의 조회 -->  
+<!-- 컬럼명 또는 테이블명이 동적일 때의 조회 -->  
+<!-- dynamic query : where,if,choose,foreach -->  
+  
+</mapper>
