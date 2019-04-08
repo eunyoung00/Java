@@ -27,6 +27,12 @@
 #rc01{float: left; width:240px;height:250px; border:1px solid #FF0088; position:absolute; top:40px; left:50px;}
 #rc02{float: left; width:240px;height:250px; border:1px solid #FF0088; position:absolute; top:40px; left:310px;}
 #rc03{float: left; width:240px;height:250px; border:1px solid #FF0088; position:absolute; top:40px; left:570px;}
+#rc04{float: left; width:240px;height:250px; border:1px solid #FF0088; }
+#rc05{float: left; width:240px;height:250px; border:1px solid #FF0088;}
+#rc06{float: left; width:240px;height:250px; border:1px solid #FF0088;  }
+#rc07{float: left; width:240px;height:250px; border:1px solid #FF0088;  }
+#rc08{float: left; width:240px;height:250px; border:1px solid #FF0088; }
+#rc09{float: left; width:240px;height:250px; border:1px solid #FF0088; }
 #rclbtn{float: left; position:absolute; top:140px;}
 #rcrbtn{float: left; position:absolute; top:140px; left: 828px;}
 #rvTitle{float: left; position:absolute; top:8px; left:8px;	font-size: 20px; font-weight: bold;}
@@ -35,9 +41,48 @@
 #rv03{float: left; width:240px;height:250px; border:1px solid #FF0088; position:absolute; top:40px; left:570px;}
 #rvlbtn{float: left; position:absolute; top:140px;}
 #rvrbtn{float: left; position:absolute; top:140px; left: 828px;}
-		
+#showcg{float: left;width:780px;height:250px;position:absolute; }
 		
 </style>
+<script type="text/javascript">
+var BANNER_INDEX = 1;
+var BANNER_LEN = 0;
+var BANNER_WIDTH = 780;
+
+$("#cglbtn").unbind();
+$("#cglbtn").bind("click", function(){           
+    var nIndex = BANNER_INDEX-1;
+    if(nIndex<0)
+        nIndex = BANNER_LEN-1;
+    // n번째 배너 보이기. 
+    showBannerAt(nIndex);
+});
+$("#cgrbtn").unbind();
+$("#cgrbtn").bind("click", function(){
+    // 이동할 이전 배너 인덱스 값 구하기.
+    var nIndex = BANNER_INDEX+1;
+    if(nIndex>=BANNER_LEN)
+        nIndex = 0;
+    // n번째 배너 보이기.
+    showBannerAt(nIndex);  
+});
+function showBannerAt(nIndex){
+    if (nIndex != BANNER_INDEX) {
+        //  n번째 배너 위치 값 구하기.
+        var nPosition = -BANNER_WIDTH * nIndex;
+         
+        // 슬라이드 시작.
+        $("#cgwrapper").stop();
+        $("#cgwrapper").animate({
+            left: nPosition
+        }, 200);
+        //현재 배너 인덱스 업데이트 시키기.
+        BANNENR_INDEX = nIndex;
+    }
+}
+
+</script>
+
 </head>
 <body>
 <div id="wrap">
@@ -51,10 +96,24 @@
 		<div id="category">
 		<span id="cgTitle">카테고리</span>
 		<input type="button" value="letf" class="lbtn" id="cglbtn"/>
+		<div id="cgwrapper">
+		<div id="showcg">
 		<div id="cgpage1">
-			<a href="#void"><div id="cg01"></div></a>
-			<a href="#void"><div id="cg02"></div></a>
-			<a href="#void"><div id="cg03"></div></a>
+			<a href="#void"><div id="cg01">1</div></a>
+			<a href="#void"><div id="cg02">2</div></a>
+			<a href="#void"><div id="cg03">3</div></a>
+		</div>
+		<div id="cgpage2">
+			<a href="#void"><div id="cg04">4</div></a>
+			<a href="#void"><div id="cg05">5</div></a>
+			<a href="#void"><div id="cg06">6</div></a>
+		</div>
+		<div id="cgpage3">
+			<a href="#void"><div id="cg07">7</div></a>
+			<a href="#void"><div id="cg08">8</div></a>
+			<a href="#void"><div id="cg09">9</div></a>
+		</div>
+		</div>
 		</div>
 		<input type="button" value="right" class="rbtn" id="cgrbtn"/>
 		</div>

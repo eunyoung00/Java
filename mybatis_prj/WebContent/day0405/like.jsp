@@ -42,8 +42,9 @@
 		</c:if>
 		<c:forEach var="zip" items="${zipList}">
 		<tr>
-			<td><c:out value="${zip.zipcode}"/></td>
-			<td><c:out value="${zip.sido} ${zip.gugun} ${zip.dong} ${zip.bunji}"/></td>
+			<td><a href="#void" onclick="setMarker('${zip.sido} ${zip.gugun} ${zip.dong}','${zip.dong}')"><c:out value="${zip.zipcode}"/></a></td>
+			<td><a href="#void" onclick="setMarker('${zip.sido} ${zip.gugun} ${zip.dong}','${zip.dong}')"><c:out value="${zip.sido} ${zip.gugun} ${zip.dong} ${zip.bunji}"/></a></td>
+<%-- 			<td><c:out value="${zip.sido} ${zip.gugun} ${zip.dong} ${zip.bunji}"/></td> --%>
 		</tr>
 		</c:forEach>
 	</table>
@@ -51,6 +52,9 @@
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=acbead349136da6f3bb665febdb9861f&libraries=services"></script>
 <script type="text/javascript">
+var mapContainer=null;
+var mapOption=null;
+
 $(function(){
 /* var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 var options = { //지도를 생성할 때 필요한 기본 옵션
@@ -59,43 +63,50 @@ var options = { //지도를 생성할 때 필요한 기본 옵션
 };
 
 var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴 */
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
         center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
     };  
 
+setMarker("서울시 동작구 상도동","살기좋은 상도동");
+
+});//만약 javaScript가 없다면 onload로 넣어준다.
+
+
+function setMarker(addr,dong){
 // 지도를 생성합니다    
 var map = new daum.maps.Map(mapContainer, mapOption); 
 
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder = new daum.maps.services.Geocoder();
+ 
+	// 주소로 좌표를 검색합니다
+	geocoder.addressSearch(addr, function(result, status) {
 
-// 주소로 좌표를 검색합니다
-geocoder.addressSearch('서울특별시 강남구 역삼동 테헤란로 132', function(result, status) {
+	    // 정상적으로 검색이 완료됐으면 
+	     if (status === daum.maps.services.Status.OK) {
 
-    // 정상적으로 검색이 완료됐으면 
-     if (status === daum.maps.services.Status.OK) {
+	        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
 
-        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	        var marker = new daum.maps.Marker({
+	            map: map,
+	            position: coords
+	        });
 
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker = new daum.maps.Marker({
-            map: map,
-            position: coords
-        });
+	        // 인포윈도우로 장소에 대한 설명을 표시합니다
+	        var infowindow = new daum.maps.InfoWindow({
+	            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+dong+'</div>'
+	        });
+	        infowindow.open(map, marker);
 
-        // 인포윈도우로 장소에 대한 설명을 표시합니다
-        var infowindow = new daum.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">쌍용교욱센터</div>'
-        });
-        infowindow.open(map, marker);
+	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	        map.setCenter(coords);
+	    }//end if 
+	});   
+}//setMaker
 
-        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-        map.setCenter(coords);
-    } 
-});    
-});//만약 javaScript가 없다면 onload로 넣어준다.
 </script>
 <div id="map" style="width:500px;height:400px;"></div>
 
