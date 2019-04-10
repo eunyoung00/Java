@@ -61,6 +61,13 @@
                 <li><a href="main.jsp?page=day0409/dynamic_if">dynamic if</a></li>
               </ul>
             </li>
+            <li><a href="#void">5일차</a>
+              <ul>
+                <li><a href="main.jsp?page=day0410/dynamic_choose">dynamic choose</a></li>
+                <li><a href="main.jsp?page=day0410/dynamic_foreach">dynamic foreach</a></li>
+                <li><a href="main.jsp?page=day0410/insert_procedure">insert procedure</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
         <li><a href="main.jsp?page=day0410/car">동기방식 차량조회</a></li>
