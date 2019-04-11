@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hw">
+<!-- 숙제- 제조국|제조사|모델명 조회 -모델1 -->
+<select id="" resultType="">
+select  cco.country,cco.maker,cmo.model,cmo.car_img,cmo.car_year,cmo.price,cmo.car_option,cmo.hiredate
+					from car_country cco,car_maker cma, car_model cmo
+					where cco.maker=cma.maker
+					and cmo.model=cma.model
+</select>
+  
+  
+  
+  
+</mapper>
