@@ -210,5 +210,36 @@
   </select>
   
   <!-- cursor -->
+ <resultMap type="kr.co.sist.exam.domain.EmpProcedure" id="epResult" >
+ 	<result column="empno" property="empno"/>
+ 	<result column="ename" property="ename"/>
+ 	<result column="sal" property="sal"/>
+ 	<result column="deptno" property="deptno"/>
+ 	<result column="dname" property="dname"/>
+ 	<result column="loc" property="loc"/>
+</resultMap>
+
+  <select id="selectProcedure" parameterType="kr.co.sist.exam.vo.CursorVO" statementType="CALLABLE">
+  {
+  	call select_emp(#{deptno, mode=IN},
+  					#{empList,mode=OUT, jdbcType=CURSOR, 
+  						javaType=ResultSet, resultMap=epResult}
+  					)
+  	
+  }
+  </select>
+  
+<!--  transaction : test_transaction1 테이블에 레코드를 추가  -->
+<insert id="tr1" parameterType="kr.co.sist.exam.vo.TransactionVO">
+	insert into test_transaction1(SUBJECT,WRITER,INPUT_DATE)
+	values(#{subject}, #{writer}, sysdate)
+</insert>
+
+
+<!--  transaction : test_transaction2 테이블에 레코드를 추가 (제목이 긴 글은 추가되지 않는다.10자이상) -->
+<insert id="tr2" parameterType="kr.co.sist.exam.vo.TransactionVO">
+	insert into test_transaction2(SUBJECT,WRITER,INPUT_DATE)
+	values(#{subject}, #{writer}, sysdate)
+</insert>
   
 </mapper>

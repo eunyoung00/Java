@@ -1,0 +1,25 @@
+package kr.co.sist.exam.vo;
+
+public class TransactionVO {
+	private String subject, writer;
+
+	public TransactionVO(String subject, String writer) {
+		this.subject = subject;
+		this.writer = writer;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+	public String getWriter() {
+		return writer;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+	
+}

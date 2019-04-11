@@ -14,11 +14,13 @@ import kr.co.sist.exam.domain.EmpJoin;
 import kr.co.sist.exam.domain.Union;
 import kr.co.sist.exam.domain.Zipcode;
 import kr.co.sist.exam.vo.CarVO;
+import kr.co.sist.exam.vo.CursorVO;
 import kr.co.sist.exam.vo.DeptnoVO;
 import kr.co.sist.exam.vo.DiaryListParamVO;
 import kr.co.sist.exam.vo.EmpVO;
 import kr.co.sist.exam.vo.TestProcVO;
 import kr.co.sist.exam.vo.TnameVO;
+import kr.co.sist.exam.vo.TransactionVO;
 
 public class MyBatisDAO1 {
 	public List<Emp> multiParam(EmpVO ev){
@@ -71,7 +73,7 @@ public class MyBatisDAO1 {
 		
 		SqlSession ss=MyBatisDAO.getInstance().getSessionFactory().openSession();
 		cnt=ss.selectOne("diaryCnt");
-		
+		ss.close();
 		return cnt;
 	}//diaryTotalCount
 	
@@ -80,7 +82,7 @@ public class MyBatisDAO1 {
 		
 		SqlSession ss=MyBatisDAO.getInstance().getSessionFactory().openSession();
 		list=ss.selectList("subquery",dlpvo);
-		
+		ss.close();
 		return list;
 	}//subquery
 	
@@ -89,7 +91,7 @@ public class MyBatisDAO1 {
 		
 		SqlSession ss=MyBatisDAO.getInstance().getSessionFactory().openSession();
 		list=ss.selectList("union");
-		
+		ss.close();
 		return list;
 	}//union
 	
@@ -98,7 +100,7 @@ public class MyBatisDAO1 {
 		
 		SqlSession ss=MyBatisDAO.getInstance().getSessionFactory().openSession();
 		list=ss.selectList("join",mgr);
-		
+		ss.close();
 		return list;
 	}//join
 
@@ -107,7 +109,7 @@ public class MyBatisDAO1 {
 		
 		SqlSession ss= MyBatisDAO.getInstance().getSessionFactory().openSession();
 		list=ss.selectList("joinSubquery");
-		
+		ss.close();
 		return list;
 	}//joinSubquery
 	
@@ -115,6 +117,7 @@ public class MyBatisDAO1 {
 		List<Demp> list=null;
 		SqlSession ss=MyBatisDAO.getInstance().getSessionFactory().openSession();
 		list=ss.selectList("dtable",tvo);
+		ss.close();
 		return list;		
 	}//dynamicTable
 	
@@ -122,6 +125,7 @@ public class MyBatisDAO1 {
 		List<Dynamicif> list=null;
 		SqlSession ss=MyBatisDAO.getInstance().getSessionFactory().openSession();
 		list=ss.selectList("dynamicif", dvo);
+		ss.close();
 		return list;
 	}//dynamicIf
 	
@@ -129,6 +133,7 @@ public class MyBatisDAO1 {
 		List<Dynamicif> list=null;
 		SqlSession ss=MyBatisDAO.getInstance().getSessionFactory().openSession();
 		list=ss.selectList("kr.co.sist.exam2.dynamicChoose", dvo);
+		ss.close();
 		return list;
 	}//dynamicIf
 	
@@ -136,6 +141,7 @@ public class MyBatisDAO1 {
 		List<Car> list=null;
 		SqlSession ss=MyBatisDAO.getInstance().getSessionFactory().openSession();
 		list=ss.selectList("kr.co.sist.exam2.dynamicForeach", cv);
+		ss.close();
 		return list;
 	}//dynamicForeach
 	
@@ -144,9 +150,28 @@ public class MyBatisDAO1 {
 		System.out.println("-----"+tpvo.getMsg());
 		ss.selectOne("insertProcedure",tpvo);
 		System.out.println("-----"+tpvo.getMsg());
-		
+		ss.close();
 		return tpvo;
 	}//insertProc
+	
+	public void selectProc(CursorVO c_vo) {
+		SqlSession ss=MyBatisDAO.getInstance().getSessionFactory().openSession();
+		ss.selectOne("selectProcedure", c_vo);
+		ss.close();
+	}//selectProc
+	
+	public int insertTransaction(TransactionVO t_vo) {
+		int cnt=0,cnt1=0;
+		SqlSession ss=MyBatisDAO.getInstance().getSessionFactory().openSession();
+		cnt=ss.insert("tr1",t_vo);
+		cnt1=ss.insert("tr2", t_vo);
+
+		if((cnt+cnt1)==2) {
+			ss.commit();
+		}
+		ss.close();
+		return cnt+cnt1;
+	}//insertTransaction
 	
 	
 	public static void main(String[] args) {
@@ -172,10 +197,18 @@ public class MyBatisDAO1 {
 		list.add("ªÔº∫");*/
 		//md.dynamicForeach(new CarVO(list));
 		
-		TestProcVO tpvo=new TestProcVO(1111, 3000, 0, "±Ë»Ò√∂", "¥Î∏Æ", "");
+		/*TestProcVO tpvo=new TestProcVO(1111, 3000, 0, "±Ë»Ò√∂", "¥Î∏Æ", "");
 		md.insertProc(tpvo);
+		*/
 		
+		/*CursorVO c_vo=new CursorVO();
+		c_vo.setDeptno(10);
+		md.selectProc(c_vo);
+		System.out.println(c_vo.getEmpList());*/
 		
+		TransactionVO tv=new TransactionVO("ø¿¥√¿∫ æÓ¬æ¡ˆ ±‚∫–¿Ã ¡¡¿∫ ∏Òø‰¿œ", "±Ë¡§¿±");
+		
+		System.out.println(md.insertTransaction(tv));
 	}//main
 	
 }//class
