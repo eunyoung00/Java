@@ -31,11 +31,27 @@
 	<div id="header">
 		<div id="headerTitle">SIST Class4</div>
 		<div style="padding-top:100px; ">
-
+		<c:import url="../common/jsp/main_menu.jsp"></c:import>
 		</div>
-	</div>
+	</div>   
 	<div id="container">
-	
+
+		<ul>
+			<li>${param.name}님 안녕하세요?</li>
+			<li>${param.age}살</li>
+			<li>
+			<c:if test="${empty param.lang}">관심언어가 없습니다.</c:if>
+			<c:forEach var="lang" items="${requestScope.lang}">
+				<c:out value="${lang}"/>
+			</c:forEach>
+			</li>
+			<li>
+				<a href="#void" onclick="history.back()">다시입력</a>
+				<a href="#void" onclick="location.href='request_form.do'">다시입력</a>
+				
+			</li>
+		</ul>
+		
 	</div>
 	<div id="footer">
 		<div id="footerTitle">copyright&copy; all right reserved. class 4.</div>
