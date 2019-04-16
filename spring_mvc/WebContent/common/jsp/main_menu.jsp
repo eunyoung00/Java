@@ -81,6 +81,13 @@
                 <li><a href="view_request.do">HttpServletRequest사용 데이터 전달</a></li>
                 <li><a href="view_model.do">Model을 사용한 데이터 전달</a></li>
                 <li><a href="view_modelandview.do">ModelAndView사용 데이터 전달</a></li>
+                <li><a href="use_redirect.do">redirect 이동(기존은 forward)</a></li>
+              </ul>
+            </li>
+            <li><a href="#void">3일차</a>
+              <ul>
+                <li><a href="session/use_session.do">HttpSession 사용</a></li>
+                <li><a href="session/an_use_session.do">@SessionAttributes 사용</a></li>
               </ul>
             </li>
             </ul>
