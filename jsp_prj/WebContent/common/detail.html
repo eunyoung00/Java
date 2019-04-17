@@ -15,7 +15,6 @@
 
 /* 내부 */
 
-
 </style>
 </head>
 <body>
@@ -26,7 +25,14 @@
 	
 	<div id="container">
 	<div id="detail">
-	<div style="float: right;">
+	<div id="content" style="height: 1500px;width: 700px; float: left">
+	<div>
+		대표이미지-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	</div>
+	
+	</div>
+	
+	<div style="padding: 10px; float: right;">
 	<div id="moveBar" style="position:fixed;width: 300px; height: 600px; border: 1px solid #333 ">
 		<div id="barTitle">
 		<span id="Title">Title</span>
@@ -36,21 +42,181 @@
 		</div>
 	</div>
 	</div>
-	<div id="content" style="height: 1500px;width: 760px; float: left">
-	<div>
-		대표이미지-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	</div>
-	
-	</div>
 	
 	</div>
 
 	</div>
+<aside class="other is_stuck">
+                    <div class="sticky">
+						<div class="box m_info">
+                        <div class="intro group clear_fix">
+                            <div class="pic" style="background:url('/files/class/photo/201903/thumb/1552548786982.PNG') no-repeat center; background-size:cover;"></div>
+                            <div class="info">
+                                <p class="name">숲속산책(이재은)</p>
+                                <div class="grade clear_fix">
+                                    <div class="star">
+                                        <div class="bar" style="width:0%;"></div>
+                                        <div class="mask"></div>
+                                    </div>
+                                    <!--<div class="txt">0점</div>-->
+                                </div>
+                                <p class="stat">진행중 클래스 : 2개 / 전체 클래스 : 3개</p>
+                            </div>
+                        </div>
+						                        <div class="infos group">
+                            <div class="default_lecture" style="display:none">
+                                <dl class="clear_fix">
+                                    <dt>기간</dt>
+                                    <dd style="position:absolute; right:9px;">2019.04.15 ~ 2019.04.21 (총 1회)</dd>
+                                </dl>
+                                <dl class="clear_fix">
+                                    <dt>요일</dt>
+                                    <dd style="position:absolute; right:9px;">월</dd>
+                                </dl>
+                                <dl class="clear_fix">
+                                    <dt>시간</dt>
+                                    <dd>09:00 ~ 10:00</dd>
+                                </dl>
+                            </div>
+                            <div class="select_day group" >
+                                <div class="c_selectbox">
+                                    <label for="">클릭해서 클래스날짜 선택하기</label>
+                                    <select onChange="setPeople(this.value)">
+                                        <option value="0">클릭해서 클래스날짜 선택하기</option>
+                                        <option value="1_1000">2019.04.15(월) 19:00 ~ 20:00 &nbsp; &nbsp; &nbsp; &nbsp; 마감 </option>
+                                        <option value="2_1000">2019.04.16(화) 19:00 ~ 20:00 &nbsp; &nbsp; &nbsp; &nbsp; 마감 </option>
+                                        <option value="3_1">2019.04.21(일) 12:30 ~ 13:30 &nbsp; &nbsp; &nbsp; &nbsp; 0 / 4 </option>
+                                        <option value="4_1">2019.04.21(일) 14:00 ~ 15:00 &nbsp; &nbsp; &nbsp; &nbsp; 0 / 4 </option>
+                                        <option value="5_1">2019.04.21(일) 16:00 ~ 17:00 &nbsp; &nbsp; &nbsp; &nbsp; 0 / 4 </option>
+                                        <option value="6_1">2019.04.21(일) 18:00 ~ 19:30 &nbsp; &nbsp; &nbsp; &nbsp; 0 / 4 </option>
+                                        <option value="7_1">2019.04.27(토) 12:30 ~ 13:30 &nbsp; &nbsp; &nbsp; &nbsp; 0 / 4 </option>
+                                        <option value="8_1">2019.04.27(토) 14:00 ~ 15:00 &nbsp; &nbsp; &nbsp; &nbsp; 0 / 4 </option>
+                                        <option value="9_1">2019.04.27(토) 16:00 ~ 17:00 &nbsp; &nbsp; &nbsp; &nbsp; 0 / 4 </option>
+                                        <option value="10_1">2019.04.29(월) 19:00 ~ 20:00 &nbsp; &nbsp; &nbsp; &nbsp; 0 / 4 </option>
+                                        <option value="11_1">2019.04.30(화) 19:00 ~ 20:00 &nbsp; &nbsp; &nbsp; &nbsp; 0 / 4 </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <dl class="clear_fix">
+                                <dt>지역정보</dt>
+                                <dd title="서울 > 용산구">서울 > 용산구</dd>
+                            </dl>
+                            <dl class="clear_fix">
+                                <dt>카테고리</dt>
+                                <dd title>핸드메이드/공방 > 플라워</dd>
+                            </dl>
+                            <dl class="clear_fix">
+                                <dt>최소수강인원</dt>
+                                <dd id="lec_count_min">1명</dd>
+                            </dl>
+                            <dl class="clear_fix">
+                                <dt>수강인원</dt>
+                                <dd><span class="mark" id="lec_count_now">0</span> / <span id="lec_count_max">4</span>명</dd>
+                            </dl>
+                            
+                            <dl class="clear_fix">
+                                <dt>신청마감일</dt>
+                                <dd>
+																2019. 04. 29(월) 18:00
+								</dd>
+                            </dl>
+                            <dl class="clear_fix">
+                                <dt>찜한 회원</dt>
+                                <dd><span id="likeCnt">0</span>명</dd>
+                            </dl>
+                        </div>
+                        <div class="btn group" id="btnOpen">
+                         <a href="javascript:commonLayerOpen('l_login');"> 클래스 예약하기</a>
+                     </div>
+                     	<div class="btn group" id="btnClose" style="display:none;"><a style="background:#888484;">클래스 신청 마감</a></div>
+						</div>
+                    </div>
+                </aside>            
+                </div>
+    <!-- //container -->
+    
+    <!-- 수업결제 정보 -->
+		<div class="class_price" id ="class_price" style="position:relative;">
+			<!--div class="pricetxt">총 1회 / 2시간  <span>25,000원/1시간</span></div-->
+			<div class="area_info">
+				<div class="area" id="area">
+					<h1>위치</h1>
+					<ul>
+						<li ><a class="on" onclick="selectRegion(1, this)" style="font-size:13px;">강남</a></li>
+												<li><a onclick="selectRegion(2, this)" style="font-size:13px;">마포</a></li>						
+																		<li><a onclick="selectRegion(3, this)" style="font-size:13px;">잠실</a></li>
+											</ul>
+				</div>
+				
+					
+										
+										<div class="add_price">						
+						<div>장소 : 
+						서울 강남구 강남대로 476 투썸플레이스			
+						<br>
+						추가비용 : 카페 / 음료비 불포함	
+						</div>
+					</div>
+				</div>
+				
+						<div class="tutor_t">
+				<dl class="tutor_txt">
+					<dt><div style="background:#000;z-index:0;width:100%;height:100%;background-size:cover;background-position:center;background-image: url('//taling.me/Content/Uploads/Profile/s_4bf9697d29c378586ac42496edca7f3fbac460a0.JPG');" ></div>
+					</dt>
+					<dd>						
+						강남, 홍대, 마포, 잠실 등 협의 후에 장소 결정 가능합니다.
+
+서울지역, 인천지역, 경기지역 장소 협의 후 가능합니다 :)
+
+
+수업은 카페에서 진행하며, 음료비는 불포함입니다.
+
+카페에서 음료마시면서 블로그 디자인도 하고 좋은시간 보내요 :)					</dd>
+				</dl>
+			</div>
+			
+			<div class="bnt_payment">
+								<a href="javascript:void(0)" onclick="$('#popup-login').show()"><span class="btntxt_s">수업 신청하기</span><span> ▶</span></a>				
+				
+			</div>
+
+			<div class="price">	
+				
+							
+				<div class="hp1"><b>￦25,000원</b> / 시간</div>
+				<div class="tp1">￦50,000 / 총 1회 2시간</div>
+				
+			</div>
+
+			<div class="btn_area">
+									
+					<a onclick="alert('로그인이 필요합니다'); $('#popup-login').show();" class="btn_qna"><img src="/Content/Images/class/icon_btn_qna.png" /> 실시간 톡하기</a>
+				
+				<script>
+					function qPhonePop()
+					{
+						alert("휴대전화 인증이 필요합니다");
+						var phone = "";
+						popupWindow = window.open('/Tutor/Register/PhoneAuth?phone=' + phone, '_blank', 'height=250,width=350,scrollbars=no,status=no,resizable=0');
+					}
+				
+					function PhoneConfirm()
+					{
+						location.reload();
+					}
+				</script>
+				<a onclick="alert('로그인이 필요합니다'); $('#popup-login').show();" class="bnt_wishlist"><img src="/Content/Images/class/icon_btn_wish.png" /> 찜하기</a>					
+								
+				<!--span class="btntxt_s">오늘 5명이 튜터에게 문의를 남겼습니다.</span-->
+			</div>
+		
+		<!-- //수업결제 정보 -->
+    
+    
 
 	<div id="footer">
 		<div id="footerTitle">copyright&copy; all right reserved. class 4.</div>
 	</div>
 </div>
-
 </body>
 </html>
