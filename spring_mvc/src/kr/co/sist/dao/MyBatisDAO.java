@@ -9,7 +9,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import kr.co.sist.domain.Diary;
+import kr.co.sist.domain.DiaryDetail;
+import kr.co.sist.domain.DiaryReply;
 import kr.co.sist.domain.Notice;
+import kr.co.sist.vo.DiaryVO;
+import kr.co.sist.vo.ReplyVO;
 
 public class MyBatisDAO {
 	
@@ -51,14 +56,63 @@ public class MyBatisDAO {
 	public List<Notice> selectMainNotice(){
 		SqlSession ss=getSessionFactory().openSession();
 		List<Notice> list=ss.selectList("noticeList");
-		
+		ss.close();
 		return list;
 	}//selectMainNotice
 	
+	public int selectTotalCount() {
+		SqlSession ss=getSessionFactory().openSession();
+		
+		int cnt=ss.selectOne("diaryTotalCnt");
+		ss.close();
+		return cnt;
+	}//selectTotalCount
 	
-/*	public static void main(String[] args) {
-		MyBatisDAO m=MyBatisDAO.getInstance();
-		m.selectMainNotice();
+	public List<Diary> selectList(DiaryVO dv){
+		List<Diary> list=null;
+		SqlSession ss=getSessionFactory().openSession();
+		list=ss.selectList("diaryList",dv);
+		ss.close();
+		return list;
+	}//selectList
+	
+	public DiaryDetail selectDiaryDetail(int num) {
+		DiaryDetail dd=null;
+		SqlSession ss=getSessionFactory().openSession();
+		dd=ss.selectOne("kr.co.sist.notice.diaryDetail",num);
+		ss.close();
+		return dd;
+	}//selectDiaryDetail
+	
+	public List<DiaryReply> selectReplyList(int num) {
+		List<DiaryReply> list=null;
+		SqlSession ss=getSessionFactory().openSession();
+		list=ss.selectList("diaryReply",num);
+		ss.close();
+		return list;
+	}//selectReplyList
+	
+	public int insertReply(ReplyVO r_vo) {
+		int cnt=0;
+		
+		SqlSession ss=getSessionFactory().openSession();
+		cnt=ss.insert("insertReply",r_vo);
+		if(cnt==1) {
+			ss.commit();
+		}//end if
+		ss.close();
+		
+		return cnt;
+	}//insertReply
+	
+	/*
+	public static void main(String[] args) {
+		//MyBatisDAO m=MyBatisDAO.getInstance();
+		//m.selectMainNotice();
+		DiaryVO dv=new DiaryVO();
+		dv.setStartNum(11);
+		dv.setEndNum(20);
+		System.out.println(MyBatisDAO.getInstance().selectList(dv));
 	}//main
-*/	
+*/
 }//class
