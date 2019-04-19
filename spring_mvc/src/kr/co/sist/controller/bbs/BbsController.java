@@ -45,6 +45,7 @@ public class BbsController {
 		model.addAttribute("indexList",indexList);
 		model.addAttribute("pageScale",pageScale);
 		model.addAttribute("totalCount",totalCount);
+		model.addAttribute("currentPage",dv.getCurrentPage());
 		
 		return "diary/list";
 	}//diaryList

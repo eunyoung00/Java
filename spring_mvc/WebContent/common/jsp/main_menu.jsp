@@ -103,6 +103,14 @@
                 <li><a href="diary/list.do">일정 보기</a></li>
               </ul>
             </li>
+            <li><a href="#void">6일차</a>
+              <ul>
+                <li><a href="exception/exception.do">Controller에서 예외처리</a></li>
+                <!-- 예외메세지를 찍어볼수 있따.-->
+                <li><a href="chain/chain_a.do">chain_a.do 요청</a></li>
+                <li><a href="chain/chain_b.do">chain_b.do 요청</a></li>
+              </ul>
+            </li>
             </ul>
             <li><a href="#">동기방식 차량조회</a></li>
         </ul>
