@@ -21,7 +21,12 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<context:annotation-config/><!-- @Component나 @Autowired, @Controller를 Spring Framework가 찾을 수 있도록 설정 -->
 	<context:component-scan base-package="kr.co.sist" />
+	<context:component-scan base-package="kr.co.sist.dao.*" /><!-- 클래스 -->
+	<context:component-scan base-package="kr.co.sist.dao" /><!-- 하위? -->
+	<context:component-scan base-package="kr.co.sist.service.*" />
+	<context:component-scan base-package="kr.co.sist.service" />
 	
 	
 	
