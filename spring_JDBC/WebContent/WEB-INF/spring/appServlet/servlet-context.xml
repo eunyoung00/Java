@@ -29,9 +29,11 @@
       <beans:property name="username" value="scott"/>
       <beans:property name="password" value="tiger"/>
    </beans:bean>
-   <!-- Spring JDBC를 사용할 수 있는 객체 : JdbcTemplate -->
+   <!-- Spring JDBC를 사용할 수 있는 객체 설정 : JdbcTemplate -->
    <beans:bean id="jt" class="org.springframework.jdbc.core.JdbcTemplate">
       <beans:property name="dataSource" ref="dataSource"/>
+      <!-- <beans:constructor-arg>
+      </beans:constructor-arg> -->
    </beans:bean>
    
    <context:annotation-config/>

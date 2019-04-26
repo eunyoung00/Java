@@ -35,6 +35,13 @@
 #rvTitle{float: left; position:absolute; top:8px; left:8px;	font-size: 20px; font-weight: bold;}
 #showcg{float: left;width:780px;height:250px;position:absolute; }
 		
+
+#TitleImg1{border:1px solid #FF0088; top:10px; left:150px; width:1075px;height: 470px; float: left;}
+#TitleImg2{border:1px solid #FF0088; top:10px; left:1500px; width:1075px;height: 470px; float: left;}
+#TitleImg3{border:1px solid #FF0088; top:10px; left:3000px; width:1075px;height: 470px; float: left;}
+#tilbtn{float: left; position:absolute; top:420px; left:370px;}
+#tirbtn{float: left; position:absolute; top:420px; left: 1520px;}
+
 </style>
 
 <script src="http://localhost:8080/spring_mvc/common/touchslider.js"></script>
@@ -48,22 +55,22 @@
 	
 	<div id="container">
 	<div id="headImg" style="width:1100px;height:500px;border:1px solid #333;margin-top: 15px; ">
-		<span id="cgTitle">타이틀 이미지</span>
 		<div class='swipe' style='margin:10px ;height:350px;'>
 			<ul id='slider4'>
-			    <li style='display:block'><div>
-			    	1번 이미지
+			    <li style='display:block'>
+			    <div id="TitleImg1">
+			    	1번 이미지      
 				</div></li>
-			    <li><div>
+			    <li><div id="TitleImg2">
 					2번 이미지
 				</div></li>
-			    <li><div>
+			    <li><div id="TitleImg3">
 					3번 이미지
 				</div></li>
 			  </ul>
 		</div>
-		<input type="button" value="&lt;" class="lbtn" id="cglbtn" onclick="t00.prev();"/>
-		<input type="button" value="&gt;" class="rbtn" id="cgrbtn" onclick="t00.next();"/>
+		<input type="button" value="&lt;" class="lbtn" id="tilbtn" onclick="t00.prev();"/>
+		<input type="button" value="&gt;" class="rbtn" id="tirbtn" onclick="t00.next();"/>
 		<br/><div id="pagenavi"></div>
 	</div>
 	<!-- <c:import url="../common/jsp/main_menu.jsp"></c:import> -->
