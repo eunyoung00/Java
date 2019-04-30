@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -14,14 +14,20 @@
 #headerTitle{font-family: HY견고딕,고딕; font-size:35px; font-weight:bold; text-align:center; 
 			/* padding-top: 35px */ position:absolute; top:40px; left:420px; }
 #container{clear:both; width:1100px; min-height:1500px; }
-#footer{clear:both;width:1100px; height: 140px; clear:both }
+#footer{clear:both;width:1100px; height: 140px;position:absolute;}
 #footerTitle{float: right; font-size:15px; padding-top:20px; padding-right:20px; }
-
-/* 내부 */
+ /* 내부 */
 table{align : center; text-align: center;}
+.contentTitle{font-size: 24px;font-weight: bold;}
+.clear_fix{border-bottom: 1px solid #cdcdcd;height: 30px;}
+
+dt{float:left; font-weight: bold; font-size:15px; height: 30px;}
+dd{font-size: 15px; color: #adadad; float: right;} 
+#qnaBtn{width: 50%; height:40px; background-color:#4944A0; float: right; color: #ffffff; font-weight: bold}
+#joinBtn{width: 50%; height:40px; background-color:#4944A0; float: left; color: #ffffff; font-weight: bold}
 
 
-</style>
+ </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
  $(function(){
@@ -34,10 +40,10 @@ table{align : center; text-align: center;}
 	<div id="header">
 		<div id="headerTitle">Class For(4)</div>
 	</div>
-	
-	<div id="container">
-	
-	<div id="detailContent" style="clear:both; position:relative; width: 700px; float: left; margin: 10px;">
+
+ 	<div id="container">
+
+ 	<div id="detailContent" style="clear:both; position:relative; width: 700px; float: left; margin: 10px;">
 		<div id="detail">
 			<div id="classTitleImg" style="height: 400px; border: 1px solid #333; top:20px; ">
 				대표이미지
@@ -68,12 +74,12 @@ table{align : center; text-align: center;}
             	</table>
 			</div>	
         	<div class="class_detail">
-            	<div class="area clear_fix">
+            	<div class="area">
                 <article class="cont" >
-					                    
-                  <div class="default" style="padding:20px; ">
+
+                   <div class="default" style="padding:20px; ">
                   	<div class="group" style="margin-bottom: 15px; border-top: 1px solid #cfcfcf;">
-                  		<span style="margin-left:10px;"><h2>강사 프로필</h2></span>
+                  		<span class="contentTitle">강사 프로필</span>
                   		<div style="background-color: transparent;margin-left:20px;">
                           *강사 경력<br/>
                            oo대학교 oo과 졸업<br/>
@@ -84,7 +90,7 @@ table{align : center; text-align: center;}
                       	</div>
                   	</div>
                       <div class="group" style="margin-bottom: 15px;border-top: 1px solid #cfcfcf;">
-                          <div class="detail_info_title"><h2>클래스를 소개해요</h2></div>
+                          <div class="detail_info_title"><span class="contentTitle">클래스를 소개해요</span></div>
                           <span style="line-height: 1.5;font-size: 12pt; font-family: NanumGothic, sans-serif;">
                               <p style="text-align: center;"><br></p>
                               <p style="text-align: center;"><span style="background-color: transparent;">
@@ -99,7 +105,7 @@ table{align : center; text-align: center;}
                            </span></p>
                       </div>
                       <div class="group" style="border-top: 1px solid #cfcfcf;">
-                          <div class="detail_info_title"><h2>수업 정보</h2></div>
+                          <div class="detail_info_title"><span class="contentTitle">수업 정보</span></div>
                           <span style="line-height: 1.5;font-size: 12pt; font-family: NanumGothic, sans-serif;">
                               <p><span style="font-size: 12pt;"><br></span></p>
                               <p><span style="font-size: 12pt;"><strong>1. 강의 소개</strong>
@@ -115,9 +121,9 @@ table{align : center; text-align: center;}
                               <p><span style="font-size: 12pt;"><strong>* 소요 시간은 보통 1시간 내외로&nbsp;</strong><strong>소요됩니다.</strong></span></p><p><br></p><p><br></p>                            
                           </span>
                       </div>
-                      
-                      <div class="group" style="border-top: 1px solid #cfcfcf;">
-                          <div class="detail_info_title"><h2>기타 사항-환불규정</h2></div>
+
+                       <div class="group" style="border-top: 1px solid #cfcfcf;">
+                          <div class="detail_info_title"><span class="contentTitle">기타 사항-환불규정</span></div>
                           <span style="line-height: 1.5;font-size: 12pt; font-family: NanumGothic, sans-serif;">
 						<p>클래스볼의 결제 취소 및 환불 규정은 관련 법령인 &lt;학원의 설립ㆍ운영 및 과외교습에 관한 법률 시행령 [별표4] [시행 2017.3.21.]&gt;의 &lt;교습비 등 반환기준(제18조 제3항 관련)&gt;을 준수합니다.</p>
 						<p><br></p>
@@ -140,14 +146,14 @@ table{align : center; text-align: center;}
 						마스터는 법령에서 제시한 내용 외에 별도의 환불규정을 수강생에게 고지할 수 있고, 수강생은 마스터가 고지한 환불수수료를 제외한 금액을 환불받을 수 있습니다.</p>
 						<br></span>
 					  </div>
-					  
-                      <div class="group" style="border-top: 1px solid #cfcfcf;">
-                          <h3 class="detail_info_title"><h2>클래스 위치</h2></h3>
+
+                       <div class="group" style="border-top: 1px solid #cfcfcf;">
+                          <div class="detail_info_title"><span class="contentTitle">클래스 위치</span></div>
                           <p class="detail editor_st" style="margin: 15px;">서울 용산구 동빙고동 262-6 B1 </p>
 							<div id="kakaoMap">
 							</div>
-							
-							<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=acbead349136da6f3bb665febdb9861f&libraries=services"></script>
+
+ 							<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=acbead349136da6f3bb665febdb9861f&libraries=services"></script>
 							<script type="text/javascript">
 							$(function(){
 								mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -155,8 +161,7 @@ table{align : center; text-align: center;}
 							        center: new daum.maps.LatLng(37.499490, 127.033167), // 지도의 중심좌표
 							        level: 3 // 지도의 확대 레벨
 							    };  
-
-							setMarker("서울 용산구 동빙고동 262-6","클래스 위치");
+ 							setMarker("서울 용산구 동빙고동 262-6","클래스 위치");
 							});//ready
 							
 							function setMarker(addr,dong){	
@@ -193,25 +198,46 @@ table{align : center; text-align: center;}
 							}//setMarker
 							</script>
 							<div id="map" style="width:600px;height:400px; border: 1px solid #cdcdcd;margin: 15px;"></div>
-							<div class="group" style="border-top: 1px solid #cfcfcf;">
-							<h3 class="detail_info_title"><h2>리뷰</h2></h3>
-							<input type="button" name="reviewBtn" class="btn" value="리뷰 작성"/>
-								<table>
+							<div class="group" style="border-top: 1px solid #cfcfcf; margin-bottom: 15px;">
+								<div class="detail_info_title" style="border-bottom: 2px solid #adadad;">
+									<span class="contentTitle" style="float: letf">리뷰</span>
+									<input style="float: right;" type="button" name="reviewBtn" id="reviewBtn" class="btn" value="리뷰 작성"/>
+								</div>
+								<table width="100%">
 									<tr>
-										<th></th>
+										<td>등록된 후기정보가 없습니다.</td>
+										<!-- style="border-bottom: 1px solid #cdcdcd;" -->
 									</tr>
 								</table>
 							</div>					
-							<div class="group" style="border-top: 1px solid #cfcfcf;">
-							<h3 class="detail_info_title"><h2>Q&A</h2></h3>
-							
-							</div>					
-							<div class="group" style="border-top: 1px solid #cfcfcf;">
-							<h3 class="detail_info_title"><h2>강사가 강의중인 다른 클래스</h2></h3>
-							
-							</div>					
+							<div class="group" style="border-top: 1px solid #cfcfcf; margin-bottom: 15px;">
+								<div class="detail_info_title" style="border-bottom: 2px solid #adadad;">
+									<span class="contentTitle"  style="float: letf">Q&A</span>
+									<input style="float: right;" type="button" name="qnaWBtn" id="qnaWBtn" class="btn" value="Q&A 작성"/>
+								</div>
+								<table width="100%">
+									<tr>
+										<td>등록된 Q&A정보가 없습니다.</td>
+									</tr>
+								</table>
 
-                      </div>
+ 							</div>					
+							<div class="group" style="border-top: 1px solid #cfcfcf; margin-bottom: 15px; height: 250px;">
+								<div class="detail_info_title" style="border-bottom: 2px solid #adadad; margin-bottom: 15px;">
+									<span class="contentTitle">강사가 강의중인 다른 클래스</span>
+								</div>
+								<div style="float: right; border-left: 1px solid #cfcfcf;width: 150px; height: 200px; text-align: center;">
+									<div style="float:none;margin-top: 15px;margin-bottom:10px ; margin-left:35px;
+										border:1px solid #cfcfcf; width: 50%; height: 40%;">강사 사진</div>
+									<span style="">강사 명</span><br/>
+									<span style="">강사 간단소개</span>
+								</div>
+								<div style="border: 1px solid #333; width: 150px; height: 200px; float: left;">
+									
+								</div>
+
+ 							</div>					
+                       </div>
                       </div>
                 </article>
             </div>
@@ -219,34 +245,21 @@ table{align : center; text-align: center;}
            </div>
            </div>     
 
-	
-	
-		<div id="moveBar" style="position:relative; float:right; width:350px; height: 700px; top:20px; margin: 5px; max-height: 1500px; ">
-			<aside class="other" style="clear:both; position:fixed; border: 1px solid #afafaf; width: 320px; height: 700px; float: right; padding: 10px;">
+ 		<div id="moveBar" style="position:relative; float:right; width:350px; height: 600px; top:20px; margin: 5px; max-height: 1500px; ">
+			<aside class="other" style="clear:both; position:fixed; border: 1px solid #afafaf; width: 320px; height: 600px; float: right; padding: 10px;">
 				<div id="barTitle">
-				<span id="Title">Title</span>
-				</div>
-				<div id="">
-				<span id=""></span>
+				<span id="Title" style="font-size: 20px; font-weight: bold">손 끝에서 피어나는 행복, 하바리움</span>
 				</div>
 	              <div class="sticky">
 				  <div class="box m_info">
-	                  <div class="intro group clear_fix">
-	                      <div class="pic" style="background:url('/files/class/photo/201903/thumb/1552548786982.PNG')
-	                      				 no-repeat center; background-size:cover;"></div>
-	                      <div class="info">
+	                  <div class="clear_fix" style="height: 50px;">
+	                      <div class="pic" style="float: left;">(이미지)</div>
+	                      <div class="info" style=:float:right;>
 	                          <p class="name">숲속산책(이재은)</p>
-	                          <div class="grade clear_fix">
-                              <div class="star">
-                                  <div class="bar" style="width:0%;"></div>
-                                  <div class="mask"></div>
-                              </div>
-	                          </div>
-	                          <p class="stat">진행중 클래스 : 2개 / 전체 클래스 : 3개</p>
 	                      </div>
 	                  </div>
-	                 	<div class="infos group">
-	                      <div class="default_lecture" style="display:none">
+                 	<div class="infos group">
+	                      <div class="default_lecture" style="display:none;">
 	                          <dl class="clear_fix">
 	                              <dt>기간</dt>
 	                              <dd style="position:absolute; right:9px;">2019.04.15 ~ 2019.04.21 (총 1회)</dd>
@@ -263,7 +276,7 @@ table{align : center; text-align: center;}
 	                      <div class="select_day group" >
 	                          <div class="c_selectbox">
 	                             <!--  <label for="">클릭해서 클래스날짜 선택하기</label> -->
-	                              <select onChange="setPeople(this.value)">
+	                              <select onChange="setPeople(this.value)" style="width: 100%; height: 30px; margin-top: 10px;">
                                   <option value="0">클릭해서 클래스날짜 선택하기</option>
                                   <option value="1_1000">2019.04.15(월) 19:00 ~ 20:00 &nbsp; &nbsp; &nbsp; &nbsp; 마감 </option>
                                   <option value="2_1000">2019.04.16(화) 19:00 ~ 20:00 &nbsp; &nbsp; &nbsp; &nbsp; 마감 </option>
@@ -279,50 +292,51 @@ table{align : center; text-align: center;}
 	                              </select>
 	                          </div>
 	                      </div>
-	                      <dl class="clear_fix">
+	                      <dl class="clear_fix" style="border-top: 1px solid #cdcdcd;">
 	                          <dt>지역정보</dt>
 	                          <dd title="서울 > 용산구">서울 > 용산구</dd>
-	                      </dl>
-	                      <dl class="clear_fix">
-	                          <dt>카테고리</dt>
-	                          <dd title="핸드메이드/공방 > 플라워">핸드메이드/공방 > 플라워</dd>
-	                      </dl>
-	                      <dl class="clear_fix">
-	                          <dt>최소수강인원</dt>
-	                          <dd id="lec_count_min">1명</dd>
 	                      </dl>
 	                      <dl class="clear_fix">
 	                          <dt>수강인원</dt>
 	                          <dd><span class="mark" id="lec_count_now">0</span> / <span id="lec_count_max">4</span>명</dd>
 	                      </dl>
-	                      <div class="tutor_t">
-						<dl class="tutor_txt">
-						<dt>강사 한마디</dt>
-						<dd>						
-							강남, 홍대, 마포, 잠실 등 협의 후에 장소 결정 가능합니다.
-							서울지역, 인천지역, 경기지역 장소 협의 후 가능합니다 :)
-							수업은 카페에서 진행하며, 음료비는 불포함입니다.
-							<br>장소 : 
-							서울 강남구 강남대로 476 투썸플레이스			
-							<br>
-							추가비용 : 카페 / 음료비 불포함						
-						</dd>
-						</dl>
-						</div>
 	                      <dl class="clear_fix">
 	                          <dt>신청마감일</dt>
 	                          <dd>
 									2019. 04. 29(월) 18:00
-							</dd>
+							  </dd>
 	                      </dl>
 	                      <dl class="clear_fix">
 	                          <dt>찜한 회원</dt>
 	                          <dd><span id="likeCnt">0</span>명</dd>
 	                      </dl>
+	                    <div class="tutor_t">
+						<dl class="tutor_txt" style="height:200px;">
+							<dt>강사 한마디</dt>
+							<dd>						
+								강남, 홍대, 마포, 잠실 등 협의 후에 장소 결정 가능합니다.
+								서울지역, 인천지역, 경기지역 장소 협의 후 가능합니다 :)
+								수업은 카페에서 진행하며, 음료비는 불포함입니다.
+								<br>장소 : 
+								서울 강남구 강남대로 476 투썸플레이스			
+								<br>
+								추가비용 : 카페 / 음료비 불포함						
+							</dd>
+						</dl>
+						</div>
+	                  </div>
+	                  <div>
+	                  	<input type="button" class="btn" id="qnaBtn" value="강사에게 문의하기"/>
+	                  	<input type="button" class="btn" id="joinBtn" value="클래스 신청하기 "/>
+	                  
+	                  </div>
+	                  
+	                  <!-- <div class="btn group" id="btnQnA">
+	                    <a href="#void"> 강사에게 문의하기</a>
 	                  </div>
 	                  <div class="btn group" id="btnOpen">
-	                   <a href="javascript:commonLayerOpen('l_login');"> 클래스 예약하기</a>
-	               	</div>
+	                    <a href="javascript:commonLayerOpen('l_login');"> 클래스 신청하기</a>
+	               	  </div> -->
 	               	<div class="btn group" id="btnClose" style="display:none;">
 	               		<a style="background:#888484;">클래스 신청 마감</a>
 	               	</div>
@@ -331,7 +345,7 @@ table{align : center; text-align: center;}
 	          </aside>            
 		</div>
 
-    </div>
+     </div>
 	<script>
     var lec_type=2;
     var all_count_max='4';
@@ -431,7 +445,7 @@ table{align : center; text-align: center;}
   }
 </script>
 
-	<div id="footer">
+ 	<div id="footer">
 		<div id="footerTitle">copyright&copy; all right reserved. class 4.</div>
 	</div>
 </div>

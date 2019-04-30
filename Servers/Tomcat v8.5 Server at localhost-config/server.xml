@@ -161,7 +161,7 @@
 	      <Resource auth="Container" driverClassName="oracle.jdbc.OracleDriver" maxIdle="10" maxTotal="20" maxWaitMillis="-1" name="jdbc/model2_dbcp" password="tiger" type="javax.sql.DataSource" url="jdbc:oracle:thin:@127.0.0.1:1521:orcl" username="scott"/>
       </Context>
       <Context docBase="spring_mvc" path="/spring_mvc" reloadable="true" source="org.eclipse.jst.jee.server:spring_mvc"/>
-      <Context docBase="mybatis_prj" path="/mybatis_prj" reloadable="true" source="org.eclipse.jst.jee.server:mybatis_prj"/><Context docBase="team_prj3_class4" path="/team_prj3_class4" reloadable="true" source="org.eclipse.jst.jee.server:team_prj3_class4"/><Context docBase="spring_JDBC" path="/spring_JDBC" reloadable="true" source="org.eclipse.jst.jee.server:spring_JDBC"/></Host>
+      <Context docBase="mybatis_prj" path="/mybatis_prj" reloadable="true" source="org.eclipse.jst.jee.server:mybatis_prj"/><Context docBase="team_prj3_class4" path="/team_prj3_class4" reloadable="true" source="org.eclipse.jst.jee.server:team_prj3_class4"/><Context docBase="spring_JDBC" path="/spring_JDBC" reloadable="true" source="org.eclipse.jst.jee.server:spring_JDBC"/><Context docBase="spring_orm" path="/spring_orm" reloadable="true" source="org.eclipse.jst.jee.server:spring_orm"/></Host>
       
     </Engine>
   </Service>
