@@ -12,10 +12,19 @@ public class AopRun {
 		ApplicationContext ac=new ClassPathXmlApplicationContext("kr/co/sist/run/applicationContext.xml");
 		
 		ItemService is=ac.getBean(ItemService.class);
+/*		System.out.println("---------------------run getAddr--------------------");
+		is.getAddr();
+		System.out.println("---------------------run getName--------------------");
+		is.getName();
+		System.out.println("---------------------run getAge--------------------");
+		is.getAge();*/
 		
-		ItemDomain id=is.searchItem("±Ë»Ò√∂");
+/*		ItemDomain id=is.searchItem("¿Ã¿Á¬˘");
 		System.out.println(id.getItemNo());
-		System.out.println(id.getItem());
+		System.out.println(id.getItem());*/
+		
+		ItemDomain id=is.searchData("¡§≈√º∫");
+		System.out.println(id.getItemNo()+" / "+id.getItem());
 	}//execute
 	
 	public static void main(String[] args) {
